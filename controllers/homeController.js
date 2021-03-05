@@ -8,13 +8,12 @@ exports.index = (req, res) => {
         console.log('Hello World > helloworld.txt');
     });
 
-
     exec('espeak -vpt-br -f textos/helloworld.txt --stdout > audios/rtyqqty.wav', (stdout, stderr,err) => {
         if (err) {
             console.log("Erro ao executar o espeak: "+ err);
         }
-        console.log("STDOUT: "  + stdout);
-        console.log("STDERR: "  + stderr);
+        // console.log("STDOUT: "  + stdout);
+        // console.log("STDERR: "  + stderr);
     });
 
     res.render('home'); 

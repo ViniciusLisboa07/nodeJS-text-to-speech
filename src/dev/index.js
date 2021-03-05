@@ -1,1 +1,8 @@
-console.log('123');
+import $ from 'jquery';
+
+var btnFalar = document.getElementById("btnFalar");
+
+btnFalar.onclick = function () {
+    
+    $().post('/screen');
+}
