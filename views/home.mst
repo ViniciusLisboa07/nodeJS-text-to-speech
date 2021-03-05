@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>{{ h.defaultPageTitle }}</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div>{{ msg }}</div>
+    <div class="d-flex align-items-center justify-content-center" id="corpo">
+        <div class="card w-50 m-5">
+            <div class="card-header bg-primary">
+                <div class="text-light">Chamar paciente</div>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                <form >
+                    <label for="nomePaciente">Paciente</label>
+                    <input type="text" id="nomePaciente" name="nomePaciente" class="form-control" required="true">
+                    <label class="mt-2" for="consultorio">Consultório</label>
+                    <select name="consultorio" id="consultorio" class="form-control">
+                        <option value="consultório 1">Consultório 1</option>
+                        <option value="consultório 2">Consultório 2</option>
+                        <option value="consultório 3">Consultório 3</option>
+                    </select>
+                    <label class="mt-2" for="repetir">Repetir</label>
+                    <select name="repetir" id="repetir" class="form-control">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </form>
+                    <button class="mt-4 btn btn-primary btn-lg" id="btnFalar">Falar</button>
+                </div>
+            </div>
+            <div class="card-footer">
+            </div>
+        </div>
+{{! 
+        <audio controls>
+            <source src='{ audioMSG }'>
+        </audio> }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/speech-synthesis-recorder@1.2.1/SpeechSynthesisRecorder.js"></script>
+    <script src="./src/dist/js/script.js"></script>
+</body>
+
+</html>

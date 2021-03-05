@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>{{ h.screenPageTitle }}</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="js/second.css">
+</head>
+<body>
+
+    <div class="row" style="height: 100vh">
+    <div class="col align-self-center">
+        <div class="card w-50 mx-auto">
+            <div class="card-body">
+                <label>Paciente</label>
+                <div class="h2" id="pacienteTela"></div>
+                <div class="h2" id="consultorioTela"></div>
+            </div>
+            <div class="card-footer">
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="src/second.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+</html>
