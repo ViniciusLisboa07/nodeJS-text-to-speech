@@ -18,7 +18,7 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                <form >
+                <form method="post" action="/screen" target="screenWindow" id="formTTS">
                     <label for="nomePaciente">Paciente</label>
                     <input type="text" id="nomePaciente" name="nomePaciente" class="form-control" required="true">
                     <label class="mt-2" for="consultorio">Consultório</label>
@@ -33,8 +33,8 @@
                         <option value="2">2</option>
                         <option value="3">3</option>
                     </select>
+                   <button type="submit" class="mt-4 btn btn-primary btn-lg" id="btnFalar">Falar</button>
                 </form>
-                    <button class="mt-4 btn btn-primary btn-lg" id="btnFalar">Falar</button>
                 </div>
             </div>
             <div class="card-footer">
@@ -46,7 +46,7 @@
         </audio> }}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/speech-synthesis-recorder@1.2.1/SpeechSynthesisRecorder.js"></script>
-    <script src="./src/dist/js/script.js"></script>
+    <script src="./src/dist/js/home.js"></script>
 </body>
 
 </html>

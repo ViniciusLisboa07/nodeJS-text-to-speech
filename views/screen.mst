@@ -6,7 +6,7 @@
     <title>{{ h.screenPageTitle }}</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="js/second.css">
+    {{! <link rel="stylesheet" href="js/second.css"> }}
 </head>
 <body>
 
@@ -15,16 +15,18 @@
         <div class="card w-50 mx-auto">
             <div class="card-body">
                 <label>Paciente</label>
-                <div class="h2" id="pacienteTela"></div>
-                <div class="h2" id="consultorioTela"></div>
+                <div class="h2" id="pacienteTela">{{ nomePaciente }}</div>
+                <div class="h2" id="consultorioTela">{{ consultorio }}</div>
             </div>
             <div class="card-footer">
             </div>
         </div>
     </div>
     </div>
-
-    <script src="src/second.js"></script>
+    {{! <audio controls autoplay>
+        <source src="src/audios/rtyqqty.wav" type="audio/mpeg">
+    </audio> }}
+    <script src="./src/dist/js/screen.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 </html>

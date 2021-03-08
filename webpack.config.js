@@ -1,9 +1,12 @@
 const path =  require('path');
 
 module.exports = {
-    entry:'./src/dev/index.js',
+    entry: {
+        home: './src/dev/index.js',
+        screen: './src/dev/screen.js',
+    },
     output: {
-        filename:'script.js',
+        filename:'[name].js',
         path:path.resolve(__dirname, 'src/dist/js')        
     },
     mode: 'development',

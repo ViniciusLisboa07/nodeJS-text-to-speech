@@ -10,5 +10,6 @@ router.use("/src/dist;js",express.static(__dirname + "/src/dist;js"));
 // Rotas 
 router.get('/', homeController.index);
 router.get('/screen', screenController.index); 
+router.post('/screen', screenController.receivingData); 
 
 module.exports = router;

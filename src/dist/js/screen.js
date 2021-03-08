@@ -9,13 +9,13 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/dev/index.js":
-/*!**************************!*\
-  !*** ./src/dev/index.js ***!
-  \**************************/
+/***/ "./src/dev/screen.js":
+/*!***************************!*\
+  !*** ./src/dev/screen.js ***!
+  \***************************/
 /***/ (() => {
 
-eval("console.log('123');\n\n//# sourceURL=webpack://node-tts/./src/dev/index.js?");
+eval("var pacienteTela = document.getElementById('pacienteTela');\r\nvar consultorioTela = document.getElementById('consultorioTela');\r\n\r\nwindow.addEventListener('load', () => {\r\n    var audio = new Audio('src/audios/rtyqqty.wav');\r\n    audio.play();\r\n});\n\n//# sourceURL=webpack://node-tts/./src/dev/screen.js?");
 
 /***/ })
 
@@ -26,7 +26,7 @@ eval("console.log('123');\n\n//# sourceURL=webpack://node-tts/./src/dev/index.js
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./src/dev/index.js"]();
+/******/ 	__webpack_modules__["./src/dev/screen.js"]();
 /******/ 	
 /******/ })()
 ;
