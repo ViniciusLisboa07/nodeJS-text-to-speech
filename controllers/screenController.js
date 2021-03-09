@@ -12,30 +12,35 @@ exports.receivingData = (req, res) => {
 
     fs.writeFile('textos/helloworld.txt', str, function (err) {
         if (err) return console.log(err);
-        console.log('Hello World > helloworld.txt');
+        // console.log('Hello World > helloworld.txt');
     });
 
-    let createAudioFile = new Promise(function (resolve, reject) {
+    var dataAtual = Date.now();
+    var nomeAudio = req.body.nomePaciente;
 
-        exec('espeak -vpt-br -f textos/helloworld.txt --stdout > src/audios/rtyqqty.wav', (stdout, stderr, err) => {
+    const myPromise = new Promise((resolve, reject) => {  
+        
+        var audioFile = exec('espeak -vpt-br -f textos/helloworld.txt --stdout > src/audios/'+ nomeAudio +'.wav', (stdout, stderr, err) => {
             if (err) {
-                reject(
-                    console.log("Erro ao executar o espeak: " + err)
-                );
-            } else{
-                resolve();
+                console.log("Erro ao executar o espeak: " + err);
+                x++;
             }
-            // console.log("STDOUT: "  + stdout);
-            // console.log("STDERR: "  + stderr);
-        });        
-    })
+        }); 
+        
+        if(audioFile) {    
+            resolve('Promise is resolved successfully.');  
+        } else {    
+            reject('Promise is rejected');
+        }
+        
+    });  
 
-    console.log(str)
-    console.log(req.body)
-    console.log("SCREEN")
-    
-    createAudioFile.then(
-        res.render('screen', { nomePaciente: req.body.nomePaciente, consultorio: req.body.consultorio })
-    );
 
-}
+    myPromise.then((msg) => {
+        setTimeout(res.render('screen', { nomePaciente: req.body.nomePaciente, consultorio: req.body.consultorio, nomeAudio: nomeAudio }), 2000);
+        console.log(msg);
+    }).catch((msg)=>{
+        console.log(msg);
+    });
+
+} 
