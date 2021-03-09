@@ -23,9 +23,11 @@
                     <input type="text" id="nomePaciente" name="nomePaciente" class="form-control" required="true">
                     <label class="mt-2" for="consultorio">Consultório</label>
                     <select name="consultorio" id="consultorio" class="form-control">
-                        <option value="consultório 1">Consultório 1</option>
-                        <option value="consultório 2">Consultório 2</option>
-                        <option value="consultório 3">Consultório 3</option>
+                        <option value="consultorio 1">Consultório 1</option>
+                        <option value="consultorio 2">Consultório 2</option>
+                        <option value="consultorio 3">Consultório 3</option>
+                        <option value="medicacao">Medicação</option>
+                        <option value="eletro">Eletro</option>
                     </select>
                     <label class="mt-2" for="repetir">Repetir</label>
                     <select name="repetir" id="repetir" class="form-control">

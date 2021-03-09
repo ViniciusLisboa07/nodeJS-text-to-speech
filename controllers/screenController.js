@@ -1,12 +1,20 @@
 const { exec } = require('child_process');
 const fs = require('fs');
 
+
 exports.index = (req, res) => {
 
     res.render('screen');
 };
 
 exports.receivingData = (req, res) => {
+
+
+    if(req.body.consultorio == "eletro"){
+        
+    }
+
+
 
     var str = "Atenção: " + req.body.nomePaciente + " se dirija ao " + req.body.consultorio;
 
@@ -23,7 +31,6 @@ exports.receivingData = (req, res) => {
         var audioFile = exec('espeak -vpt-br -f textos/helloworld.txt --stdout > src/audios/'+ nomeAudio +'.wav', (stdout, stderr, err) => {
             if (err) {
                 console.log("Erro ao executar o espeak: " + err);
-                x++;
             }
         }); 
         

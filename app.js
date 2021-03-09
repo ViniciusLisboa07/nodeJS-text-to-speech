@@ -3,16 +3,8 @@ const router = require('./routes/main');
 const bodyParser = require('body-parser');
 const mustache = require('mustache-express');
 const helpers = require('./helpers');
-const mongoose = require('mongoose'); 
-
 
 const app = express();
-mongoose.connect('localhost:27017', { useNewUrlParser: true });
-mongoose.Promise = gobal.Promise;
-mongoose.connection.on('error', (error)=>{
-    console.log('Error: ' + error)
-});
-
 app.use((req, res, next) => {
     res.locals.h = helpers;
     next();
