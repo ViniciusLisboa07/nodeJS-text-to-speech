@@ -1,18 +1,24 @@
 const { exec } = require('child_process');
 const fs = require('fs');
-
+const mongoose = require('mongoose');
+const Call = mongoose.model('Call');
 
 exports.index = (req, res) => {
 
     res.render('screen');
 };
 
-exports.receivingData = (req, res) => {
+exports.screenAction = (req, res) => {
 
+    // let queue = {};
 
-    if(req.body.consultorio == "eletro"){
-        
-    }
+    // if(req.body.consultorio == "eletro"){
+    //     const call = new Call(req.body);
+
+    //     queue.push(call);
+
+    //     call.save();
+    // }
 
 
 
@@ -24,11 +30,11 @@ exports.receivingData = (req, res) => {
     });
 
     var dataAtual = Date.now();
-    var nomeAudio = req.body.nomePaciente;
+    var nomeAudio = dataAtual;
 
     const myPromise = new Promise((resolve, reject) => {  
         
-        var audioFile = exec('espeak -vpt-br -f textos/helloworld.txt --stdout > src/audios/'+ nomeAudio +'.wav', (stdout, stderr, err) => {
+        var audioFile = exec('espeak -vpt-br -f textos/helloworld.txt --stdout > src/audios/'+ nomeAudio +'.wav', (err) => {
             if (err) {
                 console.log("Erro ao executar o espeak: " + err);
             }
@@ -44,10 +50,18 @@ exports.receivingData = (req, res) => {
 
 
     myPromise.then((msg) => {
-        setTimeout(res.render('screen', { nomePaciente: req.body.nomePaciente, consultorio: req.body.consultorio, nomeAudio: nomeAudio }), 2000);
-        console.log(msg);
-    }).catch((msg)=>{
-        console.log(msg);
-    });
 
+        setTimeout(
+            () => {
+                res.render('screen', { nomePaciente: req.body.nomePaciente, consultorio: req.body.consultorio, nomeAudio: nomeAudio})
+            }
+        , 3000);
+
+        console.log("Success:" + msg);})
+    
+    // .catch((msg) => {
+
+    //     console.log("Error" + msg);
+
+    // });
 } 

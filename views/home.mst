@@ -41,11 +41,17 @@
             </div>
             <div class="card-footer">
             </div>
+            {{! <div class="card"> }}
+                {{! <div class="card-header"> }}
+                    {{! <div class="card-title">Fila</div> }}
+                {{! </div> }}
+                {{! <div class="card-body"> }}
+                    {{! {{ queue }} 
+                    {{! {{ queue }} 
+                {{! </div> }}
+                {{! <div class="card-footer"></div> }}
+            </div>
         </div>
-{{! 
-        <audio controls>
-            <source src='{ audioMSG }'>
-        </audio> }}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/speech-synthesis-recorder@1.2.1/SpeechSynthesisRecorder.js"></script>
     <script src="./src/dist/js/home.js"></script>

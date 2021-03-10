@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>{{ h.defaultPageTitle }}</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div>
+        <form method="post" action="/login">
+                    <label class="mt-2" for="name">Consultório</label>
+                    <select name="name" id="name" class="form-control">
+                        <option value="consultorio 1">Consultório 1</option>
+                        <option value="consultorio 2">Consultório 2</option>
+                        <option value="consultorio 3">Consultório 3</option>
+                        <option value="medicacao">Medicação</option>
+                        <option value="eletro">Eletro</option>
+                    </select>
+                   <button type="submit" class="mt-4 btn btn-primary btn-lg">Entrar</button>
+                </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/speech-synthesis-recorder@1.2.1/SpeechSynthesisRecorder.js"></script>
+</body>
+
+</html>
