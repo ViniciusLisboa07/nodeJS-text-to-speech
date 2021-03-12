@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('Users');
+const Call = mongoose.model('Call');
 
 exports.userMidleware = async (req, res, next) =>{
     if(!req.query.token && !req.body.token && !req.session.token) {
@@ -40,15 +41,15 @@ exports.index = async (req, res) => {
 };
 
 exports.homeAction = async (req, res) => {
-    let nomePaciente = req.body.name;
+    let nomePaciente = req.body.nomePaciente;
     let consultorio = req.body.consultorio;
     let repetir = req.body.repetir;
 
     if(consultorio == 'eletro'){
+        console.log('=================================================')
         
-
-        res.redirect('/eletro');
+        await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, repetir: repetir });
+        res.redirect('/');
     }
-
-    console.log(req.body);
-};
+    // console.log(req.session);
+};   

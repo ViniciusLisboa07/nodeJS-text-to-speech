@@ -18,5 +18,14 @@ const callSchema = new mongoose.Schema({
     }
 
 });
+const modelName = "Call";
 
-module.exports = mongoose.model('Call', callSchema);
+if(mongoose.connection && mongoose.connection.models[modelName]){
+
+    module.exports = mongoose.connection.models[modelName]
+
+} else {
+
+    module.exports = mongoose.model( modelName, callSchema);
+
+}

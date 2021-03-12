@@ -26,7 +26,18 @@
     <div>{{ msg }}</div>
     
     <div class="card">
+        <div class="card-header">
+            Fila Eletro
+        </div>
+        <div class="card-body">
 
+            <ul class="list-group list-group-flush">
+                {{#fila}}
+                    <li class="list-group-item">{{.}}</li>
+                {{/fila}}
+            </ul>
+
+        </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

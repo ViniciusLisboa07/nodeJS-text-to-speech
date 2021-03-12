@@ -26,7 +26,7 @@ eval("var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!\n * jQ
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);\n\r\n\r\nvar nomePaciente = document.getElementById('nomePaciente');\r\nvar consultorio = document.getElementById('consultorio');\r\nvar repetir = document.getElementById('repetir');\r\nvar formTTS = document.getElementById('formTTS');\r\n\r\nvar btnFalar = document.getElementById(\"btnFalar\");\r\n\r\n\r\nbtnFalar.onclick =  () => {\r\n    \r\n}\n\n//# sourceURL=webpack://node-tts/./src/dev/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);\n\r\n\r\nvar nomePaciente = document.getElementById('nomePaciente');\r\nvar consultorio = document.getElementById('consultorio');\r\nvar repetir = document.getElementById('repetir');\r\nvar formTTS = document.getElementById('formTTS');\r\n\r\nvar btnFalar = document.getElementById(\"btnFalar\");\r\n\r\n\r\nbtnFalar.onclick =  (event) => {\r\n    // event.preventDefault();\r\n}\n\n//# sourceURL=webpack://node-tts/./src/dev/index.js?");
 
 /***/ })
 

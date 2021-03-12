@@ -8,6 +8,6 @@ var formTTS = document.getElementById('formTTS');
 var btnFalar = document.getElementById("btnFalar");
 
 
-btnFalar.onclick =  () => {
-    
+btnFalar.onclick =  (event) => {
+    // event.preventDefault();
 }
