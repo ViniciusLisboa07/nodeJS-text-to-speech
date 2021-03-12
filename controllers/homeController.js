@@ -45,7 +45,9 @@ exports.homeAction = async (req, res) => {
     let repetir = req.body.repetir;
 
     if(consultorio == 'eletro'){
-        res.send('');
+        
+
+        res.redirect('/eletro');
     }
 
     console.log(req.body);
