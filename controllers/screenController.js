@@ -10,18 +10,6 @@ exports.index = (req, res) => {
 
 exports.screenAction = (req, res) => {
 
-    // let queue = {};
-
-    // if(req.body.consultorio == "eletro"){
-    //     const call = new Call(req.body);
-
-    //     queue.push(call);
-
-    //     call.save();
-    // }
-
-
-
     var str = "Atenção: " + req.body.nomePaciente + " se dirija ao " + req.body.consultorio;
 
     fs.writeFile('textos/helloworld.txt', str, function (err) {
@@ -58,10 +46,4 @@ exports.screenAction = (req, res) => {
         , 3000);
 
         console.log("Success:" + msg);})
-    
-    // .catch((msg) => {
-
-    //     console.log("Error" + msg);
-
-    // });
 } 

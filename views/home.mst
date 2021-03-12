@@ -31,7 +31,7 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                <form method="post" action="/screen" target="screenWindow" id="formTTS">
+                <form method="post" action="/" >
                     <label for="nomePaciente">Paciente</label>
                     <input inputmode="none" type="text" id="nomePaciente" name="nomePaciente" class="form-control" required="true">
                     <label class="mt-2" for="consultorio">Consultório</label>

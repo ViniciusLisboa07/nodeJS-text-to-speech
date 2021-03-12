@@ -1,14 +1,12 @@
-const { validationResult, matchedData } = require('express-validator');
 const mongoose = require('mongoose');
 const User = mongoose.model('Users');
-
 
 exports.userMidleware = async (req, res, next) =>{
     if(!req.query.token && !req.body.token && !req.session.token) {
         req.flash("error", "Efetue o LogIn 1!");
         res.redirect('/login');
         return;
-    }   
+    }
 
     let token = '';
     if (req.query.token) {
@@ -21,11 +19,11 @@ exports.userMidleware = async (req, res, next) =>{
 
     if(token == "") {
         req.flash("error", "Efetue o LogIn 2!");
-        res.redirect('/login')
+        res.redirect('/login');
         return;
     }
 
-    const user = await User.findOne({ token: token })
+    const user = await User.findOne({ token: token });
 
     if(!user){
         req.flash("error", "Efetue o LogIn 3!");
@@ -37,7 +35,18 @@ exports.userMidleware = async (req, res, next) =>{
 };
 
 exports.index = async (req, res) => {  
-     let userName = req.session.user['name'];
-
+    let userName = req.session.user['name'];
     res.render('home', { userName: userName }); 
-}; 
+};
+
+exports.homeAction = async (req, res) => {
+    let nomePaciente = req.body.name;
+    let consultorio = req.body.consultorio;
+    let repetir = req.body.repetir;
+
+    if(consultorio == 'eletro'){
+        res.send('');
+    }
+
+    console.log(req.body);
+};

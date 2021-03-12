@@ -19,7 +19,6 @@ exports.loginAction = async (req, res) => {
 
     const data = matchedData(req);
 
- 
     const user = await User.findOne({ name: data.name })
     const payload = (Date.now() + Math.random()).toString();
     const token = await bcrypt.hash(payload, 10);
@@ -32,10 +31,15 @@ exports.loginAction = async (req, res) => {
         req.session.user = user;
         req.session.token = token;
 
-        req.flash('success', 'Login efetuado com sucesso!');
 
-        res.redirect('/');
-        
+        if (user.name == 'recepcao') { 
+            req.flash('success', 'Login efetuado com sucesso!');
+            res.redirect('/');
+        } else if (user.name == 'eletro') {
+            req.flash('success', 'Login efetuado na eletro com sucesso!');
+            res.redirect('/eletro')
+        }
+
     } catch (err) {
         req.flash('error', 'Problemas no login!');
         res.redirect("/login");

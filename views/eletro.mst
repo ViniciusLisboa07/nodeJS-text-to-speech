@@ -23,23 +23,16 @@
 {{/flashes}}
 
 <body>
-    <div>
-        <form method="post" action="/login">
-            <label class="mt-2" for="name">Consultório</label>
-            <select name="name" id="name" class="form-control">
-                <option value="consultorio 1">Consultório 1</option>
-                <option value="consultorio 2">Consultório 2</option>
-                <option value="consultorio 3">Consultório 3</option>
-                <option value="medicacao">Medicação</option>
-                <option value="eletro">Eletro</option>
-                <option value="recepcao">Recepção</option>
-            </select>
-        <button type="submit" class="mt-4 btn btn-primary btn-lg">Entrar</button>
-        </form>
+    <div>{{ msg }}</div>
+    
+    <div class="card">
+
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/speech-synthesis-recorder@1.2.1/SpeechSynthesisRecorder.js"></script>
+    <script type="text/javascript"
+        src="https://unpkg.com/speech-synthesis-recorder@1.2.1/SpeechSynthesisRecorder.js"></script>
+    <script src="./src/dist/js/home.js"></script>
 </body>
 
 </html>
