@@ -15,7 +15,7 @@ router.use("/src/dist/js",express.static(__dirname + "/src/dist/js"));
 router.get('/login', loginController.index);
 router.post('/login', signInValidator.signIn,  loginController.loginAction);
 
-router.get('/', homeController.index);
+router.get('/', homeController.userMidleware, homeController.index);
 
 router.get('/screen', screenController.index); 
 router.post('/screen', screenController.screenAction); 
