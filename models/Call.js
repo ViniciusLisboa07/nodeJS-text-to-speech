@@ -16,7 +16,7 @@ const callSchema = new mongoose.Schema({
         type:Number,
         required:"A ser executada com uma quantidade determinada."
     }
-
+ 
 });
 const modelName = "Call";
 

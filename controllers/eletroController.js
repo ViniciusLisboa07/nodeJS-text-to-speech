@@ -7,9 +7,13 @@ exports.index = async (req, res) => {
 
     let fila = [];
     for( i in chamadasEletro) {
-        fila.push({ ...chamadasEletro[i] })
+        fila.push({
+            nomePaciente: chamadasEletro[i]._doc['nomePaciente'],
+            consultorio: chamadasEletro[i]._doc['consultorio'],
+            repetir: chamadasEletro[i]._doc['repetir']
+        })
     }
 
-    console.log(fila)
-    res.render('eletro', { file: fila })
-}
+    console.log(fila);
+    res.render('eletro', { fila: fila })
+} 
