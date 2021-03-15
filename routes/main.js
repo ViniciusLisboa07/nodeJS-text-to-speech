@@ -10,7 +10,7 @@ const signInValidator = require('../validators/SignInValidator')
 const router = express.Router();
 router.use("/vendors",express.static(__dirname + "/vendors"));
 router.use("/src/dist/js",express.static(__dirname + "/src/dist/js"));
-
+ 
 
 // Rotas 
 router.get('/login', loginController.index);
@@ -25,4 +25,4 @@ router.post('/screen', screenController.screenAction);
 router.get('/eletro', homeController.userMidleware,  eletroController.index);
 router.post('/eletro', eletroController.eletroAction);
 
-module.exports = router;  
+module.exports = router;   

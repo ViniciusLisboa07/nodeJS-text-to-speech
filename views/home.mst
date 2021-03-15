@@ -20,7 +20,6 @@
 {{/flashes}}
 
 <body>
-    <div>{{ msg }}</div>
     <div class="d-flex align-items-center justify-content-center" id="corpo">
         <div class="card w-50 m-5">
             <div class="card-header bg-light">
@@ -54,23 +53,30 @@
                         <option value="2">Alta</option>
                         <option value="3">Muito Alta</option>
                     </select>
-                   <button type="submit" class="mt-4 btn btn-primary btn-lg" id="btnFalar">Falar</button>
+                   <button type="submit" class="mt-4 btn btn-primary btn-lg" id="btnFalar">Enviar</button>
                 </form>
                 </div>
             </div>
             <div class="card-footer">
             </div>
-            {{! <div class="card"> }}
-                {{! <div class="card-header"> }}
-                    {{! <div class="card-title">Fila</div> }}
-                {{! </div> }}
-                {{! <div class="card-body"> }}
-                    {{! {{ queue }} 
-                    {{! {{ queue }} 
-                {{! </div> }}
-                {{! <div class="card-footer"></div> }}
-            </div>
         </div>
+        <table class="table table-striped table-hover table-sm w-50" id="tblFilaRecepcao">
+            <thead>
+                <tr>
+                    <th scope="col">Nome Paciente</th>
+                    <th scope="col">Prioridade</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#fila}}
+                    <tr class="linha">
+                        <td> {{ nomePaciente }} </td>
+                        <td> {{ prioridade }} </td>
+                        <input type="hidden" value="{{id}}">
+                    </tr>
+                {{/fila}}
+            </tbody>
+        </table>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/speech-synthesis-recorder@1.2.1/SpeechSynthesisRecorder.js"></script>
     <script src="./src/dist/js/home.js"></script>

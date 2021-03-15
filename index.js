@@ -5,12 +5,13 @@ mongoose.connect('mongodb://127.0.0.1:27017/teste', { useNewUrlParser: true , us
 mongoose.Promise = global.Promise; 
 mongoose.connection.on('error', (error)=>{
     console.log('Error: .-.' + error.message)
+
 });
 
 require('./models/Call');
 require('./models/User');
 
-require('dotenv').config({ path:'variables.env' })
+require('dotenv').config({ path:'variables.env' });
 
 const app = require('./app');
 
