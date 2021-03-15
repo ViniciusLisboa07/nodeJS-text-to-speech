@@ -17,7 +17,7 @@ const callSchema = new mongoose.Schema({
         required:"A ser executada com uma quantidade determinada."
     }, 
     prioridade : {
-        type:String, 
+        type:Number, 
         required: "A chamada deve conter uma prioridade."
     }
  

@@ -24,16 +24,21 @@
 
 <body>
     <div class="container-fluid">
-        <table class="table table-striped">
-            <thead class="thead-light">
-                <tr scope="col">Nome Paciente</tr>
-                <tr scope="col">Prioridade</tr>
+        <table class="table table-striped table-hover table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Nome Paciente</th>
+                    <th scope="col">Prioridade</th>
+                    <th scope="col">Chamar</th>
+                </tr>
             </thead>
             <tbody>
                 {{#fila}}
-                    <tr scope="row">
+                    <tr class="linha">
                         <td> {{ nomePaciente }} </td>
                         <td> {{ prioridade }} </td>
+                        <td><button class="btn btn-secondary btn-sm">Chamar</button></td>
+                        <input type="hidden" value="{{id}}">
                     </tr>
                 {{/fila}}
             </tbody>
@@ -46,7 +51,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript"
         src="https://unpkg.com/speech-synthesis-recorder@1.2.1/SpeechSynthesisRecorder.js"></script>
-    <script src="./src/dist/js/home.js"></script>
+    <script src="./src/dist/js/eletro.js"></script>
 </body>
 
 </html>

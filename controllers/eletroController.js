@@ -7,41 +7,25 @@ exports.index = async (req, res) => {
 
     let fila = [];
     for (i in chamadasEletro) {
-        // se houver prioridade muitoAlta no DB
-        if (chamadasEletro[i]._doc['prioridade'] == 'muitoAlta') {
-            console.log('se houver prioridade muitoAlta no DB')
-            // se houver prioridade muitoAlta no array, insiro na proxima posição
-            if (fila.some(obj => obj.prioridade == 'muitoAlta')) {
-                console.log('se houver prioridade muitoAlta no array, insiro na proxima posição');
-                let indexUltimo = fila.lastIndexOf(fila.some(obj => obj.prioridade == 'muitoAlta')); //ultimo indice com muito Alta
-
-                fila[indexUltimo + 1] = fila.push({
-                    nomePaciente: chamadasEletro[i]._doc['nomePaciente'],
-                    consultorio: chamadasEletro[i]._doc['consultorio'],
-                    repetir: chamadasEletro[i]._doc['repetir'],
-                    prioridade: chamadasEletro[i]._doc['prioridade']
-                }) 
-
-            } else { //senao, insiro na posição inicial
-                console.log('senao, insiro na posição inicial')
-                fila.unshift({
-                    nomePaciente: chamadasEletro[i]._doc['nomePaciente'],
-                    consultorio: chamadasEletro[i]._doc['consultorio'],
-                    repetir: chamadasEletro[i]._doc['repetir'],
-                    prioridade: chamadasEletro[i]._doc['prioridade']
-                })
-            }
-        } else {
-            fila.push({
-                nomePaciente: chamadasEletro[i]._doc['nomePaciente'],
-                consultorio: chamadasEletro[i]._doc['consultorio'],
-                repetir: chamadasEletro[i]._doc['repetir'],
-                prioridade: chamadasEletro[i]._doc['prioridade']
-            })
-        }
+ 
+        fila.push({ 
+            nomePaciente: chamadasEletro[i]._doc['nomePaciente'],
+            consultorio: chamadasEletro[i]._doc['consultorio'],
+            repetir: chamadasEletro[i]._doc['repetir'],
+            prioridade: chamadasEletro[i]._doc['prioridade'],
+            id: chamadasEletro[i]._doc['_id']
+        })
 
     }
- 
+    fila.sort((a, b) => a.prioridade > b.prioridade ? -1 : 1);
     // console.log("123 : " + fila);
     res.render('eletro', { fila: fila })
-}   
+};
+
+exports.eletroAction = async (req, res) => {
+    let id = req.body.id;
+    const chamada = await Call.find({ _id: id }).updateOne({ consultorio: 'recepcao' });
+
+
+    console.log(chamada);
+};

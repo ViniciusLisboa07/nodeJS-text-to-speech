@@ -23,5 +23,6 @@ router.get('/screen', screenController.index);
 router.post('/screen', screenController.screenAction); 
  
 router.get('/eletro', homeController.userMidleware,  eletroController.index);
+router.post('/eletro', eletroController.eletroAction);
 
-module.exports = router;
+module.exports = router;  

@@ -50,9 +50,9 @@
                     </select>
                     <label class="mt-2" for=" prioridade">Prioridade</label>
                     <select name="prioridade" id="prioridade" class="form-control">
-                        <option value="normal">Normal</option>
-                        <option value="alta">Alta</option>
-                        <option value="muitoAlta">Muito Alta</option>
+                        <option value="1">Normal</option>
+                        <option value="2">Alta</option>
+                        <option value="3">Muito Alta</option>
                     </select>
                    <button type="submit" class="mt-4 btn btn-primary btn-lg" id="btnFalar">Falar</button>
                 </form>

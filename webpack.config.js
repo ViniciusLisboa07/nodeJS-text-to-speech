@@ -4,6 +4,7 @@ module.exports = {
     entry: {
         home: './src/dev/index.js',
         screen: './src/dev/screen.js',
+        eletro: './src/dev/eletro.js',
     },
     output: {
         filename:'[name].js',
