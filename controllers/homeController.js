@@ -44,11 +44,12 @@ exports.homeAction = async (req, res) => {
     let nomePaciente = req.body.nomePaciente;
     let consultorio = req.body.consultorio;
     let repetir = req.body.repetir;
+    let prioridade = req.body.prioridade;
 
     if(consultorio == 'eletro'){
         console.log('=================================================')
         
-        await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, repetir: repetir });
+        await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, repetir: repetir, prioridade: prioridade });
         res.redirect('/');
     }
     // console.log(req.session);

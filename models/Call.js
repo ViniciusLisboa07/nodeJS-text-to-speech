@@ -15,6 +15,10 @@ const callSchema = new mongoose.Schema({
     repetir: {
         type:Number,
         required:"A ser executada com uma quantidade determinada."
+    }, 
+    prioridade : {
+        type:String, 
+        required: "A chamada deve conter uma prioridade."
     }
  
 });

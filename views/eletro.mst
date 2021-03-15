@@ -11,35 +11,36 @@
 
 {{#flashes}}
 
-    {{#success}}
-        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
-    {{/success}}
-    {{#error}}
-        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
-    {{/error}}
-    {{#info}}
-        <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
-    {{/info}}
+{{#success}}
+<div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
+{{/success}}
+{{#error}}
+<div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
+{{/error}}
+{{#info}}
+<div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
+{{/info}}
 {{/flashes}}
 
 <body>
-    <div>{{ msg }}</div>
-    
-    <div class="card">
-        <div class="card-header">
-            Fila Eletro
-        </div>
-        <div class="card-body">
+    <div class="container-fluid">
+        <table class="table table-striped">
+            <thead class="thead-light">
+                <tr scope="col">Nome Paciente</tr>
+                <tr scope="col">Prioridade</tr>
+            </thead>
+            <tbody>
+                {{#fila}}
+                    <tr scope="row">
+                        <td> {{ nomePaciente }} </td>
+                        <td> {{ prioridade }} </td>
+                    </tr>
+                {{/fila}}
+            </tbody>
+        </table>
+    </div>
 
-            <ul class="list-group list-group-flush">
-                {{#each fila}}
-                    <li class="list-group-item">
-                            
-                    </li>
-                {{/each}}
-            </ul>
 
-        </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
