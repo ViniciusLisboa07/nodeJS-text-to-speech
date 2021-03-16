@@ -10,14 +10,13 @@ mongoose.connection.on('error', (error)=>{
 require('./models/Call');
 require('./models/User');
 
-// const User = mongoose.model('User');
+const User = mongoose.model('User');
 
 // User.watch().on('change', (data) => {
 
 //   console.log(data);
 
 // });
-
 
 require('dotenv').config({ path:'variables.env' });
 
