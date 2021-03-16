@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = mongoose.model('Users');
+const User = mongoose.model('User');
 const Call = mongoose.model('Call');
 
 exports.userMidleware = async (req, res, next) => {
@@ -53,10 +53,13 @@ exports.index = async (req, res) => {
     }
     fila.sort((a, b) => a.prioridade > b.prioridade ? -1 : 1);
 
+    await Call.watch().on('change', data => console.log(new Date(), data));
+
     res.render('home', { userName: userName, fila: fila });
 };
 
 exports.homeAction = async (req, res) => {
+
     let nomePaciente = req.body.nomePaciente;
     let consultorio = req.body.consultorio;
     let repetir = req.body.repetir;

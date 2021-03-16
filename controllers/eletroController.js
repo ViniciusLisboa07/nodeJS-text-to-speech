@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
-const User = mongoose.model('Users');
+const User = mongoose.model('User');
 const Call = mongoose.model('Call');
 
 exports.index = async (req, res) => {
     const chamadasEletro = await Call.find({ consultorio: 'eletro' });
 
     let fila = [];
+    
     for (i in chamadasEletro) {
 
         fila.push({ 
@@ -17,6 +18,9 @@ exports.index = async (req, res) => {
         });
 
     }
+
+    // Call.watch().on('change', data => console.log(new Date(), data))
+
     fila.sort((a, b) => a.prioridade > b.prioridade ? -1 : 1);
     // console.log("123 : " + fila);
     res.render('eletro', { fila: fila });

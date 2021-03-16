@@ -3,11 +3,15 @@ const bcrypt = require('bcrypt');
 var session = require('express-session');
 
 const mongoose = require('mongoose');
-const User = mongoose.model('Users');
+const User = mongoose.model('User');
+const Call = mongoose.model('Call');
 
 exports.index = async (req, res) => {
 
-    res.render('login')
+    const user = await Call.find({ repetir: 1 });
+    console.log(user);
+    res.render('login');
+
 }
 
 exports.loginAction = async (req, res) => {
@@ -18,11 +22,12 @@ exports.loginAction = async (req, res) => {
     }
 
     const data = matchedData(req);
-
-    const user = await User.findOne({ name: data.name })
+    console.log(data)
+    const user = await User.findOne({ name: data.name });
     const payload = (Date.now() + Math.random()).toString();
     const token = await bcrypt.hash(payload, 10);
 
+    console.log(user);
 
     try {
         user.token = token;
@@ -31,7 +36,7 @@ exports.loginAction = async (req, res) => {
         req.session.user = user;
         req.session.token = token;
 
-
+        console.log(user.name);
         if (user.name == 'recepcao') { 
             req.flash('success', 'Login efetuado com sucesso!');
             res.redirect('/');
