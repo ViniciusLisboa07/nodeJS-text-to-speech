@@ -53,9 +53,8 @@ exports.index = async (req, res) => {
     }
     fila.sort((a, b) => a.prioridade > b.prioridade ? -1 : 1);
 
-    await Call.watch().on('change', data => console.log(new Date(), data));
-
     res.render('home', { userName: userName, fila: fila });
+    
 };
 
 exports.homeAction = async (req, res) => {
@@ -65,8 +64,8 @@ exports.homeAction = async (req, res) => {
     let repetir = req.body.repetir;
     let prioridade = req.body.prioridade;
 
-    if (consultorio == 'eletro') {
-        console.log('=================================================')
+    {
+        console.log('=================================================');
 
         await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, repetir: repetir, prioridade: prioridade });
         res.redirect('/');

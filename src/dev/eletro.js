@@ -1,9 +1,8 @@
 import $ from 'jquery';
-console.log('098098')
 
 
 var rowFila = document.getElementsByClassName("linha");
-var btns = document.getElementsByTagName('button'); 
+var btns = document.getElementsByTagName("button");
   
 for(let i = 0; i < rowFila.length; i++) {
     if(rowFila[i].children[1].outerText == '1'){
@@ -18,13 +17,17 @@ for(let i = 0; i < rowFila.length; i++) {
         rowFila[i].children[1].innerHTML =  "Muito Alta";
         rowFila[i].children[1].className = 'bg-danger'
 
-    }
-
-    btns[i].onclick = (x) => {
-        x = btns[i];
-        let id = x.parentNode.parentNode.children[3].value;
- 
-        $.post("/eletro", { id: id });
     } 
 
-};  
+    btns[i].onclick = (x) => {
+        let id =  btns[i].parentNode.parentNode.children[3].value;
+        
+        x.preventDefault();    
+        $.post("/eletro", { id: id });
+    }
+
+    // var btn = document.createElement('button');
+    // rowFila[i].appendChild(btn);
+
+};
+

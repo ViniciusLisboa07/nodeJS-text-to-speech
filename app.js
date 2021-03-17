@@ -3,14 +3,12 @@ const router = require('./routes/main');
 const bodyParser = require('body-parser');
 const mustache = require('mustache-express');
 const helpers = require('./helpers');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 const dotenv = require('dotenv').config()
+const io = require('socket.io');
 
 const cookieParser = require('cookie-parser')
 const session = require('express-session');
 const flash = require('express-flash')
-
 
 const app = express();
 
@@ -42,6 +40,8 @@ app.use('/', router);
 app.engine('mst', mustache());
 
 app.use("/src",express.static(__dirname + '/src'));
+app.use("/node_modules",express.static(__dirname + '/node_modules'));
+app.use("/utils",express.static(__dirname + '/utils'));
 
 app.set('view engine', 'mst');
 app.set('views', __dirname + '/views');
