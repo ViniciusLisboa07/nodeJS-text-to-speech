@@ -1,6 +1,7 @@
 import $ from 'jquery';
 
-
+var socket = io();
+ 
 var rowFila = document.getElementsByClassName("linha");
 var btns = document.getElementsByTagName("button");
   
@@ -26,8 +27,11 @@ for(let i = 0; i < rowFila.length; i++) {
         $.post("/eletro", { id: id });
     }
 
-    // var btn = document.createElement('button');
-    // rowFila[i].appendChild(btn);
-
 };
 
+console.log(socket);
+
+// socket.on("call", (data) => {
+
+
+// });

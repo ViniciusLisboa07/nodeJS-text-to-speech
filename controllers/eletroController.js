@@ -20,15 +20,16 @@ exports.index = async (req, res) => {
 
     }
 
-    Call.watch({ $match: [{ operationType: 'update' }] } )
-    .on('change', async (change) => {
+    // Call.watch( { $match: { "operationType": "update", fulldocument: 'updateLookup' } } )
+    // .on('change', async (change) => {
+    //     console.log(change);
+    //     console.log(change.documentKey['_id']);
+    //     let alteracao = await Call.findOne({ _id: change.documentKey['_id'] });
         
-        console.log(change.documentKey['_id']);
-        let alteracao = await Call.findOne({ _id: change.documentKey['_id'] });
+    
+    //     Socket.emit('call', alteracao);
 
-        Socket.emit('call', alteracao);
-
-    });
+    // });
 
     fila.sort((a, b) => a.prioridade > b.prioridade ? -1 : 1);
 
@@ -37,7 +38,11 @@ exports.index = async (req, res) => {
 
 exports.eletroAction = async (req, res) => {
     let id = req.body.id;
+    
+    const alteracao = await Call.findOne({ _id: id });
     const chamada = await Call.find({ _id: id }).updateOne({ consultorio: 'eletroRecepcao' });
+
+    Socket.emit('call', alteracao);
     console.log('eletroAction');
     res.redirect('/eletro');
 };  

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Call = mongoose.model('Call');
+const { Socket } = require("../utils/socket");
 
 exports.userMidleware = async (req, res, next) => {
     if (!req.query.token && !req.body.token && !req.session.token) {
@@ -67,7 +68,10 @@ exports.homeAction = async (req, res) => {
     {
         console.log('=================================================');
 
-        await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, repetir: repetir, prioridade: prioridade });
+        let call = await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, repetir: repetir, prioridade: prioridade });
+        
+
+        // Socket.to().emit('call', call)
         res.redirect('/');
     }
     // console.log(req.session);
