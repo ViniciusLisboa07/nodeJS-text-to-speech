@@ -45,7 +45,6 @@ socket.on('call', (data) => {
     novoNome.innerHTML = data['nomePaciente'];
     novaPrioridade.innerHTML = data['prioridade'];
 
-    console.log(novaPrioridade);
 
     novaLinha.appendChild(novoNome);
     novaLinha.appendChild(novaPrioridade);
@@ -54,32 +53,37 @@ socket.on('call', (data) => {
     // Se a prioridade da nova linha for Normal
     if (novaPrioridade.innerHTML == '1') {
         tblFilaRecepcao.appendChild(novaLinha);
-    
-    // Se ela for Alta
-    } else if (novaPrioridade.innerHTML == '2') {
 
+        // Se ela for Alta
+    } else if (novaPrioridade.innerHTML == '2') {
         // Se já houver alguma linha com prioridade Alta
-        if (tableRow.find(a => a.children[1].innerHTML = "Alta")) {
+        console.log(tableRow);
+        if ((tableRow.find(a => a.children[1].outerText == "Alta") == true)) {
 
             // Index da ultima linha "Alta" encontrada [utlizei o metodo slice() para criar uma copia do array e o metodo reverse em conjunto com o indexOf e find para pegar o ultimo elemento com prioridade "Alta" na tabela]
-            var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].innerHTML = "Alta"));
+            var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Alta"));
+            $('#tblFilaRecepcao > tbody > tr').eq(i - 1).after(novaLinha); // Adicionando após
+
+        // Se houver alguma linha com prioridade Muito Alta 
+        } else if ((tableRow.find(a => a.children[1].outerText == "Muito Alta")) == true) {
+
+            var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Muito Alta"));
             // Adicionando após
             $('#tblFilaRecepcao > tbody > tr').eq(i - 1).after(novaLinha);
 
-            
-
-        // Se houver alguma linha com prioridade Muito Alta 
-        } else if (tableRow.find(a => a.children[1].innerHTML = "Muito Alta")) {
-            
-            console.log('tem muito alta');
-
-        // Se a prioridade da linha for Muito Alta
+        // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
         } else {
-
-            tblFilaRecepcao.unshift(novaLinha);
+            $('#tblFilaRecepcao > tbody > tr').eq(0).before(novaLinha);
         }
 
     } else {
+
+        if(tableRow.find(a => a.children[1].outerText == "Muito Alta")){
+            var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Muito Alta"));
+            $('#tblFilaRecepcao > tbody > tr').eq(i - 1).after(novaLinha);// Adicionando após
+        } else {
+            $('#tblFilaRecepcao > tbody > tr').eq(0).before(novaLinha);
+        }
 
     }
 
