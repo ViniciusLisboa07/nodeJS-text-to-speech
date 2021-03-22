@@ -4,7 +4,9 @@ var socket = io();
  
 var rowFila = document.getElementsByClassName("linha");
 var btns = document.getElementsByTagName("button");
-  
+
+
+
 for(let i = 0; i < rowFila.length; i++) {
     if(rowFila[i].children[1].outerText == '1'){
         rowFila[i].children[1].innerHTML =  "Normal";
@@ -31,7 +33,6 @@ for(let i = 0; i < rowFila.length; i++) {
 
 console.log(socket);
 
-// socket.on("call", (data) => {
-
-
-// });
+socket.on("call", (data) => {   
+    console.log(data);
+});
