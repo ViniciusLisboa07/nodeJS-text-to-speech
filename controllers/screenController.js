@@ -8,9 +8,13 @@ exports.index = (req, res) => {
     res.render('screen');
 };
 
-exports.screenAction = (req, res) => {
+exports.screenAction = async (req, res) => {
 
-    var str = "Atenção: " + req.body.nomePaciente + " se dirija ao " + req.body.consultorio;
+    var id = req.body.id;
+
+    var call = await Call.findOne({ _id: id });
+
+    var str = "Atenção: " + call._doc['nomePaciente'] + " se dirija ao " + call._doc['consultorio'];
 
     fs.writeFile('textos/helloworld.txt', str, function (err) {
         if (err) return console.log(err);

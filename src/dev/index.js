@@ -4,6 +4,17 @@ var socket = io();
 var tblFilaRecepcao = document.getElementById('tblFilaRecepcao');
 var rowFila = document.getElementsByClassName("linha");
 var tableRow = Array.from(rowFila);
+var btnChamar = document.getElementById('btnChamar');
+
+var screen = null;
+if (screen == null || screen.closed) {
+    screen = window.open('/screen', 'screen', 'left=0,top=0,width=1024,height=1140,toolbar=0,scrollbars=0,status=0');
+} else {
+    screen.location.reload(true);
+    screen.focus();
+}
+
+
 
 function aplicandoEstilo() {
     for (let i = 0; i < tableRow.length; i++) {
@@ -53,7 +64,7 @@ socket.on('call', (data) => {
             console.log(i);
             $('#tblFilaRecepcao > tbody > tr').eq(i - 1).after(novaLinha); // Adicionando após
 
-        // Se houver alguma linha com prioridade Muito Alta 
+            // Se houver alguma linha com prioridade Muito Alta 
         } else if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
 
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Muito Alta"));
@@ -62,30 +73,48 @@ socket.on('call', (data) => {
             $('#tblFilaRecepcao > tbody > tr').eq(i - 1).after(novaLinha);
             console.log('muito alta');
 
-        // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
+            // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
         } else {
-        
+
             $('#tblFilaRecepcao > tbody > tr').eq(0).before(novaLinha);
         }
 
     } else {
 
-        if(tableRow.find(a => a.children[1].outerText == "Muito Alta")){
+        if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
 
             var i = tableRow.indexOf(tableRow.slice().reverse().find(a => a.children[1].outerText == "Muito Alta"));
 
             $('#tblFilaRecepcao > tbody > tr').eq(i).after(novaLinha);// Adicionando após
             console.log('algum muito alta');
-            
+
         } else {
 
             $('#tblFilaRecepcao > tbody').eq(0).append(novaLinha);
             console.log('nenhum muito alta');
-        
+
         }
 
     }
 
     aplicandoEstilo();
 
-});
+}); 
+
+btnChamar.onclick = (x) => {
+    x.preventDefault();
+
+    // console.log(tableRow);
+    if(tableRow.length > 0) {
+        
+        var id = tableRow[0].children[2].value;
+        // console.log(tableRow[0].children[2].value);
+
+        $.post("/eletro", { id: id });
+
+    } else {
+
+        console.log("A fila está vazia");
+
+    }
+};

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Call = mongoose.model('Call');
 const { Socket } = require("../utils/socket");
-
+ 
 exports.index = async (req, res) => {
     const chamadasEletro = await Call.find({ consultorio: 'eletro' });
 
