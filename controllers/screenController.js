@@ -46,4 +46,4 @@ exports.screenAction = (req, res) => {
         , 3000);
 
         console.log("Success:" + msg);})
-} 
+};

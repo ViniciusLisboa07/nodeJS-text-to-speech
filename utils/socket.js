@@ -6,11 +6,13 @@ var Socket = {
         console.log(event);
         io.sockets.emit(event, data);
     }
+
 };
 
 io.on("connection", function (socket) {
     console.log("A user connected");
 });
+
 
 exports.Socket = Socket;
 exports.io = io;

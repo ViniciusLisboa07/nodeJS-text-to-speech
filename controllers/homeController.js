@@ -68,10 +68,9 @@ exports.homeAction = async (req, res) => {
     {
         console.log('=================================================');
 
-        let call = await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, repetir: repetir, prioridade: prioridade });
-        
+        let alteracao = await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, repetir: repetir, prioridade: prioridade });
 
-        // Socket.to().emit('call', call)
+        Socket.emit('eletroCall', alteracao);
         res.redirect('/');
     }
     // console.log(req.session);

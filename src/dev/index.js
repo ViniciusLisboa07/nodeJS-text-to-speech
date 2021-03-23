@@ -1,16 +1,9 @@
 import $ from 'jquery';
 
 var socket = io();
-
 var tblFilaRecepcao = document.getElementById('tblFilaRecepcao');
-
-var btnFalar = document.getElementById("btnFalar");
-
 var rowFila = document.getElementsByClassName("linha");
-
 var tableRow = Array.from(rowFila);
-
-console.log(tableRow);
 
 function aplicandoEstilo() {
     for (let i = 0; i < tableRow.length; i++) {
@@ -32,10 +25,6 @@ function aplicandoEstilo() {
 
 aplicandoEstilo();
 
-btnFalar.onclick = (event) => {
-    // event.preventDefault();
-}
-
 socket.on('call', (data) => {
 
     var novaLinha = document.createElement('tr');
@@ -44,7 +33,6 @@ socket.on('call', (data) => {
 
     novoNome.innerHTML = data['nomePaciente'];
     novaPrioridade.innerHTML = data['prioridade'];
-
 
     novaLinha.appendChild(novoNome);
     novaLinha.appendChild(novaPrioridade);
@@ -62,27 +50,38 @@ socket.on('call', (data) => {
 
             // Index da ultima linha "Alta" encontrada [utlizei o metodo slice() para criar uma copia do array e o metodo reverse em conjunto com o indexOf e find para pegar o ultimo elemento com prioridade "Alta" na tabela]
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Alta"));
+            console.log(i);
             $('#tblFilaRecepcao > tbody > tr').eq(i - 1).after(novaLinha); // Adicionando após
 
         // Se houver alguma linha com prioridade Muito Alta 
-        } else if ((tableRow.find(a => a.children[1].outerText == "Muito Alta")) == true) {
+        } else if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
 
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Muito Alta"));
+            console.log(i);
             // Adicionando após
             $('#tblFilaRecepcao > tbody > tr').eq(i - 1).after(novaLinha);
+            console.log('muito alta');
 
         // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
         } else {
+        
             $('#tblFilaRecepcao > tbody > tr').eq(0).before(novaLinha);
         }
 
     } else {
 
         if(tableRow.find(a => a.children[1].outerText == "Muito Alta")){
-            var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Muito Alta"));
-            $('#tblFilaRecepcao > tbody > tr').eq(i - 1).after(novaLinha);// Adicionando após
+
+            var i = tableRow.indexOf(tableRow.slice().reverse().find(a => a.children[1].outerText == "Muito Alta"));
+
+            $('#tblFilaRecepcao > tbody > tr').eq(i).after(novaLinha);// Adicionando após
+            console.log('algum muito alta');
+            
         } else {
-            $('#tblFilaRecepcao > tbody > tr').eq(0).before(novaLinha);
+
+            $('#tblFilaRecepcao > tbody').eq(0).append(novaLinha);
+            console.log('nenhum muito alta');
+        
         }
 
     }
@@ -90,7 +89,3 @@ socket.on('call', (data) => {
     aplicandoEstilo();
 
 });
-
-tblFilaRecepcao.onchange = () => {
-    console.log('mudou');
-}
