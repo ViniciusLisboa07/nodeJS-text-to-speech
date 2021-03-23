@@ -110,7 +110,7 @@ btnChamar.onclick = (x) => {
         var id = tableRow[0].children[2].value;
         // console.log(tableRow[0].children[2].value);
 
-        $.post("/eletro", { id: id });
+        $.post("/screen", { id: id });
 
     } else {
 
