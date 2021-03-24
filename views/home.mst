@@ -61,24 +61,24 @@
             </div>
         </div>
         <div>
-            <table class="table table-striped table-hover table-md w-50" id="tblFilaRecepcao">
-                <thead>
-                    <tr>
-                        <th scope="col">Nome Paciente</th>
-                        <th scope="col">Prioridade</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#fila}}
-                        <tr class="linha">
-                            <td> {{ nomePaciente }} </td>
-                            <td> {{ prioridade }} </td>
-                            <input type="hidden" value="{{id}}">
+                <table class="table table-striped table-hover table-md w-50" id="tblFilaRecepcao">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome Paciente</th>
+                            <th scope="col">Prioridade</th>
                         </tr>
-                    {{/fila}}
-                </tbody>
-            </table>
-            <button class="btn btn-secondary btn-md" id="btnChamar"> Chamar Próximo </button>
+                    </thead>
+                    <tbody>
+                        {{#fila}}
+                            <tr class="linha">
+                                <td> {{ nomePaciente }} </td>
+                                <td> {{ prioridade }} </td>
+                                <input type="hidden" value="{{id}}">
+                            </tr>
+                        {{/fila}}
+                    </tbody>
+                </table>
+                <button class="btn btn-secondary btn-md" id="btnChamar"> Chamar Próximo </button>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

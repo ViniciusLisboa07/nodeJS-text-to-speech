@@ -40,7 +40,7 @@ exports.eletroAction = async (req, res) => {
     let id = req.body.id;
     
     const alteracao = await Call.findOne({ _id: id });
-    const chamada = await Call.find({ _id: id }).updateOne({ consultorio: 'eletroRecepcao' });
+    const chamada = await Call.find({ _id: id }).updateOne({ consultorio: 'eletro_Recepcao' });
 
     Socket.emit('call', alteracao);
     console.log('eletroAction');

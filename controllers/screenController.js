@@ -10,44 +10,45 @@ exports.index = (req, res) => {
 
 exports.screenAction = async (req, res) => {
 
+    console.log(req.body)
     var id = req.body.id;
 
     var call = await Call.findOne({ _id: id });
+    var endIndex = call._doc['consultorio'].indexOf('_');
+    var consultorio = call._doc['consultorio'].slice(0, endIndex);
 
-    var str = "Atenção: " + call._doc['nomePaciente'] + " se dirija ao " + call._doc['consultorio'];
+    var str = "Atenção: " + call._doc['nomePaciente'] + " se dirija ao " + consultorio;
 
     fs.writeFile('textos/helloworld.txt', str, function (err) {
         if (err) return console.log(err);
-        // console.log('Hello World > helloworld.txt');
     });
 
     var dataAtual = Date.now();
     var nomeAudio = dataAtual;
 
-    const myPromise = new Promise((resolve, reject) => {  
-        
-        var audioFile = exec('espeak -vpt-br -f textos/helloworld.txt --stdout > src/audios/'+ nomeAudio +'.wav', (err) => {
+    const myPromise = new Promise((resolve, reject) => {
+
+        var audioFile = exec('espeak -vpt-br -f textos/helloworld.txt --stdout > src/audios/' + nomeAudio + '.wav', (err) => {
             if (err) {
                 console.log("Erro ao executar o espeak: " + err);
             }
-        }); 
-        
-        if(audioFile) {    
-            resolve('Promise is resolved successfully.');  
-        } else {    
+        });
+
+        if (audioFile) {
+            resolve('Promise is resolved successfully.');
+        } else {
             reject('Promise is rejected');
         }
-        
-    });  
 
+    });
 
     myPromise.then((msg) => {
 
         setTimeout(
             () => {
-                res.render('screen', { nomePaciente: req.body.nomePaciente, consultorio: req.body.consultorio, nomeAudio: nomeAudio})
-            }
-        , 3000);
+                res.render('screen', { nomePaciente: call._doc['nomePaciente'], consultorio: consultorio, nomeAudio: nomeAudio });
+            }, 1000);
 
-        console.log("Success:" + msg);})
+        console.log("Success:" + msg);
+    })
 };

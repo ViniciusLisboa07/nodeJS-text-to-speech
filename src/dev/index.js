@@ -8,10 +8,14 @@ var btnChamar = document.getElementById('btnChamar');
 
 var screen = null;
 if (screen == null || screen.closed) {
+
     screen = window.open('/screen', 'screen', 'left=0,top=0,width=1024,height=1140,toolbar=0,scrollbars=0,status=0');
+
 } else {
+
     screen.location.reload(true);
     screen.focus();
+
 }
 
 
@@ -99,19 +103,27 @@ socket.on('call', (data) => {
 
     aplicandoEstilo();
 
-}); 
+});
 
 btnChamar.onclick = (x) => {
     x.preventDefault();
 
-    // console.log(tableRow);
-    if(tableRow.length > 0) {
-        
+    if (tableRow.length > 0) {
+
         var id = tableRow[0].children[2].value;
-        // console.log(tableRow[0].children[2].value);
 
-        $.post("/screen", { id: id });
+        $('body').append(`<form 
+        action="/screen" 
+        method="post" 
+        target="screen" 
+        id="chamarForm"
+        style=" display: none">
+          <input type="hidden" name="id" value="${id}"/>
+        </form>`);
 
+        tableRow[0].remove();
+
+        $("#chamarForm").submit();
     } else {
 
         console.log("A fila está vazia");

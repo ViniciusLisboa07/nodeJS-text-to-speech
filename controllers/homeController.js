@@ -38,7 +38,7 @@ exports.userMidleware = async (req, res, next) => {
 
 exports.index = async (req, res) => {
     let userName = req.session.user['name'];
-    const chamadasEletro = await Call.find({ consultorio: 'eletroRecepcao' });
+    const chamadasEletro = await Call.find({ consultorio: 'eletro_Recepcao' });
 
     let fila = [];
     for (i in chamadasEletro) {
