@@ -7,6 +7,7 @@ var tableRow = Array.from(rowFila);
 var btnChamar = document.getElementById('btnChamar');
 
 var screen = null;
+
 if (screen == null || screen.closed) {
 
     screen = window.open('/screen', 'screen', 'left=0,top=0,width=1024,height=1140,toolbar=0,scrollbars=0,status=0');
@@ -21,21 +22,22 @@ if (screen == null || screen.closed) {
 
 
 function aplicandoEstilo() {
-    for (let i = 0; i < tableRow.length; i++) {
+    for (let i = 0; i < $('#tblFilaRecepcao > tbody')[0].children.length; i++) {
 
-        if (tableRow[i].children[1].outerText == '1') {
-            tableRow[i].children[1].innerHTML = "Normal";
-            tableRow[i].children[1].className = 'bg-info';
+        if ($('#tblFilaRecepcao > tbody')[0].children[i].children[1].outerText == '1') {
+            $('#tblFilaRecepcao > tbody')[0].children[i].children[1].innerHTML = "Normal";
+            $('#tblFilaRecepcao > tbody')[0].children[i].children[1].className = 'bg-info';
 
-        } else if (tableRow[i].children[1].outerText == '2') {
-            tableRow[i].children[1].innerHTML = "Alta";
-            tableRow[i].children[1].className = 'bg-warning';
+        } else if ($('#tblFilaRecepcao > tbody')[0].children[i].children[1].outerText == '2') {
+            $('#tblFilaRecepcao > tbody')[0].children[i].children[1].innerHTML = "Alta";
+            $('#tblFilaRecepcao > tbody')[0].children[i].children[1].className = 'bg-warning';
 
-        } else if (tableRow[i].children[1].outerText == '3') {
-            tableRow[i].children[1].innerHTML = "Muito Alta";
-            tableRow[i].children[1].className = 'bg-danger';
+        } else if ($('#tblFilaRecepcao > tbody')[0].children[i].children[1].outerText == '3') {
+            $('#tblFilaRecepcao > tbody')[0].children[i].children[1].innerHTML = "Muito Alta";
+            $('#tblFilaRecepcao > tbody')[0].children[i].children[1].className = 'bg-danger';
         }
     };
+    console.log($('#tblFilaRecepcao > tbody')[0].children.length);
 }
 
 aplicandoEstilo();
@@ -55,7 +57,7 @@ socket.on('call', (data) => {
 
     // Se a prioridade da nova linha for Normal
     if (novaPrioridade.innerHTML == '1') {
-        tblFilaRecepcao.appendChild(novaLinha);
+        $('#tblFilaRecepcao > tbody')[0].appendChild(novaLinha);
 
         // Se ela for Alta
     } else if (novaPrioridade.innerHTML == '2') {
@@ -81,6 +83,7 @@ socket.on('call', (data) => {
         } else {
 
             $('#tblFilaRecepcao > tbody > tr').eq(0).before(novaLinha);
+
         }
 
     } else {
@@ -105,24 +108,40 @@ socket.on('call', (data) => {
 
 });
 
+console.log($('#tblFilaRecepcao > tbody')[0].children)
+
+var form = null;
 btnChamar.onclick = (x) => {
     x.preventDefault();
 
     if (tableRow.length > 0) {
 
-        var id = tableRow[0].children[2].value;
+        console.log($('#tblFilaRecepcao')[0].children[1].children[0].children[2].value);
+        var id = $('#tblFilaRecepcao')[0].children[1].children[0].children[2].value;
+        console.log("!!! " + form)
+        if (form == null) {
+            form = document.createElement('form');
+            form.setAttribute("action", "/screen");
+            form.setAttribute("method", "post");
+            form.setAttribute("target", "screen");
+            form.setAttribute("id", "chamarForm");
 
-        $('body').append(`<form 
-        action="/screen" 
-        method="post" 
-        target="screen" 
-        id="chamarForm"
-        style=" display: none">
-          <input type="hidden" name="id" value="${id}"/>
-        </form>`);
+            var input = document.createElement("input");
+            input.setAttribute('type', 'hidden')
+            input.setAttribute('name', 'id')
+            input.setAttribute('id', 'id')
+            input.value = id;
 
-        tableRow[0].remove();
+            form.appendChild(input);
+            $('body').append(form);
+        } else {
+            $("#id").val(id);
+            console.log("alterou")
+        }
 
+        tblFilaRecepcao.children[1].children[0].remove();
+
+        console.log($("#chamarForm"));
         $("#chamarForm").submit();
     } else {
 

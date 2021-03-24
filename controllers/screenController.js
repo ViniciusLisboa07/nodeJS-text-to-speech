@@ -42,13 +42,17 @@ exports.screenAction = async (req, res) => {
 
     });
 
+
+
     myPromise.then((msg) => {
 
         setTimeout(
             () => {
                 res.render('screen', { nomePaciente: call._doc['nomePaciente'], consultorio: consultorio, nomeAudio: nomeAudio });
-            }, 1000);
+            }, 1500);
 
         console.log("Success:" + msg);
-    })
+    });
+
+    await Call.deleteOne({ _id: id });
 };
