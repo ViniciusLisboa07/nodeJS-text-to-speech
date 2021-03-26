@@ -43,6 +43,7 @@ function aplicandoEstilo() {
 aplicandoEstilo();
 
 socket.on('call', (data) => {
+    console.log(data);
 
     var novaLinha = document.createElement('tr');
     var novoNome = document.createElement('td');
@@ -57,16 +58,17 @@ socket.on('call', (data) => {
 
     // Se a prioridade da nova linha for Normal
     if (novaPrioridade.innerHTML == '1') {
-        $('#tblFilaRecepcao > tbody')[0].appendChild(novaLinha);
+        $('#tblFilaRecepcao > tbody').append(novaLinha);
 
         // Se ela for Alta
     } else if (novaPrioridade.innerHTML == '2') {
         // Se já houver alguma linha com prioridade Alta
         console.log(tableRow);
-        if ((tableRow.find(a => a.children[1].outerText == "Alta") == true)) {
+        if (tableRow.find(a => a.children[1].outerText == "Alta")) {
 
             // Index da ultima linha "Alta" encontrada [utlizei o metodo slice() para criar uma copia do array e o metodo reverse em conjunto com o indexOf e find para pegar o ultimo elemento com prioridade "Alta" na tabela]
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Alta"));
+            console.log(tableRow.slice().reverse());
             console.log(i);
             $('#tblFilaRecepcao > tbody > tr').eq(i - 1).after(novaLinha); // Adicionando após
 
@@ -82,7 +84,7 @@ socket.on('call', (data) => {
             // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
         } else {
 
-            $('#tblFilaRecepcao > tbody > tr').eq(0).before(novaLinha);
+            $('#tblFilaRecepcao > tbody').prepend(novaLinha);
 
         }
 
@@ -97,7 +99,7 @@ socket.on('call', (data) => {
 
         } else {
 
-            $('#tblFilaRecepcao > tbody').eq(0).append(novaLinha);
+            $('#tblFilaRecepcao > tbody').eq(0).prepend(novaLinha);
             console.log('nenhum muito alta');
 
         }
@@ -112,13 +114,13 @@ console.log($('#tblFilaRecepcao > tbody')[0].children)
 
 var form = null;
 btnChamar.onclick = (x) => {
-    x.preventDefault();
-
+    console.log($('#tblFilaRecepcao')[0].children[1].children[0].children[2]);  
     if (tableRow.length > 0) {
 
         console.log($('#tblFilaRecepcao')[0].children[1].children[0].children[2].value);
+        console.log($('#tblFilaRecepcao')[0].children[1]);
         var id = $('#tblFilaRecepcao')[0].children[1].children[0].children[2].value;
-        console.log("!!! " + form)
+        console.log("!!! " + form);
         if (form == null) {
             form = document.createElement('form');
             form.setAttribute("action", "/screen");
@@ -127,16 +129,16 @@ btnChamar.onclick = (x) => {
             form.setAttribute("id", "chamarForm");
 
             var input = document.createElement("input");
-            input.setAttribute('type', 'hidden')
-            input.setAttribute('name', 'id')
-            input.setAttribute('id', 'id')
+            input.setAttribute('type', 'hidden');
+            input.setAttribute('name', 'id');
+            input.setAttribute('id', 'id');
             input.value = id;
 
             form.appendChild(input);
             $('body').append(form);
         } else {
             $("#id").val(id);
-            console.log("alterou")
+            console.log("alterou");
         }
 
         tblFilaRecepcao.children[1].children[0].remove();

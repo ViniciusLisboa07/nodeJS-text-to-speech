@@ -4,6 +4,7 @@ const homeController = require('../controllers/homeController');
 const screenController = require('../controllers/screenController');
 const loginController = require('../controllers/loginController');
 const eletroController = require('../controllers/eletroController');
+const medicacaoController = require('../controllers/medicacaoController');
 
 const signInValidator = require('../validators/SignInValidator')
 
@@ -24,5 +25,9 @@ router.post('/screen', screenController.screenAction);
  
 router.get('/eletro', homeController.userMidleware,  eletroController.index);
 router.post('/eletro', eletroController.eletroAction);
+
+router.get('/medicacao', homeController.userMidleware,  medicacaoController.index);
+router.post('/medicacao', medicacaoController.medicacaoAction);
+
 
 module.exports = router;   

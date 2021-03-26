@@ -1,15 +1,38 @@
-const { exec } = require('child_process');
-const fs = require('fs');
+const { validationResult, matchedData } = require('express-validator');
+const bcrypt = require('bcrypt');
+var session = require('express-session');
+
+
 const mongoose = require('mongoose');
+const User = mongoose.model('User');
 const Call = mongoose.model('Call');
 
-exports.index = (req, res) => {
+exports.index = async (req, res) => {
 
-    res.render('screen');
-    
-};
+    let userName = req.session.user['name'];
+    const chamadasEletro = await Call.find({ consultorio: 'medicacao' });
 
-exports.screenAction = async (req, res) => {
+    let fila = [];
+
+    for (i in chamadasEletro) {
+
+        fila.push({
+            nomePaciente: chamadasEletro[i]._doc['nomePaciente'],
+            consultorio: chamadasEletro[i]._doc['consultorio'],
+            repetir: chamadasEletro[i]._doc['repetir'],
+            prioridade: chamadasEletro[i]._doc['prioridade'],
+            id: chamadasEletro[i]._doc['_id']
+        });
+    }
+    fila.sort((a, b) => a.prioridade > b.prioridade ? -1 : 1);
+
+    res.render('medicacao', { userName: userName, fila: fila });
+
+}
+
+
+
+exports.medicacaoAction = async (req, res) => {
 
     console.log(req.body)
     var id = req.body.id;
@@ -56,4 +79,6 @@ exports.screenAction = async (req, res) => {
     });
 
     await Call.deleteOne({ _id: id });
-};
+
+    
+}

@@ -5,6 +5,7 @@ module.exports = {
         home: './src/dev/index.js',
         screen: './src/dev/screen.js',
         eletro: './src/dev/eletro.js',
+        medicacao: './src/dev/medicacao.js'
     },
     output: {
         filename:'[name].js',
