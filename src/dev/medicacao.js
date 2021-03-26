@@ -7,25 +7,22 @@ var btns = document.getElementsByTagName("button");
 var rowFila = document.getElementsByClassName("linxha");
 var tableRow = Array.from(rowFila);
 
+console.log(rowFila)
 function aplicandoEstilo() {
-    for(let i = 0; i < rowFila.length; i++) {
-        console.log(rowFila[i].children[1].outerText);
-        if(rowFila[i].children[1].outerText == '1'){
-            console.log('normal');
-            rowFila[i].children[1].innerHTML =  "Normal";
-            rowFila[i].children[1].className = 'bg-info'
-            
-        } else if(rowFila[i].children[1].outerText == '2') {
-            console.log('alta');
-            rowFila[i].children[1].innerHTML =  "Alta";
-            rowFila[i].children[1].className = 'bg-warning'
-            
-        } else if(rowFila[i].children[1].outerText == '3') {
-            console.log('muito alta');
-            rowFila[i].children[1].innerHTML =  "Muito Alta";
-            rowFila[i].children[1].className = 'bg-danger'
+    for(let i = 0; i < $('#tblPacientesMedicacao > tbody')[0].children.length; i++) {
 
-        } 
+        if ($('#tblPacientesMedicacao > tbody')[0].children[i].children[1].outerText == '1') {
+            $('#tblPacientesMedicacao > tbody')[0].children[i].children[1].innerHTML = "Normal";
+            $('#tblPacientesMedicacao > tbody')[0].children[i].children[1].className = 'bg-info';
+
+        } else if ($('#tblPacientesMedicacao > tbody')[0].children[i].children[1].outerText == '2') {
+            $('#tblPacientesMedicacao > tbody')[0].children[i].children[1].innerHTML = "Alta";
+            $('#tblPacientesMedicacao > tbody')[0].children[i].children[1].className = 'bg-warning';
+
+        } else if ($('#tblPacientesMedicacao > tbody')[0].children[i].children[1].outerText == '3') {
+            $('#tblPacientesMedicacao > tbody')[0].children[i].children[1].innerHTML = "Muito Alta";
+            $('#tblPacientesMedicacao > tbody')[0].children[i].children[1].className = 'bg-danger';
+        };
 
         btns[i].onclick = (x) => {
             let id =  btns[i].parentNode.parentNode.children[3].value;
