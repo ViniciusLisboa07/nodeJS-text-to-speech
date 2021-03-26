@@ -1,5 +1,5 @@
 import $ from 'jquery';
-
+ 
 var socket = io();
 console.log(socket);
 var tblPacientesMedicacao = document.getElementById('tblPacientesMedicacao');
@@ -9,15 +9,19 @@ var tableRow = Array.from(rowFila);
 
 function aplicandoEstilo() {
     for(let i = 0; i < rowFila.length; i++) {
+        console.log(rowFila[i].children[1].outerText);
         if(rowFila[i].children[1].outerText == '1'){
+            console.log('normal');
             rowFila[i].children[1].innerHTML =  "Normal";
             rowFila[i].children[1].className = 'bg-info'
-
+            
         } else if(rowFila[i].children[1].outerText == '2') {
+            console.log('alta');
             rowFila[i].children[1].innerHTML =  "Alta";
             rowFila[i].children[1].className = 'bg-warning'
             
         } else if(rowFila[i].children[1].outerText == '3') {
+            console.log('muito alta');
             rowFila[i].children[1].innerHTML =  "Muito Alta";
             rowFila[i].children[1].className = 'bg-danger'
 
@@ -73,7 +77,7 @@ socket.on("medicacao_call", (data) => {
         // Se ela for Alta
     } else if (novaPrioridade.innerHTML == '2') {
         // Se já houver alguma linha com prioridade Alta
-        console.log(tableRow);
+        // console.log(tableRow);
         if (tableRow.find(a => a.children[1].outerText == "Alta")) {
 
             // Index da ultima linha "Alta" encontrada [utlizei o metodo slice() para criar uma copia do array e o metodo reverse em conjunto com o indexOf e find para pegar o ultimo elemento com prioridade "Alta" na tabela]

@@ -11,16 +11,15 @@ function aplicandoEstilo() {
     for(let i = 0; i < rowFila.length; i++) {
         if(rowFila[i].children[1].outerText == '1'){
             rowFila[i].children[1].innerHTML =  "Normal";
-            rowFila[i].children[1].className = 'bg-info'
+            rowFila[i].children[1].className = 'bg-info';
 
         } else if(rowFila[i].children[1].outerText == '2') {
             rowFila[i].children[1].innerHTML =  "Alta";
-            rowFila[i].children[1].className = 'bg-warning'
+            rowFila[i].children[1].className = 'bg-warning';
             
         } else if(rowFila[i].children[1].outerText == '3') {
             rowFila[i].children[1].innerHTML =  "Muito Alta";
-            rowFila[i].children[1].className = 'bg-danger'
-
+            rowFila[i].children[1].className = 'bg-danger';
         } 
 
         btns[i].onclick = (x) => {
@@ -38,11 +37,10 @@ function aplicandoEstilo() {
 
 aplicandoEstilo();
 
-// console.log(socket);
+console.log(socket);
 
 socket.on("eletroCall", (data) => {   
     console.log(data)
-
 
     var novaLinha = document.createElement('tr');
     var novoNome = document.createElement('td');
