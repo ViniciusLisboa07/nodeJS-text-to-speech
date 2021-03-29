@@ -45,4 +45,4 @@ exports.eletroAction = async (req, res) => {
     Socket.emit('call', alteracao);
     console.log('eletroAction');
     res.redirect('/eletro');
-};  
+};   

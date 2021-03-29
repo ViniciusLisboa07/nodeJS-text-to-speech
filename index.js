@@ -10,7 +10,6 @@ mongoose.connection.on('error', (error) => {
 require('./models/Call');
 require('./models/User');
 
-const User = mongoose.model('User');
 
 require('dotenv').config({ path: 'variables.env' });
 

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>{{ h.defaultPageTitle }}</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+{{#flashes}}
+
+{{#success}}
+<div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
+{{/success}}
+{{#error}}
+<div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
+{{/error}}
+{{#info}}
+<div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
+{{/info}}
+{{/flashes}}
+
+<body>
+    <div class="container-fluid">
+        <table class="table table-striped table-hover table-md" id="tblPacientesTriagem">
+            <div class="card-header bg-light">
+                <div class="text-dark">Chamar pacientes</div>
+            </div>
+            <thead>
+                <tr>
+                    <th scope="col">Nome Paciente</th>
+                    <th scope="col">Prioridade</th>
+                    <th scope="col">Chamar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#fila}}
+                    <tr class="linha">
+                        <td> {{ nomePaciente }} </td>
+                        <td> {{ prioridade }} </td>
+                        <td><button class="btn btn-secondary btn-sm">Chamar</button></td>
+                        <input type="hidden" value="{{id}}">
+                    </td>
+                {{/fila}}
+            </tbody>
+        </table>
+
+        <table class="table table-striped table-hover table-md" id="tblPacientesTelaTriagem">
+            <div class="card-header bg-light">
+                <div class="text-dark">Dispensar pacientes</div>
+            </div>
+            <thead>
+                <tr>
+                    <th scope="col">Nome Paciente</th>
+                    <th scope="col">Prioridade Triagem</th>
+                    <th scope="col">Consultorio</th>
+                    <th scope="col">Dispensar</th>
+                    <th scope="col">Enviar ao médico</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#filaPacientesProntos}}
+                    <tr class="linha2">
+                        <td> {{ nomePaciente }} </td>
+                        <td> {{ prioridade }} </td>
+                        <input type="hidden" value="{{id}}">
+                        <td>
+                            <select name="consultorioTriagem" id="consultorioTriagem" class="form-control">
+                                <option value="1">Consultorio 1</option>
+                                <option value="2">Consultorio 2</option>
+                                <option value="3">Consultorio 3</option>
+                            </select>
+                        </td>
+                        <td><button class="btn btn-danger btn-sm">Dispensar</button></td>
+                        <td><button class="btn btn-success btn-sm">Enviar</button></td>
+                        <!-- <td><button class="btn btn-secondary btn-sm">Chamar</button></td> -->
+                    </td>
+                {{/filaPacientesProntos}}
+            </tbody>
+        </table>
+    </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="https://unpkg.com/speech-synthesis-recorder@1.2.1/SpeechSynthesisRecorder.js"></script>
+    <script src="./node_modules/socket.io/client-dist/socket.io.js"></script>
+    <script src="./src/dist/js/triagem.js"></script>
+</body>
+</html>

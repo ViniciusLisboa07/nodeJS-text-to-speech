@@ -32,6 +32,7 @@
                 <option value="consultorio 3">Consultório 3</option>
                 <option value="medicacao">Medicação</option>
                 <option value="eletro">Eletro</option>
+                <option value="triagem">Triagem</option>
                 <option value="recepcao">Recepção</option>
             </select>
         <button type="submit" class="mt-4 btn btn-primary btn-lg">Entrar</button>

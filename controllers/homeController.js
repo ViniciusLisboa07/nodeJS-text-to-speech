@@ -38,7 +38,7 @@ exports.userMidleware = async (req, res, next) => {
 
 exports.index = async (req, res) => {
     let userName = req.session.user['name'];
-    const chamadasEletro = await Call.find({ consultorio: 'eletro_Recepcao' });
+    const chamadasEletro = await Call.find( { "consultorio": { "$regex": "_Recepcao"} });
 
     let fila = [];
     for (i in chamadasEletro) {
@@ -79,6 +79,12 @@ exports.homeAction = async (req, res) => {
         console.log("medicacaao 123123");
         Socket.emit('medicacao_call', alteracao);
         res.redirect('/');
+    } else if (consultorio == 'triagem') {
+
+        let alteracao = await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, repetir: repetir, prioridade: prioridade })
+        
+        console.log('triagemmm');
+        Socket.emit('triagem_call', alteracao);
+        res.redirect('/');
     }
-    // console.log(req.session);
-};   
+};

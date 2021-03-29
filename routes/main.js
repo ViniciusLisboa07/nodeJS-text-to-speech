@@ -6,7 +6,11 @@ const loginController = require('../controllers/loginController');
 const eletroController = require('../controllers/eletroController');
 const medicacaoController = require('../controllers/medicacaoController');
 
-const signInValidator = require('../validators/SignInValidator')
+const triagemController = require('../controllers/triagemController');
+
+const consultorio1Controller = require('../controllers/consultorio1Controller');
+
+const signInValidator = require('../validators/SignInValidator');
 
 const router = express.Router();
 router.use("/vendors",express.static(__dirname + "/vendors"));
@@ -29,5 +33,10 @@ router.post('/eletro', eletroController.eletroAction);
 router.get('/medicacao', homeController.userMidleware,  medicacaoController.index);
 router.post('/medicacao', medicacaoController.medicacaoAction);
 
+router.get('/triagem', homeController.userMidleware, triagemController.index);
+router.post('/triagem', triagemController.triagemAction);
+
+router.get('/consultorio1', homeController.userMidleware, consultorio1Controller.index);
+router.post('/consultorio1', consultorio1Controller.consultorio1Action);
 
 module.exports = router;   

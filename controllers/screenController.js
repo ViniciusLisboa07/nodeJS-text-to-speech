@@ -2,6 +2,7 @@ const { exec } = require('child_process');
 const fs = require('fs');
 const mongoose = require('mongoose');
 const Call = mongoose.model('Call');
+const { Socket } = require("../utils/socket");
 
 exports.index = (req, res) => {
 
@@ -55,5 +56,15 @@ exports.screenAction = async (req, res) => {
         console.log("Success:" + msg);
     });
 
-    await Call.deleteOne({ _id: id });
+    if(consultorio == 'triagem'){
+        let updateTriagemTela = await Call.find({ _id: id }).updateOne({ consultorio: 'tela_triagem' });
+        let alteracao = await Call.findOne({ _id: id });
+        
+        Socket.emit('triagemTela_call', alteracao);
+        console.log('tela-triagemqweqwe');
+    } else {
+
+        await Call.deleteOne({ _id: id });
+    }
+
 };
