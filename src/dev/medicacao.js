@@ -13,7 +13,7 @@ function aplicandoEstilo() {
 
         if ($('#tblPacientesMedicacao > tbody')[0].children[i].children[1].outerText == '1') {
             $('#tblPacientesMedicacao > tbody')[0].children[i].children[1].innerHTML = "Normal";
-            $('#tblPacientesMedicacao > tbody')[0].children[i].children[1].className = 'bg-info';
+            $('#tblPacientesMedicacao > tbody')[0].children[i].children[1].className = 'bg-info';$('#tblPacientesTriagem > tbody')
 
         } else if ($('#tblPacientesMedicacao > tbody')[0].children[i].children[1].outerText == '2') {
             $('#tblPacientesMedicacao > tbody')[0].children[i].children[1].innerHTML = "Alta";

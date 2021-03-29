@@ -48,3 +48,14 @@ exports.triagemAction = async (req, res) => {
     console.log('triagemAction: ');
     res.redirect('/triagem');
 };  
+
+exports.delAction = async (req, res) => {
+    try {
+        let id = req.body.id;
+        await Call.findOneAndRemove({ _id: id });
+        console.log('deletou triagem!!!');
+        res.redirect('/triagem');
+    } catch (error) {
+        console.log('Erro ao deletar: ' + error);
+    }
+};

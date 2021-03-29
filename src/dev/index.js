@@ -20,7 +20,6 @@ if (screen == null || screen.closed) {
 }
 
 
-
 function aplicandoEstilo() {
     for (let i = 0; i < $('#tblFilaRecepcao > tbody')[0].children.length; i++) {
 
@@ -103,11 +102,10 @@ socket.on('call', (data) => {
             console.log('nenhum muito alta');
 
         }
-
+ 
     }
-
     aplicandoEstilo();
-
+ 
 });
 
 console.log($('#tblFilaRecepcao > tbody')[0].children)

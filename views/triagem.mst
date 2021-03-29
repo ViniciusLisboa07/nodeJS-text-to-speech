@@ -11,15 +11,15 @@
 
 {{#flashes}}
 
-{{#success}}
-<div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
-{{/success}}
-{{#error}}
-<div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
-{{/error}}
-{{#info}}
-<div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
-{{/info}}
+    {{#success}}
+    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
+    {{/success}}
+    {{#error}}
+    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
+    {{/error}}
+    {{#info}}
+    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
+    {{/info}}
 {{/flashes}}
 
 <body>
@@ -40,7 +40,7 @@
                     <tr class="linha">
                         <td> {{ nomePaciente }} </td>
                         <td> {{ prioridade }} </td>
-                        <td><button class="btn btn-secondary btn-sm">Chamar</button></td>
+                        <td><button class="btn btn-secondary btn-sm chamar">Chamar</button></td>
                         <input type="hidden" value="{{id}}">
                     </td>
                 {{/fila}}
@@ -55,7 +55,6 @@
                 <tr>
                     <th scope="col">Nome Paciente</th>
                     <th scope="col">Prioridade Triagem</th>
-                    <th scope="col">Consultorio</th>
                     <th scope="col">Dispensar</th>
                     <th scope="col">Enviar ao médico</th>
                 </tr>
@@ -66,27 +65,54 @@
                         <td> {{ nomePaciente }} </td>
                         <td> {{ prioridade }} </td>
                         <input type="hidden" value="{{id}}">
-                        <td>
-                            <select name="consultorioTriagem" id="consultorioTriagem" class="form-control">
-                                <option value="1">Consultorio 1</option>
-                                <option value="2">Consultorio 2</option>
-                                <option value="3">Consultorio 3</option>
-                            </select>
                         </td>
-                        <td><button class="btn btn-danger btn-sm">Dispensar</button></td>
-                        <td><button class="btn btn-success btn-sm">Enviar</button></td>
+                        <td><button class="btn btn-danger btn-sm" onclick="dismiss(this)" >Dispensar</button></td>
+                        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#enviarModal">Enviar</button></td>
                         <!-- <td><button class="btn btn-secondary btn-sm">Chamar</button></td> -->
                     </td>
                 {{/filaPacientesProntos}}
             </tbody>
         </table>
+
+        <div class="modal fade" id="enviarModal" tabindex="-1" role="dialog" aria-labelledby="enviarModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    
+                    <label for="selectConsultorio">Consultorio</label>
+                    <select name="selectConsultorio" id="selectConsultorio" class="form-control">
+                        <option value="consultorio1">Consultorio 1</option>
+                        <option value="consultorio2">Consultorio 2</option>
+                        <option value="consultorio3">Consultorio 3</option>
+                    </select>
+                    <br>
+                    <label for="selectPrioridade">Prioridade</label>
+                    <select name="selectPrioridade" id="selectPrioridade" class="form-control">
+                        <option value="1">Normal</option>
+                        <option value="2">Alta</option>
+                        <option value="3">Muito Alta</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                  <button type="button" class="btn btn-primary">Enviar</button>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
 
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript"
-        src="https://unpkg.com/speech-synthesis-recorder@1.2.1/SpeechSynthesisRecorder.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="./node_modules/socket.io/client-dist/socket.io.js"></script>
     <script src="./src/dist/js/triagem.js"></script>
 </body>
