@@ -4,18 +4,18 @@ const Call = mongoose.model('Call');
 const { Socket } = require("../utils/socket");
  
 exports.index = async (req, res) => {
-    const chamadasEletro = await Call.find({ consultorio: 'consultorio1' });
+    const chamadasConsultorio1 = await Call.find({ consultorio: 'consultorio1' });
 
     let fila = [];
 
-    for (i in chamadasEletro) {
+    for (i in chamadasConsultorio1) {
 
         fila.push({
-            nomePaciente: chamadasEletro[i]._doc['nomePaciente'],
-            consultorio: chamadasEletro[i]._doc['consultorio'],
-            repetir: chamadasEletro[i]._doc['repetir'],
-            prioridade: chamadasEletro[i]._doc['prioridade'],
-            id: chamadasEletro[i]._doc['_id']
+            nomePaciente: chamadasConsultorio1[i]._doc['nomePaciente'],
+            consultorio: chamadasConsultorio1[i]._doc['consultorio'],
+            repetir: chamadasConsultorio1[i]._doc['repetir'],
+            prioridade: chamadasConsultorio1[i]._doc['prioridade'],
+            id: chamadasConsultorio1[i]._doc['_id']
         });
 
     }

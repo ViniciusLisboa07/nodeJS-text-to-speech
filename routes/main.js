@@ -9,6 +9,8 @@ const medicacaoController = require('../controllers/medicacaoController');
 const triagemController = require('../controllers/triagemController');
 
 const consultorio1Controller = require('../controllers/consultorio1Controller');
+const consultorio2Controller = require('../controllers/consultorio2Controller');
+const consultorio3Controller = require('../controllers/consultorio3Controller');
 
 const signInValidator = require('../validators/SignInValidator');
 
@@ -47,10 +49,10 @@ router.post('/del', triagemController.delAction);
 router.get('/consultorio1', homeController.userMidleware, consultorio1Controller.index);
 router.post('/consultorio1', consultorio1Controller.consultorio1Action);
 
-router.get('/consultorio2', homeController.userMidleware, consultorio2Controller.index);
-router.get('/consultorio2', consultorio2Controller.consultorio2Action);
+// router.get('/consultorio2', homeController.userMidleware, consultorio2Controller.index);
+// router.get('/consultorio2', consultorio2Controller.consultorio2Action);
 
-router.get('/consultorio3', homeController.userMidleware, consultorio3Controller.index);
-router.post('/consultorio3', consultorio3Controller.consultorio3Action);
+// router.get('/consultorio3', homeController.userMidleware, consultorio3Controller.index);
+// router.post('/consultorio3', consultorio3Controller.consultorio3Action);
 
 module.exports = router; 

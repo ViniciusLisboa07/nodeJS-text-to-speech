@@ -43,7 +43,6 @@ exports.loginAction = async (req, res) => {
         } else if (user.name == 'triagem') {
             req.flash('success', 'Login efetuado em Triagem com sucesso!');
             res.redirect('/triagem');
-
         } else if (user.name == 'consultorio1') {
             req.flash('success', 'Login efetuado em Consultorio 1 com sucesso!');
             res.redirect('/consultorio1')

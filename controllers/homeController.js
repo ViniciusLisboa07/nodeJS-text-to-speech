@@ -65,26 +65,27 @@ exports.homeAction = async (req, res) => {
     let repetir = req.body.repetir;
     let prioridade = req.body.prioridade;
 
+    let alteracao = await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, repetir: repetir, prioridade: prioridade })
+
     if(consultorio == 'eletro') {
         console.log('=================================================');
-
-        let alteracao = await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, repetir: repetir, prioridade: prioridade });
 
         Socket.emit('eletroCall', alteracao);
         res.redirect('/');
     } else if (consultorio == 'medicacao') {
-
-        let alteracao = await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, repetir: repetir, prioridade: prioridade })
-        
+    
         console.log("medicacaao 123123");
         Socket.emit('medicacao_call', alteracao);
         res.redirect('/');
     } else if (consultorio == 'triagem') {
-
-        let alteracao = await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, repetir: repetir, prioridade: prioridade })
         
         console.log('triagemmm');
         Socket.emit('triagem_call', alteracao);
+        res.redirect('/');
+    } else if (consultorio == 'consultorio1') {
+        
+        console.log('consultorio1');
+        Socket.emit('consultorio1_call', alteracao);
         res.redirect('/');
     }
 };
