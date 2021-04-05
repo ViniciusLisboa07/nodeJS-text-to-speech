@@ -27,9 +27,9 @@
         <form method="post" action="/login">
             <label class="mt-2" for="name">Consultório</label>
             <select name="name" id="name" class="form-control">
-                <option value="consultorio 1">Consultório 1</option>
-                <option value="consultorio 2">Consultório 2</option>
-                <option value="consultorio 3">Consultório 3</option>
+                <option value="consultorio1">Consultório 1</option>
+                <option value="consultorio2">Consultório 2</option>
+                <option value="consultorio3">Consultório 3</option>
                 <option value="medicacao">Medicação</option>
                 <option value="eletro">Eletro</option>
                 <option value="triagem">Triagem</option>
