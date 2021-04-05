@@ -32,31 +32,34 @@ exports.loginAction = async (req, res) => {
         req.session.token = token;
 
         if (user.name == 'recepcao') { 
-
             req.flash('success', 'Login efetuado com sucesso!');
             res.redirect('/');
 
         } else if (user.name == 'eletro') {
-
             req.flash('success', 'Login efetuado na eletro com sucesso!');
             res.redirect('/eletro');
 
         } else if (user.name == 'medicacao') {
-
             req.flash('success', 'Login efetuado em Medicação com sucesso!');
             res.redirect('/medicacao');
  
         } else if (user.name == 'triagem') {
-
             req.flash('success', 'Login efetuado em Triagem com sucesso!');
-            res.redirect('/consultorio1');
+            res.redirect('/triagem');
 
         } else if (user.name == 'consultorio1') {
-
             req.flash('success', 'Login efetuado no Consultorio 1 com sucesso');
-            res.redirect('/consultorio1');
-            
-        }
+            res.redirect('/consultorio1'); 
+
+        }// else if (user.name == 'consultorio2') {
+        //     req.flash('success', 'Login efetuado no Consultorio 2 com sucesso');
+        //     res.redirect('/consultorio1');
+
+        // } else if (user.name == 'consultorio3') {
+        //     req.flash('success', 'Login efetuado no Consultorio 3 com sucesso');
+        //     res.redirect('/consultorio3');
+
+        // }
 
  
     } catch (err) {

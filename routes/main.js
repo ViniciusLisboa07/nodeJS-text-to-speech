@@ -42,8 +42,11 @@ router.post('/medicacao', medicacaoController.medicacaoAction);
 router.get('/triagem', homeController.userMidleware, triagemController.index);
 router.post('/triagem', triagemController.triagemAction);
 
-// Rota para deletar chamada da triagem
+    // Rota para deletar chamada da triagem
 router.post('/del', triagemController.delAction);
+
+    // rota para enviar paciente para o consultorio
+router.post('/chamarAoMedico', triagemController.enviarPaciente)
 
 // Rotas consultorio
 router.get('/consultorio1', homeController.userMidleware, consultorio1Controller.index);

@@ -59,3 +59,7 @@ exports.delAction = async (req, res) => {
         console.log('Erro ao deletar: ' + error);
     }
 };
+
+exports.enviarPaciente = async (req, res) =>{
+    console.log("enviou: " + req);
+}

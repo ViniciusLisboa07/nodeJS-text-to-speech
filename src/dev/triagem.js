@@ -5,7 +5,9 @@ var socket = io();
 var rowFila = document.getElementsByClassName("linha");
 var btns = document.getElementsByClassName("chamar");
 var tblPacientesTriagem = document.getElementById('tblPacientesTriagem');
+var btnEnviarMedico = document.getElementById('btnEnviarMedico');
 var tableRow = Array.from(rowFila);
+
 console.log(btns.length);
 function aplicandoEstilo(tabelaBody) {
     for(let i = 0; i < tabelaBody[0].children.length; i++) {
@@ -222,3 +224,12 @@ function createLineDispensar(data) {
 
     return novaLinha;
 };
+
+btnEnviarMedico.onclick = function() {
+    console.log('btn enviar medico')
+
+    var consultorio = document.getElementById('selectConsultorio');
+    var prioridade = document.getElementById('selectPrioridade');
+
+    $.post("/triagem", { consultorio, prioridade });
+}
