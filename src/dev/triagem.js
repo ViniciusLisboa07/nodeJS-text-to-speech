@@ -10,13 +10,14 @@ var btnPostToDoctor = document.getElementById('btnEnviarMedico');
 var tableRow = Array.from(rowFila);
 
 function setInput(x) {
-var bodyModal = document.getElementById('body-modal');
+    var bodyModal = document.getElementById('body-modal');
 
     var idInput = x.parentNode.parentNode.children[2];
+    inputID.id = "idCallInput";
     console.log(idInput);
     bodyModal.appendChild(idInput);
 }
- 
+  
 function aplicandoEstilo(tabelaBody) {
     for(let i = 0; i < tabelaBody[0].children.length; i++) {
         
@@ -227,7 +228,8 @@ btnPostToDoctor.onclick = function() {
 
     var consultorio = document.getElementById('selectConsultorio');
     var prioridade = document.getElementById('selectPrioridade');
+    var id = document.getElementById('idCallInput');
 
-    $.post("/enviarAoMedico", { consultorio: consultorio.value, prioridade: prioridade.value });
+    $.post("/enviarAoMedico", { consultorio: consultorio.value, prioridade: prioridade.value, id: id.value });
 
 }

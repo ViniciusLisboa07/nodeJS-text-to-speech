@@ -117,8 +117,9 @@
     <script>
         function setInput(x) {
             var bodyModal = document.getElementById('body-modal');
-
+            console.log(x);
             var idInput = x.parentNode.parentNode.children[2];
+            idInput.id = "idCallInput";
             console.log(idInput);
             bodyModal.appendChild(idInput);
         }
