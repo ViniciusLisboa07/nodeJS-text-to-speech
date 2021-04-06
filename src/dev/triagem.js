@@ -10,6 +10,12 @@ var bodyModal = document.getElementById('body-modal');
 
 var tableRow = Array.from(rowFila);
 
+function setInput(x) {
+    var idInput = x.parentNode.parentNode.children[2];
+    console.log(idInput);
+    bodyModal.appendChild(idInput);
+}
+
 function aplicandoEstilo(tabelaBody) {
     for(let i = 0; i < tabelaBody[0].children.length; i++) {
         
@@ -52,15 +58,10 @@ socket.on("triagem_call", (data) => {
     var novoNome = document.createElement('td');
     var novaPrioridade = document.createElement('td');
     var novoTD = document.createElement('td');
-    var novoButton = document.createElement('button');
     var inputID = document.createElement('input');
 
     novoNome.innerHTML = data['nomePaciente'];
     novaPrioridade.innerHTML = data['prioridade'];
-
-    novoButton.innerHTML = "Chamar";
-    novoButton.className = "btn btn-secondary btn-sm";
-    novoTD.appendChild(novoButton);
  
     inputID.value = data['_id'];
     inputID.type = "hidden";
@@ -126,7 +127,7 @@ socket.on('triagemTela_call', (data) => {
    
     console.log(data);
 
-    let novaLinha = createLineDispensar(data);
+    let novaLinha = createLine(data);
     console.log(novaLinha);
     // Se a prioridade da nova linha for Normal
     if (novaLinha.children[1].innerHTML == '1') {
@@ -184,7 +185,7 @@ function dismiss() {
     console.log('dismisss');
 }
  
-function createLineDispensar(data) {
+function createLine(data) {
     var novaLinha = document.createElement('tr');
     var novoNome = document.createElement('td');
     var novaPrioridade = document.createElement('td');
@@ -200,6 +201,7 @@ function createLineDispensar(data) {
 
     inputID.value = data['_id'];
     inputID.type = "hidden"; 
+    // inputID.id = Date.now();
 
     novoNome.innerHTML = data['nomePaciente'];
     
@@ -209,6 +211,8 @@ function createLineDispensar(data) {
 
     TdBtnDispensar.appendChild(btnDispensar);
 
+    // btnEnviarMedico.id = inputID.id;
+    btnEnviarMedico.onclick = setInput(btnEnviarMedico);
     btnEnviarMedico.innerHTML = "Enviar";
     btnEnviarMedico.className = "btn btn-success btn-sm";
     btnEnviarMedico.dataset.toggle = "modal";
@@ -216,15 +220,17 @@ function createLineDispensar(data) {
 
     TdBtnEnviar.appendChild(btnEnviarMedico);
 
+    novaLinha.className = "linha";
+
     novaLinha.appendChild(novoNome);
     novaLinha.appendChild(novaPrioridade);
     novaLinha.appendChild(TdBtnDispensar);
     novaLinha.appendChild(TdBtnEnviar);
     novaLinha.appendChild(inputID);
-    novaLinha.className = "linha";
 
     return novaLinha;
 }
+
 
 btnPostToDoctor.onclick = function() {
     console.log('btn enviar medico')
@@ -233,18 +239,5 @@ btnPostToDoctor.onclick = function() {
     var prioridade = document.getElementById('selectPrioridade');
 
     $.post("/enviarAoMedico", { consultorio: consultorio.value, prioridade: prioridade.value });
-    
-}
-
-var sendBtns = document.getElementsByClassName("btn btn-success btn-sm");
-console.log(sendBtns);
-for(let i = 0; i < sendBtns.lenght; i++){
-    console.log(i);
-    sendBtns[i].onclick = function() {
-        var inputID = sendBtns[i].parentNode.parentNode.children[2];
-        console.log(inputID);
-        bodyModal.appendChild(inputID);
-        console.log('yeah');
-    }
 
 }

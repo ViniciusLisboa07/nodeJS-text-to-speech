@@ -67,8 +67,7 @@
                         <input type="hidden" value="{{id}}">
                         </td>
                         <td><button class="btn btn-danger btn-sm" onclick="dismiss(this)" >Dispensar</button></td>
-                        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#enviarModal">Enviar</button></td>
-                        <!-- <td><button class="btn btn-secondary btn-sm">Chamar</button></td> -->
+                        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#enviarModal" onclick="setInput(this)" >Enviar</button></td>
                     </td>
                 {{/filaPacientesProntos}}
             </tbody>
