@@ -46,7 +46,7 @@ router.post('/triagem', triagemController.triagemAction);
 router.post('/del', triagemController.delAction);
 
     // rota para enviar paciente para o consultorio
-router.post('/chamarAoMedico', triagemController.enviarPaciente)
+router.post('/enviarAoMedico', triagemController.enviarPaciente)
 
 // Rotas consultorio
 router.get('/consultorio1', homeController.userMidleware, consultorio1Controller.index);

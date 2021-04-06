@@ -5,10 +5,11 @@ var socket = io();
 var rowFila = document.getElementsByClassName("linha");
 var btns = document.getElementsByClassName("chamar");
 var tblPacientesTriagem = document.getElementById('tblPacientesTriagem');
-var btnEnviarMedico = document.getElementById('btnEnviarMedico');
+var btnPostToDoctor = document.getElementById('btnEnviarMedico');
+var bodyModal = document.getElementById('body-modal');
+
 var tableRow = Array.from(rowFila);
 
-console.log(btns.length);
 function aplicandoEstilo(tabelaBody) {
     for(let i = 0; i < tabelaBody[0].children.length; i++) {
         
@@ -43,7 +44,6 @@ function aplicandoEstilo(tabelaBody) {
  
 aplicandoEstilo($('#tblPacientesTriagem > tbody'));
 
-console.log(socket);
 
 socket.on("triagem_call", (data) => {   
     console.log(data)
@@ -208,11 +208,12 @@ function createLineDispensar(data) {
     btnDispensar.onclick = dismiss();
 
     TdBtnDispensar.appendChild(btnDispensar);
-  
+
     btnEnviarMedico.innerHTML = "Enviar";
     btnEnviarMedico.className = "btn btn-success btn-sm";
     btnEnviarMedico.dataset.toggle = "modal";
     btnEnviarMedico.dataset.target = "#enviarModal";
+
     TdBtnEnviar.appendChild(btnEnviarMedico);
 
     novaLinha.appendChild(novoNome);
@@ -223,13 +224,27 @@ function createLineDispensar(data) {
     novaLinha.className = "linha";
 
     return novaLinha;
-};
+}
 
-btnEnviarMedico.onclick = function() {
+btnPostToDoctor.onclick = function() {
     console.log('btn enviar medico')
 
     var consultorio = document.getElementById('selectConsultorio');
     var prioridade = document.getElementById('selectPrioridade');
 
-    $.post("/triagem", { consultorio, prioridade });
+    $.post("/enviarAoMedico", { consultorio: consultorio.value, prioridade: prioridade.value });
+    
+}
+
+var sendBtns = document.getElementsByClassName("btn btn-success btn-sm");
+console.log(sendBtns);
+for(let i = 0; i < sendBtns.lenght; i++){
+    console.log(i);
+    sendBtns[i].onclick = function() {
+        var inputID = sendBtns[i].parentNode.parentNode.children[2];
+        console.log(inputID);
+        bodyModal.appendChild(inputID);
+        console.log('yeah');
+    }
+
 }

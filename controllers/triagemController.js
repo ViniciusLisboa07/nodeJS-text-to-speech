@@ -61,5 +61,6 @@ exports.delAction = async (req, res) => {
 };
 
 exports.enviarPaciente = async (req, res) =>{
-    console.log("enviou: " + req);
+
+    console.log(req.body);
 }
