@@ -66,8 +66,8 @@
                         <td> {{ prioridade }} </td>
                         <input type="hidden" value="{{id}}">
                         </td>
-                        <td><button class="btn btn-danger btn-sm" onclick="dismiss(this)" >Dispensar</button></td>
-                        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#enviarModal" onclick="setInput(this)" >Enviar</button></td>
+                        <td><button class="btn btn-danger btn-sm" onClick="dismiss(this)" >Dispensar</button></td>
+                        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#enviarModal" onClick="setInput(this)" >Enviar</button></td>
                     </td>
                 {{/filaPacientesProntos}}
             </tbody>
@@ -114,5 +114,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="./node_modules/socket.io/client-dist/socket.io.js"></script>
     <script src="./src/dist/js/triagem.js"></script>
+    <script>
+        function setInput(x) {
+            var bodyModal = document.getElementById('body-modal');
+
+            var idInput = x.parentNode.parentNode.children[2];
+            console.log(idInput);
+            bodyModal.appendChild(idInput);
+        }
+
+    </script>
 </body>
 </html>

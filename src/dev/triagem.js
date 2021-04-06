@@ -6,16 +6,17 @@ var rowFila = document.getElementsByClassName("linha");
 var btns = document.getElementsByClassName("chamar");
 var tblPacientesTriagem = document.getElementById('tblPacientesTriagem');
 var btnPostToDoctor = document.getElementById('btnEnviarMedico');
-var bodyModal = document.getElementById('body-modal');
 
 var tableRow = Array.from(rowFila);
 
 function setInput(x) {
+var bodyModal = document.getElementById('body-modal');
+
     var idInput = x.parentNode.parentNode.children[2];
     console.log(idInput);
     bodyModal.appendChild(idInput);
 }
-
+ 
 function aplicandoEstilo(tabelaBody) {
     for(let i = 0; i < tabelaBody[0].children.length; i++) {
         
@@ -80,26 +81,23 @@ socket.on("triagem_call", (data) => {
         // Se ela for Alta
     } else if (novaPrioridade.innerHTML == '2') {
         // Se já houver alguma linha com prioridade Alta
-        console.log(tableRow);
         if (tableRow.find(a => a.children[1].outerText == "Alta")) {
 
             // Index da ultima linha "Alta" encontrada [utlizei o metodo slice() para criar uma copia do array e o metodo reverse em conjunto com o indexOf e find para pegar o ultimo elemento com prioridade "Alta" na tabela]
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Alta"));
-            console.log(i);
             $('#tblPacientesTriagem > tbody > tr').eq(i - 1).after(novaLinha); // Adicionando após
 
         // Se houver alguma linha com prioridade Muito Alta 
         } else if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
 
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Muito Alta"));
-            console.log(i);
             // Adicionando após
             $('#tblPacientesTriagem > tbody > tr').eq(i - 1).after(novaLinha);
-            console.log('muito alta');
+            // console.log('muito alta');
 
         // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
         } else {
-            console.log('nada. WARNING')
+            // console.log('nada. WARNING')
             $('#tblPacientesTriagem > tbody').prepend(novaLinha);
         }
 
@@ -110,12 +108,12 @@ socket.on("triagem_call", (data) => {
             var i = tableRow.indexOf(tableRow.slice().reverse().find(a => a.children[1].outerText == "Muito Alta"));
 
             $('#tblPacientesTriagem > tbody > tr').eq(i).after(novaLinha);// Adicionando após
-            console.log('algum muito alta');
+            // console.log('algum muito alta');
             
         } else {
 
             $('#tblPacientesTriagem > tbody').prepend(novaLinha);
-            console.log('nenhum muito alta');
+            // console.log('nenhum muito alta');
         }
     }
     aplicandoEstilo($('#tblPacientesTriagem > tbody'));
@@ -125,10 +123,7 @@ socket.on("triagem_call", (data) => {
 
 socket.on('triagemTela_call', (data) => {
    
-    console.log(data);
-
     let novaLinha = createLine(data);
-    console.log(novaLinha);
     // Se a prioridade da nova linha for Normal
     if (novaLinha.children[1].innerHTML == '1') {
         $('#tblPacientesTelaTriagem > tbody').append(novaLinha);
@@ -136,26 +131,23 @@ socket.on('triagemTela_call', (data) => {
         // Se ela for Alta
     } else if (novaLinha.children[1].innerHTML == '2') {
         // Se já houver alguma linha com prioridade Alta
-        console.log(tableRow);
         if (tableRow.find(a => a.children[1].outerText == "Alta")) {
 
             // Index da ultima linha "Alta" encontrada [utlizei o metodo slice() para criar uma copia do array e o metodo reverse em conjunto com o indexOf e find para pegar o ultimo elemento com prioridade "Alta" na tabela]
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Alta"));
-            console.log(i);
             $('#tblPacientesTelaTriagem > tbody > tr').eq(i - 1).after(novaLinha); // Adicionando após
 
         // Se houver alguma linha com prioridade Muito Alta 
         } else if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
 
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Muito Alta"));
-            console.log(i);
             // Adicionando após
             $('#tblPacientesTelaTriagem > tbody > tr').eq(i - 1).after(novaLinha);
-            console.log('muito alta');
+            // console.log('muito alta');
 
         // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
         } else {
-            console.log('nada. WARNING')
+            // console.log('nada. WARNING')
             $('#tblPacientesTelaTriagem > tbody').prepend(novaLinha);
         }
 
@@ -166,12 +158,12 @@ socket.on('triagemTela_call', (data) => {
             var i = tableRow.indexOf(tableRow.slice().reverse().find(a => a.children[1].outerText == "Muito Alta"));
 
             $('#tblPacientesTelaTriagem > tbody > tr').eq(i).after(novaLinha);// Adicionando após
-            console.log('algum muito alta');
+            // console.log('algum muito alta');
             
         } else {
 
             $('#tblPacientesTelaTriagem > tbody').prepend(novaLinha);
-            console.log('nenhum muito alta');
+            // console.log('nenhum muito alta');
         }
     }
 
@@ -201,7 +193,6 @@ function createLine(data) {
 
     inputID.value = data['_id'];
     inputID.type = "hidden"; 
-    // inputID.id = Date.now();
 
     novoNome.innerHTML = data['nomePaciente'];
     
@@ -211,7 +202,6 @@ function createLine(data) {
 
     TdBtnDispensar.appendChild(btnDispensar);
 
-    // btnEnviarMedico.id = inputID.id;
     btnEnviarMedico.onclick = setInput(btnEnviarMedico);
     btnEnviarMedico.innerHTML = "Enviar";
     btnEnviarMedico.className = "btn btn-success btn-sm";
