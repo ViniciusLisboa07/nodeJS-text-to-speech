@@ -27,7 +27,7 @@ router.get('/', homeController.userMidleware, homeController.index);
 router.post('/', homeController.homeAction);
 
 // Rotas tela
-router.get('/screen', screenController.index); 
+router.get('/screen', screenController.index);
 router.post('/screen', screenController.screenAction); 
  
 // Rotas eletro

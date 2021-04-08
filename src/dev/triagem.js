@@ -34,7 +34,7 @@ function aplicandoEstilo(tabelaBody) {
             tabelaBody[0].children[i].children[1].className = 'bg-danger';
         }
  
-        if(tabelaBody == $('#tblPacientesTriagem > tbody')) {
+        if(btns != null && btns != undefined) {
             btns[i].onclick = (x) => {
                 let id =  btns[i].parentNode.parentNode.children[3].value;
                 console.log(id);
@@ -42,7 +42,7 @@ function aplicandoEstilo(tabelaBody) {
                 x.preventDefault();
     
                 btns[i].parentNode.parentNode.remove();
-    
+                console.log('macaco')
                 $.post("/triagem", { id: id });
             }
         }

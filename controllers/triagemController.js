@@ -45,7 +45,7 @@ exports.triagemAction = async (req, res) => {
     const chamada = await Call.find({ _id: id }).updateOne({ consultorio: 'triagem_Recepcao' });
     
     Socket.emit('call', alteracao);
-    console.log('triagemAction: ');
+    console.log('triagemAction: ;-; ');
     res.redirect('/triagem');
 };  
 
@@ -61,6 +61,12 @@ exports.delAction = async (req, res) => {
 };
 
 exports.enviarPaciente = async (req, res) =>{
+
+    var id = req.body.id;
+    var consultorio = req.body.consultorio;
+    var prioridade = rqe.body.prioridade;
+
+    // var alteracao = await Call.update(); 
 
     console.log(req.body);
 }
