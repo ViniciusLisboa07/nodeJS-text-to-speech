@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 var socket = io();
- 
+
 var rowFila = document.getElementsByClassName("linha");
 var btns = document.getElementsByClassName("chamar");
 var tblPacientesTriagem = document.getElementById('tblPacientesTriagem');
@@ -10,17 +10,30 @@ var btnPostToDoctor = document.getElementById('btnEnviarMedico');
 var tableRow = Array.from(rowFila);
 
 function setInput(x) {
+    // melhorar isso depois
     var bodyModal = document.getElementById('body-modal');
+    console.log(x);
+    var idInput = x.parentNode.parentNode.children[2].value;
+    var newInput = document.createElement('input');
+    newInput.type = 'hidden';
+    newInput.value = idInput;
+    newInput.className = 'hiddenInputId';
 
-    var idInput = x.parentNode.parentNode.children[2];
-    inputID.id = "idCallInput";
-    console.log(idInput);
-    bodyModal.appendChild(idInput);
+    var listOfInput = document.getElementsByClassName('hiddenInputId');
+    // idInput.id = "idCallInput";
+
+    console.log(newInput);
+    bodyModal.appendChild(newInput);
+    console.log(listOfInput);
+    if (listOfInput.length > 1) {
+        listOfInput[0].remove();
+    }
+
 }
-  
+
 function aplicandoEstilo(tabelaBody) {
-    for(let i = 0; i < tabelaBody[0].children.length; i++) {
-        
+    for (let i = 0; i < tabelaBody[0].children.length; i++) {
+
         if (tabelaBody[0].children[i].children[1].outerText == '1') {
             tabelaBody[0].children[i].children[1].innerHTML = "Normal";
             tabelaBody[0].children[i].children[1].className = 'bg-info';
@@ -33,27 +46,28 @@ function aplicandoEstilo(tabelaBody) {
             tabelaBody[0].children[i].children[1].innerHTML = "Muito Alta";
             tabelaBody[0].children[i].children[1].className = 'bg-danger';
         }
- 
-        if(btns != null && btns != undefined) {
+
+        if (btns != null && btns != undefined) {
             btns[i].onclick = (x) => {
-                let id =  btns[i].parentNode.parentNode.children[3].value;
+                let id = btns[i].parentNode.parentNode.children[3].value;
                 console.log(id);
-    
+
                 x.preventDefault();
-    
+
                 btns[i].parentNode.parentNode.remove();
                 console.log('macaco')
-                $.post("/triagem", { id: id });
+                $.post("/triagem", {
+                    id: id
+                });
             }
         }
- 
+
     };
-} 
- 
+}
+
 aplicandoEstilo($('#tblPacientesTriagem > tbody'));
 
-
-socket.on("triagem_call", (data) => {   
+socket.on("triagem_call", (data) => {
     console.log(data)
 
     var novaLinha = document.createElement('tr');
@@ -64,7 +78,7 @@ socket.on("triagem_call", (data) => {
 
     novoNome.innerHTML = data['nomePaciente'];
     novaPrioridade.innerHTML = data['prioridade'];
- 
+
     inputID.value = data['_id'];
     inputID.type = "hidden";
 
@@ -88,7 +102,7 @@ socket.on("triagem_call", (data) => {
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Alta"));
             $('#tblPacientesTriagem > tbody > tr').eq(i - 1).after(novaLinha); // Adicionando após
 
-        // Se houver alguma linha com prioridade Muito Alta 
+            // Se houver alguma linha com prioridade Muito Alta 
         } else if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
 
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Muito Alta"));
@@ -96,7 +110,7 @@ socket.on("triagem_call", (data) => {
             $('#tblPacientesTriagem > tbody > tr').eq(i - 1).after(novaLinha);
             // console.log('muito alta');
 
-        // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
+            // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
         } else {
             // console.log('nada. WARNING')
             $('#tblPacientesTriagem > tbody').prepend(novaLinha);
@@ -104,13 +118,13 @@ socket.on("triagem_call", (data) => {
 
     } else {
 
-        if(tableRow.find(a => a.children[1].outerText == "Muito Alta")){
+        if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
 
             var i = tableRow.indexOf(tableRow.slice().reverse().find(a => a.children[1].outerText == "Muito Alta"));
 
-            $('#tblPacientesTriagem > tbody > tr').eq(i).after(novaLinha);// Adicionando após
+            $('#tblPacientesTriagem > tbody > tr').eq(i).after(novaLinha); // Adicionando após
             // console.log('algum muito alta');
-            
+
         } else {
 
             $('#tblPacientesTriagem > tbody').prepend(novaLinha);
@@ -123,7 +137,7 @@ socket.on("triagem_call", (data) => {
 });
 
 socket.on('triagemTela_call', (data) => {
-   
+
     let novaLinha = createLine(data);
     // Se a prioridade da nova linha for Normal
     if (novaLinha.children[1].innerHTML == '1') {
@@ -137,8 +151,8 @@ socket.on('triagemTela_call', (data) => {
             // Index da ultima linha "Alta" encontrada [utlizei o metodo slice() para criar uma copia do array e o metodo reverse em conjunto com o indexOf e find para pegar o ultimo elemento com prioridade "Alta" na tabela]
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Alta"));
             $('#tblPacientesTelaTriagem > tbody > tr').eq(i - 1).after(novaLinha); // Adicionando após
- 
-        // Se houver alguma linha com prioridade Muito Alta 
+
+            // Se houver alguma linha com prioridade Muito Alta 
         } else if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
 
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Muito Alta"));
@@ -146,7 +160,7 @@ socket.on('triagemTela_call', (data) => {
             $('#tblPacientesTelaTriagem > tbody > tr').eq(i - 1).after(novaLinha);
             // console.log('muito alta');
 
-        // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
+            // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
         } else {
             // console.log('nada. WARNING')
             $('#tblPacientesTelaTriagem > tbody').prepend(novaLinha);
@@ -154,13 +168,13 @@ socket.on('triagemTela_call', (data) => {
 
     } else {
 
-        if(tableRow.find(a => a.children[1].outerText == "Muito Alta")){
+        if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
 
             var i = tableRow.indexOf(tableRow.slice().reverse().find(a => a.children[1].outerText == "Muito Alta"));
 
-            $('#tblPacientesTelaTriagem > tbody > tr').eq(i).after(novaLinha);// Adicionando após
+            $('#tblPacientesTelaTriagem > tbody > tr').eq(i).after(novaLinha); // Adicionando após
             // console.log('algum muito alta');
-            
+
         } else {
 
             $('#tblPacientesTelaTriagem > tbody').prepend(novaLinha);
@@ -177,7 +191,7 @@ aplicandoEstilo($('#tblPacientesTelaTriagem > tbody'));
 function dismiss() {
     console.log('dismisss');
 }
- 
+
 function createLine(data) {
     var novaLinha = document.createElement('tr');
     var novoNome = document.createElement('td');
@@ -193,10 +207,10 @@ function createLine(data) {
     novaPrioridade.innerHTML = data['prioridade'];
 
     inputID.value = data['_id'];
-    inputID.type = "hidden"; 
+    inputID.type = "hidden";
 
     novoNome.innerHTML = data['nomePaciente'];
-    
+
     btnDispensar.innerHTML = "Dispensar";
     btnDispensar.className = "btn btn-danger btn-sm";
     btnDispensar.onclick = dismiss();
@@ -223,13 +237,17 @@ function createLine(data) {
 }
 
 
-btnPostToDoctor.onclick = function() {
+btnPostToDoctor.onclick = function () {
     console.log('btn enviar medico')
 
     var consultorio = document.getElementById('selectConsultorio');
     var prioridade = document.getElementById('selectPrioridade');
     var id = document.getElementById('idCallInput');
 
-    $.post("/enviarAoMedico", { consultorio: consultorio.value, prioridade: prioridade.value, id: id.value });
+    $.post("/enviarAoMedico", {
+        consultorio: consultorio.value,
+        prioridade: prioridade.value,
+        id: id.value
+    });
 
 }

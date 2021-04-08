@@ -116,12 +116,24 @@
     <script src="./src/dist/js/triagem.js"></script>
     <script>
         function setInput(x) {
+            // melhorar isso depois
             var bodyModal = document.getElementById('body-modal');
             console.log(x);
-            var idInput = $('#idInputPacientes');
+            var idInput = x.parentNode.parentNode.children[2].value;
+            var newInput = document.createElement('input');
+            newInput.type = 'hidden';
+            newInput.value = idInput;
+            newInput.className = 'hiddenInputId';
+
+            var listOfInput = document.getElementsByClassName('hiddenInputId');
             // idInput.id = "idCallInput";
-            console.log(idInput);
-            bodyModal.appendChild(idInput);
+            
+            console.log(newInput);
+            bodyModal.appendChild(newInput);
+            console.log(listOfInput);
+            if(listOfInput.length > 1) {
+                listOfInput[0].remove();
+            }
         }
 
     </script>
