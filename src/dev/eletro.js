@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 var socket = io();
- 
+
 var rowFila = document.getElementsByClassName("linha");
 var btns = document.getElementsByTagName("button");
 var tblPacientesEletro = document.getElementById('tblPacientesEletro');
@@ -64,7 +64,6 @@ socket.on("eletroCall", (data) => {
     novaLinha.appendChild(novoTD);
     novaLinha.appendChild(inputID);
     novaLinha.className = "linha";
-
 
     // Se a prioridade da nova linha for Normal
     if (novaPrioridade.innerHTML == '1') {
