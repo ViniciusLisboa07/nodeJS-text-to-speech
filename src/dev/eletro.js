@@ -20,7 +20,7 @@ function aplicandoEstilo() {
         } else if(rowFila[i].children[1].outerText == '3') {
             rowFila[i].children[1].innerHTML =  "Muito Alta";
             rowFila[i].children[1].className = 'bg-danger';
-        } 
+        }
 
         btns[i].onclick = (x) => {
             let id =  btns[i].parentNode.parentNode.children[3].value;

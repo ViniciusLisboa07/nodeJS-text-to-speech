@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 var socket = io();
-
+console.log(123)
 var rowFila = document.getElementsByClassName("linha");
 var btns = document.getElementsByClassName("chamar");
 var tblPacientesTriagem = document.getElementById('tblPacientesTriagem');
@@ -47,7 +47,7 @@ function aplicandoEstilo(tabelaBody) {
             tabelaBody[0].children[i].children[1].className = 'bg-danger';
         }
 
-        if (btns != null && btns != undefined) {
+        if (btns != null && btns != undefined && btns.length > 0) {
             btns[i].onclick = (x) => {
                 let id = btns[i].parentNode.parentNode.children[3].value;
                 console.log(id);
@@ -236,18 +236,21 @@ function createLine(data) {
     return novaLinha;
 }
 
-
+// console.log("yuikjhkh" + btnPostToDoctor);
 btnPostToDoctor.onclick = function () {
-    console.log('btn enviar medico')
+    console.log('btn enviar medico');
 
     var consultorio = document.getElementById('selectConsultorio');
     var prioridade = document.getElementById('selectPrioridade');
-    var id = document.getElementById('idCallInput');
+    var bodyModal = document.getElementById('body-modal');
+    var id = bodyModal.children[5];
 
     $.post("/enviarAoMedico", {
         consultorio: consultorio.value,
         prioridade: prioridade.value,
         id: id.value
     });
+    
+    window.location.href = '/triagem';
 
 }

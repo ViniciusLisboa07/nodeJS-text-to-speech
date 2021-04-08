@@ -64,9 +64,10 @@ exports.enviarPaciente = async (req, res) =>{
 
     var id = req.body.id;
     var consultorio = req.body.consultorio;
-    var prioridade = rqe.body.prioridade;
+    var prioridade = req.body.prioridade;
 
-    // var alteracao = await Call.update(); 
-
-    console.log(req.body);
+    await Call.updateOne({ _id: id }, { consultorio, prioridade });
+    
+    req.flash('querySuccess', 'Paciente enviado ao médico com sucesso!');
+    res.redirect('/triagem');
 }

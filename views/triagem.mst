@@ -20,6 +20,10 @@
     {{#info}}
     <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
     {{/info}}
+    {{#querySuccess}}
+    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
+    {{/querySuccess}}
+
 {{/flashes}}
 
 <body>
@@ -115,6 +119,7 @@
     <script src="./node_modules/socket.io/client-dist/socket.io.js"></script>
     <script src="./src/dist/js/triagem.js"></script>
     <script>
+        
         function setInput(x) {
             // melhorar isso depois
             var bodyModal = document.getElementById('body-modal');
