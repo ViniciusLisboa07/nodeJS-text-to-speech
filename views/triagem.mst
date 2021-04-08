@@ -64,7 +64,7 @@
                     <tr class="linha2">
                         <td> {{ nomePaciente }} </td>
                         <td> {{ prioridade }} </td>
-                        <input type="hidden" value="{{id}}">
+                        <input type="hidden" value="{{id}}" id="idInputPacientes">
                         </td>
                         <td><button class="btn btn-danger btn-sm" onClick="dismiss(this)" >Dispensar</button></td>
                         <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#enviarModal" onClick="setInput(this)" >Enviar</button></td>
@@ -118,8 +118,8 @@
         function setInput(x) {
             var bodyModal = document.getElementById('body-modal');
             console.log(x);
-            var idInput = x.parentNode.parentNode.children[2];
-            idInput.id = "idCallInput";
+            var idInput = $('#idInputPacientes');
+            // idInput.id = "idCallInput";
             console.log(idInput);
             bodyModal.appendChild(idInput);
         }

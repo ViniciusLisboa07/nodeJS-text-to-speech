@@ -137,7 +137,7 @@ socket.on('triagemTela_call', (data) => {
             // Index da ultima linha "Alta" encontrada [utlizei o metodo slice() para criar uma copia do array e o metodo reverse em conjunto com o indexOf e find para pegar o ultimo elemento com prioridade "Alta" na tabela]
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Alta"));
             $('#tblPacientesTelaTriagem > tbody > tr').eq(i - 1).after(novaLinha); // Adicionando após
-
+ 
         // Se houver alguma linha com prioridade Muito Alta 
         } else if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
 
