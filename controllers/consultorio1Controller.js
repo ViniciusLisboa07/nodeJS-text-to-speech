@@ -29,7 +29,7 @@ exports.consultorio1Action = async (req, res) => {
     let id = req.body.id;
     
     const alteracao = await Call.findOne({ _id: id });
-    const chamada = await Call.find({ _id: id }).updateOne({ consultorio: 'consultorio1_Recepcao' });
+    const chamada = await Call.updateOne({ _id: id }, { consultorio: 'consultorio1_Recepcao' });
 
     Socket.emit('call', alteracao);
     console.log('consultorio1Action');

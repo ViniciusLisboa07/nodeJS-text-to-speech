@@ -4,7 +4,7 @@ var socket = io();
  
 var rowFila = document.getElementsByClassName("linha");
 var btns = document.getElementsByTagName("button");
-var tblPacientesEletro = document.getElementById('tblPacientesEletro');
+var tblPacientesConsultorio2 = document.getElementById('tblPacientesConsultorio2');
 var tableRow = Array.from(rowFila);
 
 function aplicandoEstilo(tabelaBody) {
@@ -35,11 +35,11 @@ function aplicandoEstilo(tabelaBody) {
     };
 }
 
-aplicandoEstilo($('#tblPacientesConsultorio1 > tbody'));
+aplicandoEstilo($('#tblPacientesConsultorio2 > tbody'));
 
 console.log(socket);
 
-socket.on("consultorio", (data) => {   
+socket.on("eletroCall", (data) => {   
     console.log(data)
 
     var novaLinha = document.createElement('tr');
@@ -68,7 +68,7 @@ socket.on("consultorio", (data) => {
 
     // Se a prioridade da nova linha for Normal
     if (novaPrioridade.innerHTML == '1') {
-        $('#tblPacientesEletro > tbody').append(novaLinha);
+        $('#tblPacientesConsultorio2 > tbody').append(novaLinha);
 
         // Se ela for Alta
     } else if (novaPrioridade.innerHTML == '2') {
@@ -79,7 +79,7 @@ socket.on("consultorio", (data) => {
             // Index da ultima linha "Alta" encontrada [utlizei o metodo slice() para criar uma copia do array e o metodo reverse em conjunto com o indexOf e find para pegar o ultimo elemento com prioridade "Alta" na tabela]
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Alta"));
             console.log(i);
-            $('#tblPacientesEletro > tbody > tr').eq(i - 1).after(novaLinha); // Adicionando após
+            $('#tblPacientesConsultorio2 > tbody > tr').eq(i - 1).after(novaLinha); // Adicionando após
 
         // Se houver alguma linha com prioridade Muito Alta 
         } else if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
@@ -87,13 +87,13 @@ socket.on("consultorio", (data) => {
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Muito Alta"));
             console.log(i);
             // Adicionando após
-            $('#tblPacientesEletro > tbody > tr').eq(i - 1).after(novaLinha);
+            $('#tblPacientesConsultorio2 > tbody > tr').eq(i - 1).after(novaLinha);
             console.log('muito alta');
 
         // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
         } else {
             console.log('nada. WARNING')
-            $('#tblPacientesEletro > tbody').prepend(novaLinha);
+            $('#tblPacientesConsultorio2 > tbody').prepend(novaLinha);
         }
 
     } else {
@@ -102,19 +102,18 @@ socket.on("consultorio", (data) => {
 
             var i = tableRow.indexOf(tableRow.slice().reverse().find(a => a.children[1].outerText == "Muito Alta"));
 
-            $('#tblPacientesEletro > tbody > tr').eq(i).after(novaLinha);// Adicionando após
+            $('#tblPacientesConsultorio2 > tbody > tr').eq(i).after(novaLinha);// Adicionando após
             console.log('algum muito alta');
             
         } else {
 
-            $('#tblPacientesEletro > tbody').prepend(novaLinha);
+            $('#tblPacientesConsultorio2 > tbody').prepend(novaLinha);
             console.log('nenhum muito alta');
         
         }
 
     }
 
-    aplicandoEstilo($('#tblPacientesEletro > tbody'));
-
+    aplicandoEstilo($('#tblPacientesConsultorio2 > tbody'));
 
 });

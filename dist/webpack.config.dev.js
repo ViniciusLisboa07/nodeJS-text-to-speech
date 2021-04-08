@@ -9,7 +9,8 @@ module.exports = {
     eletro: './src/dev/eletro.js',
     medicacao: './src/dev/medicacao.js',
     triagem: './src/dev/triagem.js',
-    consultorio1: './src/dev/consultorio1.js'
+    consultorio1: './src/dev/consultorio1.js',
+    consultorio2: './src/dev/consultorio2.js'
   },
   output: {
     filename: '[name].js',

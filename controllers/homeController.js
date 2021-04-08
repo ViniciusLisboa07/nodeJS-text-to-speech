@@ -87,5 +87,15 @@ exports.homeAction = async (req, res) => {
         console.log('consultorio1');
         Socket.emit('consultorio1_call', alteracao);
         res.redirect('/');
+    } else if (consultorio == 'consultorio2') {
+
+        console.log('consultorio2');
+        Socket.emit('consultorio2_call', alteracao);
+        res.redirect('/');
+    } else if (consultorio == 'consultorio3') {
+
+        console.log('consultorio3');
+        Socket.emit('consultorio3_call', alteracao);
+        res.redirect('/');
     }
 };

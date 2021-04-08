@@ -4,7 +4,7 @@ const Call = mongoose.model('Call');
 const { Socket } = require("../utils/socket");
  
 exports.index = async (req, res) => {
-    const chamadasEletro = await Call.find({ consultorio: 'consultorio3' });
+    const chamadasEletro = await Call.find({ consultorio: 'consultorio2' });
 
     let fila = [];
 
@@ -22,16 +22,16 @@ exports.index = async (req, res) => {
 
     fila.sort((a, b) => a.prioridade > b.prioridade ? -1 : 1);
 
-    res.render('consultorio3', { fila: fila });
+    res.render('consultorio2', { fila: fila });
 };
 
-exports.consultorio3Action = async (req, res) => {
+exports.consultorio2Action = async (req, res) => {
     let id = req.body.id;
     
     const alteracao = await Call.findOne({ _id: id });
-    const chamada = await Call.find({ _id: id }).updateOne({ consultorio: 'consultorio3_Recepcao' });
+    const chamada = await Call.updateOne({ _id: id }, { consultorio: 'consultorio2_Recepcao' });
 
     Socket.emit('call', alteracao);
-    console.log('consultorio3Action');
-    res.redirect('/consultorio3');
+    console.log('consultorio2Action');
+    res.redirect('/consultorio2');
 };  

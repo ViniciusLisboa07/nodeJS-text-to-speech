@@ -1,9 +1,7 @@
 import $ from 'jquery';
 
 var socket = io();
-console.log(123)
 var rowFila = document.getElementsByClassName("linha");
-var btns = document.getElementsByClassName("chamar");
 var tblPacientesTriagem = document.getElementById('tblPacientesTriagem');
 var btnPostToDoctor = document.getElementById('btnEnviarMedico');
 
@@ -12,7 +10,6 @@ var tableRow = Array.from(rowFila);
 function setInput(x) {
     // melhorar isso depois
     var bodyModal = document.getElementById('body-modal');
-    console.log(x);
     var idInput = x.parentNode.parentNode.children[2].value;
     var newInput = document.createElement('input');
     newInput.type = 'hidden';
@@ -32,6 +29,8 @@ function setInput(x) {
 }
 
 function aplicandoEstilo(tabelaBody) {
+    var btns = document.getElementsByClassName("chamar");
+
     for (let i = 0; i < tabelaBody[0].children.length; i++) {
 
         if (tabelaBody[0].children[i].children[1].outerText == '1') {
@@ -48,6 +47,7 @@ function aplicandoEstilo(tabelaBody) {
         }
 
         if (btns != null && btns != undefined && btns.length > 0) {
+            console.log(i);
             btns[i].onclick = (x) => {
                 let id = btns[i].parentNode.parentNode.children[3].value;
                 console.log(id);
@@ -68,19 +68,25 @@ function aplicandoEstilo(tabelaBody) {
 aplicandoEstilo($('#tblPacientesTriagem > tbody'));
 
 socket.on("triagem_call", (data) => {
-    console.log(data)
+    // console.log(data)
 
     var novaLinha = document.createElement('tr');
     var novoNome = document.createElement('td');
     var novaPrioridade = document.createElement('td');
     var novoTD = document.createElement('td');
     var inputID = document.createElement('input');
+    var newBtn = document.createElement('button');
 
     novoNome.innerHTML = data['nomePaciente'];
     novaPrioridade.innerHTML = data['prioridade'];
 
     inputID.value = data['_id'];
     inputID.type = "hidden";
+
+
+    newBtn.innerHTML = "Chamar";
+    newBtn.className = "btn btn-secondary btn-sm chamar";
+    novoTD.appendChild(newBtn);
 
     novaLinha.appendChild(novoNome);
     novaLinha.appendChild(novaPrioridade);
@@ -132,8 +138,6 @@ socket.on("triagem_call", (data) => {
         }
     }
     aplicandoEstilo($('#tblPacientesTriagem > tbody'));
-
-
 });
 
 socket.on('triagemTela_call', (data) => {

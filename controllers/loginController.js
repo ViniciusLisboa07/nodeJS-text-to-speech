@@ -51,15 +51,15 @@ exports.loginAction = async (req, res) => {
             req.flash('success', 'Login efetuado no Consultorio 1 com sucesso');
             res.redirect('/consultorio1'); 
 
-        }// else if (user.name == 'consultorio2') {
-        //     req.flash('success', 'Login efetuado no Consultorio 2 com sucesso');
-        //     res.redirect('/consultorio1');
+        } else if (user.name == 'consultorio2') {
+            req.flash('success', 'Login efetuado no Consultorio 2 com sucesso');
+            res.redirect('/consultorio2');
 
-        // } else if (user.name == 'consultorio3') {
-        //     req.flash('success', 'Login efetuado no Consultorio 3 com sucesso');
-        //     res.redirect('/consultorio3');
+        } else if (user.name == 'consultorio3') {
+            req.flash('success', 'Login efetuado no Consultorio 3 com sucesso');
+            res.redirect('/consultorio3');
 
-        // }
+        }
 
  
     } catch (err) {
