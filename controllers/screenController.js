@@ -62,6 +62,7 @@ exports.screenAction = async (req, res) => {
         
         Socket.emit('triagemTela_call', alteracao);
         console.log('tela-triagemqweqwe');
+        
     } else {
 
         await Call.deleteOne({ _id: id });

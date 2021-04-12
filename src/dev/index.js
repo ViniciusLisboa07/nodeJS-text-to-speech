@@ -47,12 +47,17 @@ socket.on('call', (data) => {
     var novaLinha = document.createElement('tr');
     var novoNome = document.createElement('td');
     var novaPrioridade = document.createElement('td');
+    var novoId = document.createElement('input');
 
     novoNome.innerHTML = data['nomePaciente'];
     novaPrioridade.innerHTML = data['prioridade'];
 
+    novoId.type = "hidden";
+    novoId.value = data['_id'];
+
     novaLinha.appendChild(novoNome);
     novaLinha.appendChild(novaPrioridade);
+    novaLinha.appendChild(novoId);
     novaLinha.className = "linha";
 
     // Se a prioridade da nova linha for Normal
@@ -147,7 +152,6 @@ btnChamar.onclick = (x) => {
         console.log($("#chamarForm"));
         $("#chamarForm").submit();
     } else {
-
         console.log("A fila está vazia");
 
     }

@@ -15,7 +15,7 @@
   \*********************************/
 /***/ (() => {
 
-eval("throw new Error(\"Module parse failed: Unexpected token (34:8)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n|                 location.reload();\\n|             }\\n>         }\\n| \\n|     };\");\n\n//# sourceURL=webpack://node-tts/./src/dev/consultorio2.js?");
+eval("throw new Error(\"Module parse failed: Unexpected token (34:8)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n|                 location.reload()\\n|             }\\n>         }\\n| \\n|     };\");\n\n//# sourceURL=webpack://node-tts/./src/dev/consultorio2.js?");
 
 /***/ })
 
