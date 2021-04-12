@@ -6,40 +6,47 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var socket = io();
 var rowFila = document.getElementsByClassName("linha");
-var btns = document.getElementsByTagName("button");
 var tblPacientesEletro = document.getElementById('tblPacientesEletro');
 var tableRow = Array.from(rowFila);
 
-function aplicandoEstilo() {
+function aplicandoEstilo(tabelaBody) {
+  var btns = document.getElementsByTagName("button");
+
   var _loop = function _loop(i) {
-    if (rowFila[i].children[1].outerText == '1') {
-      rowFila[i].children[1].innerHTML = "Normal";
-      rowFila[i].children[1].className = 'bg-info';
-    } else if (rowFila[i].children[1].outerText == '2') {
-      rowFila[i].children[1].innerHTML = "Alta";
-      rowFila[i].children[1].className = 'bg-warning';
-    } else if (rowFila[i].children[1].outerText == '3') {
-      rowFila[i].children[1].innerHTML = "Muito Alta";
-      rowFila[i].children[1].className = 'bg-danger';
+    if (tabelaBody[0].children[i].children[1].outerText == '1') {
+      console.log('normal');
+      tabelaBody[0].children[i].children[1].innerHTML = "Normal";
+      tabelaBody[0].children[i].children[1].className = 'bg-info';
+    } else if (tabelaBody[0].children[i].children[1].outerText == '2') {
+      console.log('alta');
+      tabelaBody[0].children[i].children[1].innerHTML = "Alta";
+      tabelaBody[0].children[i].children[1].className = 'bg-warning';
+    } else if (tabelaBody[0].children[i].children[1].outerText == '3') {
+      console.log('muito alta');
+      tabelaBody[0].children[i].children[1].innerHTML = "Muito Alta";
+      tabelaBody[0].children[i].children[1].className = 'bg-danger';
     }
+
     btns[i].onclick = function (x) {
       var id = btns[i].parentNode.parentNode.children[3].value;
       btns[i].parentNode.parentNode.remove();
 
       _jquery["default"].post("/eletro", {
         id: id
+      }, function () {
+        location.reload();
       });
     };
   };
 
-  for (var i = 0; i < rowFila.length; i++) {
+  for (var i = 0; i < tabelaBody[0].children.length; i++) {
     _loop(i);
   }
 
   ;
 }
 
-aplicandoEstilo();
+aplicandoEstilo((0, _jquery["default"])('#tblPacientesEletro > tbody'));
 console.log(socket);
 socket.on("eletroCall", function (data) {
   console.log(data);

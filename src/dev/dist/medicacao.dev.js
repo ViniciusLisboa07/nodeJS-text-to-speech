@@ -6,27 +6,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var socket = io();
 console.log(socket);
-var tblPacientesMedicacao = document.getElementById('tblPacientesMedicacao');
-var btns = document.getElementsByTagName("button");
 var rowFila = document.getElementsByClassName("linxha");
 var tableRow = Array.from(rowFila);
 console.log(rowFila);
 
-function aplicandoEstilo() {
-  var _loop = function _loop(i) {
-    if ((0, _jquery["default"])('#tblPacientesMedicacao > tbody')[0].children[i].children[1].outerText == '1') {
-      (0, _jquery["default"])('#tblPacientesMedicacao > tbody')[0].children[i].children[1].innerHTML = "Normal";
-      (0, _jquery["default"])('#tblPacientesMedicacao > tbody')[0].children[i].children[1].className = 'bg-info';
-      (0, _jquery["default"])('#tblPacientesTriagem > tbody');
-    } else if ((0, _jquery["default"])('#tblPacientesMedicacao > tbody')[0].children[i].children[1].outerText == '2') {
-      (0, _jquery["default"])('#tblPacientesMedicacao > tbody')[0].children[i].children[1].innerHTML = "Alta";
-      (0, _jquery["default"])('#tblPacientesMedicacao > tbody')[0].children[i].children[1].className = 'bg-warning';
-    } else if ((0, _jquery["default"])('#tblPacientesMedicacao > tbody')[0].children[i].children[1].outerText == '3') {
-      (0, _jquery["default"])('#tblPacientesMedicacao > tbody')[0].children[i].children[1].innerHTML = "Muito Alta";
-      (0, _jquery["default"])('#tblPacientesMedicacao > tbody')[0].children[i].children[1].className = 'bg-danger';
-    }
+function aplicandoEstilo(tabelaBody) {
+  var btns = document.getElementsByTagName("button");
 
-    ;
+  var _loop = function _loop(i) {
+    if (tabelaBody[0].children[i].children[1].outerText == '1') {
+      tabelaBody[0].children[i].children[1].innerHTML = "Normal";
+      tabelaBody[0].children[i].children[1].className = 'bg-info';
+    } else if (tabelaBody[0].children[i].children[1].outerText == '2') {
+      tabelaBody[0].children[i].children[1].innerHTML = "Alta";
+      tabelaBody[0].children[i].children[1].className = 'bg-warning';
+    } else if (tabelaBody[0].children[i].children[1].outerText == '3') {
+      tabelaBody[0].children[i].children[1].innerHTML = "Muito Alta";
+      tabelaBody[0].children[i].children[1].className = 'bg-danger';
+    }
 
     btns[i].onclick = function (x) {
       var id = btns[i].parentNode.parentNode.children[3].value;
@@ -34,18 +31,20 @@ function aplicandoEstilo() {
 
       _jquery["default"].post("/medicacao", {
         id: id
+      }, function () {
+        location.reload();
       });
     };
   };
 
-  for (var i = 0; i < (0, _jquery["default"])('#tblPacientesMedicacao > tbody')[0].children.length; i++) {
+  for (var i = 0; i < tabelaBody[0].children.length; i++) {
     _loop(i);
   }
 
   ;
 }
 
-aplicandoEstilo();
+aplicandoEstilo((0, _jquery["default"])('#tblPacientesMedicacao > tbody'));
 socket.on("medicacao_call", function (data) {
   console.log(data);
   var novaLinha = document.createElement('tr');
@@ -112,5 +111,5 @@ socket.on("medicacao_call", function (data) {
     }
   }
 
-  aplicandoEstilo();
+  aplicandoEstilo((0, _jquery["default"])('#tblPacientesMedicacao > tbody'));
 });

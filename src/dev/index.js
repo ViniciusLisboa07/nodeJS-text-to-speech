@@ -118,8 +118,8 @@ btnChamar.onclick = (x) => {
     console.log($('#tblFilaRecepcao')[0].children[1].children[0].children[2]);  
     if (tableRow.length > 0) {
 
-        console.log($('#tblFilaRecepcao')[0].children[1].children[0].children[2].value);
         console.log($('#tblFilaRecepcao')[0].children[1]);
+        console.log($('#tblFilaRecepcao')[0].children[1].children[0].children[2].value);
         var id = $('#tblFilaRecepcao')[0].children[1].children[0].children[2].value;
         console.log("!!! " + form);
         if (form == null) {

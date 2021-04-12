@@ -9,7 +9,7 @@ var tableRow = Array.from(rowFila);
 function aplicandoEstilo(tabelaBody) {
     var btns = document.getElementsByTagName("button");
 
-    for(let i = 0; i < rowFila.length; i++) {
+    for(let i = 0; i < tabelaBody[0].children.length; i++) {
         if (tabelaBody[0].children[i].children[1].outerText == '1') {
             tabelaBody[0].children[i].children[1].innerHTML = "Normal";
             tabelaBody[0].children[i].children[1].className = 'bg-info';
@@ -28,7 +28,9 @@ function aplicandoEstilo(tabelaBody) {
             
             btns[i].parentNode.parentNode.remove();
 
-            $.post("/consultorio1", { id: id });
+            $.post("/consultorio1", { id: id }, function() {
+                location.reload();
+            });
         }
 
     };

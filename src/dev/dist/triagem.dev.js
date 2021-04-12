@@ -54,6 +54,8 @@ function aplicandoEstilo(tabelaBody) {
 
         _jquery["default"].post("/triagem", {
           id: id
+        }, function () {
+          location.reload();
         });
       };
     }

@@ -53,8 +53,8 @@ function aplicandoEstilo(tabelaBody) {
                 console.log(id);
 
                 btns[i].parentNode.parentNode.remove();
-                $.post("/triagem", {
-                    id: id
+                $.post("/triagem", { id: id }, function() {
+                    location.reload();
                 });
             }
         }

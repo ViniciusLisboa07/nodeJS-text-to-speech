@@ -3,38 +3,46 @@ import $ from 'jquery';
 var socket = io();
 
 var rowFila = document.getElementsByClassName("linha");
-var btns = document.getElementsByTagName("button");
 var tblPacientesEletro = document.getElementById('tblPacientesEletro');
 var tableRow = Array.from(rowFila);
 
-function aplicandoEstilo() {
-    for(let i = 0; i < rowFila.length; i++) {
-        if(rowFila[i].children[1].outerText == '1'){
-            rowFila[i].children[1].innerHTML =  "Normal";
-            rowFila[i].children[1].className = 'bg-info';
+function aplicandoEstilo(tabelaBody) {
+    var btns = document.getElementsByTagName("button");
 
-        } else if(rowFila[i].children[1].outerText == '2') {
-            rowFila[i].children[1].innerHTML =  "Alta";
-            rowFila[i].children[1].className = 'bg-warning';
-            
-        } else if(rowFila[i].children[1].outerText == '3') {
-            rowFila[i].children[1].innerHTML =  "Muito Alta";
-            rowFila[i].children[1].className = 'bg-danger';
+    for(let i = 0; i < tabelaBody[0].children.length; i++) {
+
+        if (tabelaBody[0].children[i].children[1].outerText == '1') {
+            console.log('normal');
+            tabelaBody[0].children[i].children[1].innerHTML = "Normal";
+            tabelaBody[0].children[i].children[1].className = 'bg-info';
+
+        } else if (tabelaBody[0].children[i].children[1].outerText == '2') {
+            console.log('alta')
+            tabelaBody[0].children[i].children[1].innerHTML = "Alta";
+            tabelaBody[0].children[i].children[1].className = 'bg-warning';
+
+        } else if (tabelaBody[0].children[i].children[1].outerText == '3') {
+            console.log('muito alta')
+            tabelaBody[0].children[i].children[1].innerHTML = "Muito Alta";
+            tabelaBody[0].children[i].children[1].className = 'bg-danger';
         }
 
         btns[i].onclick = (x) => {
             let id =  btns[i].parentNode.parentNode.children[3].value;
             
-
             btns[i].parentNode.parentNode.remove();
 
-            $.post("/eletro", { id: id });
+            $.post("/eletro", { id: id }, function() {
+                location.reload();
+            });
         }
 
     };
 }
 
-aplicandoEstilo();
+
+
+aplicandoEstilo($('#tblPacientesEletro > tbody'));
 
 console.log(socket);
 

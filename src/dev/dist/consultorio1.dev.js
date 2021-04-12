@@ -29,6 +29,8 @@ function aplicandoEstilo(tabelaBody) {
 
       _jquery["default"].post("/consultorio1", {
         id: id
+      }, function () {
+        location.reload();
       });
     };
   };

@@ -105,8 +105,8 @@ btnChamar.onclick = function (x) {
   console.log((0, _jquery["default"])('#tblFilaRecepcao')[0].children[1].children[0].children[2]);
 
   if (tableRow.length > 0) {
-    console.log((0, _jquery["default"])('#tblFilaRecepcao')[0].children[1].children[0].children[2].value);
     console.log((0, _jquery["default"])('#tblFilaRecepcao')[0].children[1]);
+    console.log((0, _jquery["default"])('#tblFilaRecepcao')[0].children[1].children[0].children[2].value);
     var id = (0, _jquery["default"])('#tblFilaRecepcao')[0].children[1].children[0].children[2].value;
     console.log("!!! " + form);
 

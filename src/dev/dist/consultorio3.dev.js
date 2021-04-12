@@ -30,11 +30,13 @@ function aplicandoEstilo(tabelaBody) {
 
       _jquery["default"].post("/consultorio1", {
         id: id
+      }, function () {
+        location.reload();
       });
     };
   };
 
-  for (var i = 0; i < rowFila.length; i++) {
+  for (var i = 0; i < tabelaBody[0].children.length; i++) {
     _loop(i);
   }
 

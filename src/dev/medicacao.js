@@ -1,45 +1,51 @@
 import $ from 'jquery';
- 
+
 var socket = io();
 console.log(socket);
-var tblPacientesMedicacao = document.getElementById('tblPacientesMedicacao');
-var btns = document.getElementsByTagName("button");
 var rowFila = document.getElementsByClassName("linxha");
 var tableRow = Array.from(rowFila);
 
 console.log(rowFila)
-function aplicandoEstilo() {
-    for(let i = 0; i < $('#tblPacientesMedicacao > tbody')[0].children.length; i++) {
 
-        if ($('#tblPacientesMedicacao > tbody')[0].children[i].children[1].outerText == '1') {
-            $('#tblPacientesMedicacao > tbody')[0].children[i].children[1].innerHTML = "Normal";
-            $('#tblPacientesMedicacao > tbody')[0].children[i].children[1].className = 'bg-info';$('#tblPacientesTriagem > tbody')
+function aplicandoEstilo(tabelaBody) {
 
-        } else if ($('#tblPacientesMedicacao > tbody')[0].children[i].children[1].outerText == '2') {
-            $('#tblPacientesMedicacao > tbody')[0].children[i].children[1].innerHTML = "Alta";
-            $('#tblPacientesMedicacao > tbody')[0].children[i].children[1].className = 'bg-warning';
+    var btns = document.getElementsByTagName("button");
 
-        } else if ($('#tblPacientesMedicacao > tbody')[0].children[i].children[1].outerText == '3') {
-            $('#tblPacientesMedicacao > tbody')[0].children[i].children[1].innerHTML = "Muito Alta";
-            $('#tblPacientesMedicacao > tbody')[0].children[i].children[1].className = 'bg-danger';
-        };
+    for (let i = 0; i < tabelaBody[0].children.length; i++) {
+
+        if (tabelaBody[0].children[i].children[1].outerText == '1') {
+            tabelaBody[0].children[i].children[1].innerHTML = "Normal";
+            tabelaBody[0].children[i].children[1].className = 'bg-info';
+
+        } else if (tabelaBody[0].children[i].children[1].outerText == '2') {
+            tabelaBody[0].children[i].children[1].innerHTML = "Alta";
+            tabelaBody[0].children[i].children[1].className = 'bg-warning';
+
+        } else if (tabelaBody[0].children[i].children[1].outerText == '3') {
+            tabelaBody[0].children[i].children[1].innerHTML = "Muito Alta";
+            tabelaBody[0].children[i].children[1].className = 'bg-danger';
+        }
 
         btns[i].onclick = (x) => {
-            let id =  btns[i].parentNode.parentNode.children[3].value;
-            
+            let id = btns[i].parentNode.parentNode.children[3].value;
 
             btns[i].parentNode.parentNode.remove();
 
-            $.post("/medicacao", { id: id });
+            $.post("/medicacao", { id: id }, function(){
+                location.reload();
+            });
+
+
+
         }
 
     };
 }
 
-aplicandoEstilo();
+aplicandoEstilo($('#tblPacientesMedicacao > tbody'));
 
 
-socket.on("medicacao_call", (data) => {   
+socket.on("medicacao_call", (data) => {
     console.log(data)
 
     var novaLinha = document.createElement('tr');
@@ -81,7 +87,7 @@ socket.on("medicacao_call", (data) => {
             console.log(i);
             $('#tblPacientesMedicacao > tbody > tr').eq(i - 1).after(novaLinha); // Adicionando após
 
-        // Se houver alguma linha com prioridade Muito Alta 
+            // Se houver alguma linha com prioridade Muito Alta 
         } else if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
 
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Muito Alta"));
@@ -90,7 +96,7 @@ socket.on("medicacao_call", (data) => {
             $('#tblPacientesMedicacao > tbody > tr').eq(i - 1).after(novaLinha);
             console.log('muito alta');
 
-        // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
+            // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
         } else {
             console.log('nada. WARNING')
             $('#tblPacientesMedicacao > tbody').prepend(novaLinha);
@@ -98,23 +104,22 @@ socket.on("medicacao_call", (data) => {
 
     } else {
 
-        if(tableRow.find(a => a.children[1].outerText == "Muito Alta")){
+        if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
 
             var i = tableRow.indexOf(tableRow.slice().reverse().find(a => a.children[1].outerText == "Muito Alta"));
 
-            $('#tblPacientesMedicacao > tbody > tr').eq(i).after(novaLinha);// Adicionando após
+            $('#tblPacientesMedicacao > tbody > tr').eq(i).after(novaLinha); // Adicionando após
             console.log('algum muito alta');
-            
+
         } else {
 
             $('#tblPacientesMedicacao > tbody').prepend(novaLinha);
             console.log('nenhum muito alta');
-        
+
         }
 
     }
 
-    aplicandoEstilo();
-
+    aplicandoEstilo($('#tblPacientesMedicacao > tbody'));
 
 });

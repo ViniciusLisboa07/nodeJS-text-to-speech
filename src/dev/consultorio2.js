@@ -28,7 +28,9 @@ function aplicandoEstilo(tabelaBody) {
 
             btns[i].parentNode.parentNode.remove();
 
-            $.post("/consultorio1", { id: id });
+            $.post("/consultorio1", { id: id }, function() {
+                location.reload();
+            }
         }
 
     };
