@@ -8,7 +8,8 @@ module.exports = {
         medicacao: './src/dev/medicacao.js',
         triagem: './src/dev/triagem.js',
         consultorio1: './src/dev/consultorio1.js',
-        consultorio2: './src/dev/consultorio2.js'
+        consultorio2: './src/dev/consultorio2.js',
+        consultorio3: './src/dev/consultorio3.js'
     },
     output: {
         filename:'[name].js',

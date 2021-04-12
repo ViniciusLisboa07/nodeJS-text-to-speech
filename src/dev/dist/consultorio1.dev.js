@@ -25,7 +25,6 @@ function aplicandoEstilo(tabelaBody) {
 
     btns[i].onclick = function (x) {
       var id = btns[i].parentNode.parentNode.children[3].value;
-      x.preventDefault();
       btns[i].parentNode.parentNode.remove();
 
       _jquery["default"].post("/consultorio1", {
@@ -43,7 +42,7 @@ function aplicandoEstilo(tabelaBody) {
 
 aplicandoEstilo((0, _jquery["default"])('#tblPacientesConsultorio1 > tbody'));
 console.log(socket);
-socket.on("consultorio", function (data) {
+socket.on("consultorio1", function (data) {
   console.log(data);
   var novaLinha = document.createElement('tr');
   var novoNome = document.createElement('td');

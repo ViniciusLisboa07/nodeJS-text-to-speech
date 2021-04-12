@@ -50,9 +50,7 @@ function aplicandoEstilo(tabelaBody) {
       btns[i].onclick = function (x) {
         var id = btns[i].parentNode.parentNode.children[3].value;
         console.log(id);
-        x.preventDefault();
         btns[i].parentNode.parentNode.remove();
-        console.log('macaco');
 
         _jquery["default"].post("/triagem", {
           id: id

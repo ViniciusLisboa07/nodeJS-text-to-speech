@@ -25,7 +25,6 @@ function aplicandoEstilo(tabelaBody) {
         btns[i].onclick = (x) => {
             let id =  btns[i].parentNode.parentNode.children[3].value;
             
-            x.preventDefault();
 
             btns[i].parentNode.parentNode.remove();
 
@@ -39,7 +38,7 @@ aplicandoEstilo($('#tblPacientesConsultorio2 > tbody'));
 
 console.log(socket);
 
-socket.on("eletroCall", (data) => {   
+socket.on("consultorio2", (data) => {   
     console.log(data)
 
     var novaLinha = document.createElement('tr');

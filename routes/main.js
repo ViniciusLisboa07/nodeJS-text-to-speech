@@ -55,7 +55,7 @@ router.post('/consultorio1', consultorio1Controller.consultorio1Action);
 router.get('/consultorio2', homeController.userMidleware, consultorio2Controller.index);
 router.post('/consultorio2', consultorio2Controller.consultorio2Action);
 
-// router.get('/consultorio3', homeController.userMidleware, consultorio3Controller.index);
-// router.post('/consultorio3', consultorio3Controller.consultorio3Action);
+router.get('/consultorio3', homeController.userMidleware, consultorio3Controller.index);
+router.post('/consultorio3', consultorio3Controller.consultorio3Action);
 
 module.exports = router; 

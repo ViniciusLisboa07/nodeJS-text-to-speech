@@ -112,6 +112,9 @@ console.log($('#tblFilaRecepcao > tbody')[0].children)
 
 var form = null;
 btnChamar.onclick = (x) => {
+    rowFila = document.getElementsByClassName("linha");
+    tableRow = Array.from(rowFila);
+    
     console.log($('#tblFilaRecepcao')[0].children[1].children[0].children[2]);  
     if (tableRow.length > 0) {
 

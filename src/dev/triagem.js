@@ -52,10 +52,7 @@ function aplicandoEstilo(tabelaBody) {
                 let id = btns[i].parentNode.parentNode.children[3].value;
                 console.log(id);
 
-                x.preventDefault();
-
                 btns[i].parentNode.parentNode.remove();
-                console.log('macaco')
                 $.post("/triagem", {
                     id: id
                 });

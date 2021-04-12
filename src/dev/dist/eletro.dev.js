@@ -22,10 +22,8 @@ function aplicandoEstilo() {
       rowFila[i].children[1].innerHTML = "Muito Alta";
       rowFila[i].children[1].className = 'bg-danger';
     }
-
     btns[i].onclick = function (x) {
       var id = btns[i].parentNode.parentNode.children[3].value;
-      x.preventDefault();
       btns[i].parentNode.parentNode.remove();
 
       _jquery["default"].post("/eletro", {

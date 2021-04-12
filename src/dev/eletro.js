@@ -25,7 +25,6 @@ function aplicandoEstilo() {
         btns[i].onclick = (x) => {
             let id =  btns[i].parentNode.parentNode.children[3].value;
             
-            x.preventDefault();
 
             btns[i].parentNode.parentNode.remove();
 

@@ -66,8 +66,20 @@ exports.enviarPaciente = async (req, res) =>{
     var consultorio = req.body.consultorio;
     var prioridade = req.body.prioridade;
 
-    await Call.updateOne({ _id: id }, { consultorio, prioridade });
-    
+    var callUpdate = await Call.updateOne({ _id: id }, { consultorio, prioridade });
+    var alteracao = await Call.findOne({ _id: id });
+
+    if(consultorio == "consultorio1") {
+        Socket.emit('consultorio1', alteracao);
+
+    } else if (consultorio == "consultorio2") {
+        Socket.emit('consultorio2', alteracao);
+
+    } else if(consultorio == "consultorio3") {
+        Socket.emit('consultorio3', alteracao);
+
+    }
+
     req.flash('querySuccess', 'Paciente enviado ao médico com sucesso!');
     res.redirect('/triagem');
 }
