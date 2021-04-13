@@ -27,7 +27,9 @@ router.use("/vendors", express["static"](__dirname + "/vendors"));
 router.use("/src/dist/js", express["static"](__dirname + "/src/dist/js")); // Rotas login
 
 router.get('/login', loginController.index);
-router.post('/login', signInValidator.signIn, loginController.loginAction); // Rotas recepcao
+router.post('/login', signInValidator.signIn, loginController.loginAction);
+router.get('/register', loginController.register);
+router.post('/register', loginController.registerAction); // Rotas recepcao
 
 router.get('/', homeController.userMidleware, homeController.index);
 router.post('/', homeController.homeAction); // Rotas tela

@@ -73,8 +73,6 @@ socket.on("eletroCall", function (data) {
     (0, _jquery["default"])('#tblPacientesEletro > tbody').append(novaLinha); // Se ela for Alta
   } else if (novaPrioridade.innerHTML == '2') {
     // Se já houver alguma linha com prioridade Alta
-    console.log(tableRow);
-
     if (tableRow.find(function (a) {
       return a.children[1].outerText == "Alta";
     })) {
@@ -115,5 +113,5 @@ socket.on("eletroCall", function (data) {
     }
   }
 
-  aplicandoEstilo();
+  aplicandoEstilo((0, _jquery["default"])('#tblPacientesEletro > tbody'));
 });

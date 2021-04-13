@@ -9,62 +9,37 @@ var _require = require("../utils/socket"),
     Socket = _require.Socket;
 
 exports.userMidleware = function _callee(req, res, next) {
-  var token, user;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          if (!(!req.query.token && !req.body.token && !req.session.token)) {
-            _context.next = 4;
-            break;
-          }
-
-          req.flash("error", "Efetue o LogIn 1!");
-          res.redirect('/login');
-          return _context.abrupt("return");
-
-        case 4:
-          token = '';
-
-          if (req.query.token) {
-            token = req.query.token;
-          } else if (req.body.token) {
-            token = req.body.token;
-          } else if (req.session.token) {
-            token = req.session.token;
-          }
-
-          if (!(token == "")) {
-            _context.next = 10;
-            break;
-          }
-
-          req.flash("error", "Efetue o LogIn 2!");
-          res.redirect('/login');
-          return _context.abrupt("return");
-
-        case 10:
-          _context.next = 12;
-          return regeneratorRuntime.awrap(User.findOne({
-            token: token
-          }));
-
-        case 12:
-          user = _context.sent;
-
-          if (user) {
-            _context.next = 17;
-            break;
-          }
-
-          req.flash("error", "Efetue o LogIn 3!");
-          res.redirect('/login');
-          return _context.abrupt("return");
-
-        case 17:
+          // if (!req.query.token && !req.body.token && !req.session.token) {
+          //     req.flash("error", "Efetue o LogIn 1!");
+          //     res.redirect('/login');
+          //     return;
+          // }
+          // let token = '';
+          // if (req.query.token) {
+          //     token = req.query.token;
+          // } else if (req.body.token) {
+          //     token = req.body.token;
+          // } else if (req.session.token) {
+          //     token = req.session.token;
+          // }
+          // if (token == "") {
+          //     req.flash("error", "Efetue o LogIn 2!");
+          //     res.redirect('/login');
+          //     return;
+          // }
+          // const user = await User.findOne({ token: token });
+          // if (!user) {
+          //     req.flash("error", "Efetue o LogIn 3!");
+          //     res.redirect('/login')
+          //     return;
+          // }
           next();
 
-        case 18:
+        case 1:
         case "end":
           return _context.stop();
       }
@@ -78,15 +53,16 @@ exports.index = function _callee2(req, res) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
+          console.log(req.body, req.session, req.query);
           userName = req.session.user['name'];
-          _context2.next = 3;
+          _context2.next = 4;
           return regeneratorRuntime.awrap(Call.find({
             "consultorio": {
               "$regex": "_Recepcao"
             }
           }));
 
-        case 3:
+        case 4:
           chamadasEletro = _context2.sent;
           fila = [];
 
@@ -108,7 +84,7 @@ exports.index = function _callee2(req, res) {
             fila: fila
           });
 
-        case 8:
+        case 9:
         case "end":
           return _context2.stop();
       }

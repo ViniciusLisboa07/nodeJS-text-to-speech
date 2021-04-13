@@ -79,7 +79,6 @@ socket.on("eletroCall", (data) => {
         // Se ela for Alta
     } else if (novaPrioridade.innerHTML == '2') {
         // Se já houver alguma linha com prioridade Alta
-        console.log(tableRow);
         if (tableRow.find(a => a.children[1].outerText == "Alta")) {
 
             // Index da ultima linha "Alta" encontrada [utlizei o metodo slice() para criar uma copia do array e o metodo reverse em conjunto com o indexOf e find para pegar o ultimo elemento com prioridade "Alta" na tabela]
@@ -120,7 +119,6 @@ socket.on("eletroCall", (data) => {
 
     }
 
-    aplicandoEstilo();
-
+    aplicandoEstilo($('#tblPacientesEletro > tbody'));
 
 });

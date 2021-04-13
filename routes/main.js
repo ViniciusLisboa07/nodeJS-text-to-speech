@@ -21,6 +21,8 @@ router.use("/src/dist/js",express.static(__dirname + "/src/dist/js"));
 // Rotas login
 router.get('/login', loginController.index);
 router.post('/login', signInValidator.signIn,  loginController.loginAction);
+router.get('/register', loginController.register);
+router.post('/register', loginController.registerAction);
 
 // Rotas recepcao
 router.get('/', homeController.userMidleware, homeController.index);

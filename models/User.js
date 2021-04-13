@@ -8,7 +8,10 @@ const userSchema = new mongoose.Schema({
         trim: true,
         required: ''
     },
-    
+    nick: {
+        type: String,
+        required: ''
+    },
     token:String
 
 });
