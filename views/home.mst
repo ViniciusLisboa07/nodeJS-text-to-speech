@@ -22,8 +22,13 @@
 <body>
     <div class="d-flex align-items-center justify-content-center" id="corpo">
         <div class="card w-50 m-5">
-            <div class="card-header bg-light">
-                <div class="text-dark">{{ userName }}</div>
+            <div class="card-header bg-light d-flex">
+                <div class="text-dark">
+                    <p>{{ userName }}</p>
+                </div>
+                <div class="justify-content-end">
+                    <a href="/logout" class="text-danger">SAIR</a>
+                </div>
             </div>
             <div class="card-header bg-primary">
                 <div class="text-light">Chamar paciente</div>

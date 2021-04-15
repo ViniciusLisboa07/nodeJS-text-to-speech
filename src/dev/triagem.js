@@ -218,22 +218,24 @@ function createLine(data) {
 
     TdBtnDispensar.appendChild(btnDispensar);
 
-    btnEnviarMedico.onclick = setInput(btnEnviarMedico);
     btnEnviarMedico.innerHTML = "Enviar";
     btnEnviarMedico.className = "btn btn-success btn-sm";
     btnEnviarMedico.dataset.toggle = "modal";
     btnEnviarMedico.dataset.target = "#enviarModal";
-
+    
     TdBtnEnviar.appendChild(btnEnviarMedico);
 
+    
     novaLinha.className = "linha";
-
+    
     novaLinha.appendChild(novoNome);
     novaLinha.appendChild(novaPrioridade);
     novaLinha.appendChild(TdBtnDispensar);
     novaLinha.appendChild(TdBtnEnviar);
     novaLinha.appendChild(inputID);
-
+    
+    btnEnviarMedico.onclick = setInput(btnEnviarMedico);
+    
     return novaLinha;
 }
 

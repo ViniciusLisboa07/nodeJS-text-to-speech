@@ -17,9 +17,10 @@ exports.index = function _callee(req, res) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
+          req.logout();
           res.render('login');
 
-        case 1:
+        case 2:
         case "end":
           return _context.stop();
       }
@@ -46,70 +47,99 @@ exports.registerAction = function (req, res) {
   });
 };
 
-exports.loginAction = function _callee2(req, res) {
+exports.loginAction = function _callee3(req, res) {
   var auth;
-  return regeneratorRuntime.async(function _callee2$(_context2) {
+  return regeneratorRuntime.async(function _callee3$(_context3) {
     while (1) {
-      switch (_context2.prev = _context2.next) {
+      switch (_context3.prev = _context3.next) {
         case 0:
-          _context2.next = 2;
+          _context3.next = 2;
           return regeneratorRuntime.awrap(User.authenticate());
 
         case 2:
-          auth = _context2.sent;
+          auth = _context3.sent;
           console.log(req.body);
-          auth(req.body.name, req.body.password, function (err, result) {
-            console.log('=======');
-            console.log("aa " + result);
-            console.log('====-==');
+          auth(req.body.name, req.body.password, function _callee2(err, result) {
+            var payload, token;
+            return regeneratorRuntime.async(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    if (!(result == undefined || result == null)) {
+                      _context2.next = 4;
+                      break;
+                    }
 
-            if (result == undefined || result == null) {
-              req.flash('error', "Problemas no login! [;-;] ");
-              res.redirect("/login");
-              return;
-            }
+                    req.flash('error', "Problemas no login! [;-;] ");
+                    res.redirect("/login");
+                    return _context2.abrupt("return");
 
-            req.login(result, function () {});
-            var payload = (Date.now() + Math.random()).toString();
-            var token = bcrypt.hash(payload, 10);
-            var updateToken = User.updateOne({
-              _id: result._id
-            }, {
-              token: token
+                  case 4:
+                    // let userDB = await User.findOne({ _id: user._id });
+                    payload = (Date.now() + Math.random()).toString();
+                    _context2.next = 7;
+                    return regeneratorRuntime.awrap(bcrypt.hash(payload, 10));
+
+                  case 7:
+                    token = _context2.sent;
+                    console.log('tooooken: ' + token); // result.token = token;
+                    // result.sessionID = req.sessionID;
+                    // result.save();
+
+                    req.login(result, function () {});
+
+                    if (result.name == 'recepcao') {
+                      req.flash('success', 'Login efetuado com sucesso!');
+                      res.redirect('/');
+                    } else if (result.name == 'eletro') {
+                      req.flash('success', 'Login efetuado na eletro com sucesso!');
+                      res.redirect('/eletro');
+                    } else if (result.name == 'medicacao') {
+                      req.flash('success', 'Login efetuado em Medicação com sucesso!');
+                      res.redirect('/medicacao');
+                    } else if (result.name == 'triagem') {
+                      req.flash('success', 'Login efetuado em Triagem com sucesso!');
+                      res.redirect('/triagem');
+                    } else if (result.name == 'consultorio1') {
+                      req.flash('success', 'Login efetuado no Consultorio 1 com sucesso');
+                      res.redirect('/consultorio1');
+                    } else if (result.name == 'consultorio2') {
+                      req.flash('success', 'Login efetuado no Consultorio 2 com sucesso');
+                      res.redirect('/consultorio2');
+                    } else if (result.name == 'consultorio3') {
+                      req.flash('success', 'Login efetuado no Consultorio 3 com sucesso');
+                      res.redirect('/consultorio3');
+                    }
+
+                  case 11:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
             });
-
-            if (result.name == 'recepcao') {
-              req.flash('success', 'Login efetuado com sucesso!');
-              res.redirect('/');
-            } else if (result.name == 'eletro') {
-              req.flash('success', 'Login efetuado na eletro com sucesso!');
-              res.redirect('/eletro');
-            } else if (result.name == 'medicacao') {
-              req.flash('success', 'Login efetuado em Medicação com sucesso!');
-              res.redirect('/medicacao');
-            } else if (result.name == 'triagem') {
-              req.flash('success', 'Login efetuado em Triagem com sucesso!');
-              res.redirect('/triagem');
-            } else if (result.name == 'consultorio1') {
-              req.flash('success', 'Login efetuado no Consultorio 1 com sucesso');
-              res.redirect('/consultorio1');
-            } else if (result.name == 'consultorio2') {
-              req.flash('success', 'Login efetuado no Consultorio 2 com sucesso');
-              res.redirect('/consultorio2');
-            } else if (result.name == 'consultorio3') {
-              req.flash('success', 'Login efetuado no Consultorio 3 com sucesso');
-              res.redirect('/consultorio3');
-            }
           });
 
         case 5:
         case "end":
-          return _context2.stop();
+          return _context3.stop();
       }
     }
   });
-}; // const errors = validationResult(req);
-// if (!errors.isEmpty()) {
-//     res.redirect("/login");
-//     return;
-// }
+};
+
+exports.logout = function _callee4(req, res) {
+  return regeneratorRuntime.async(function _callee4$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          req.logout();
+          req.flash('success', 'Você deslogou! :)');
+          res.redirect('/login');
+
+        case 3:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  });
+};

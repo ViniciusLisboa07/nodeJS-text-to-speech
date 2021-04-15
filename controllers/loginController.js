@@ -11,10 +11,10 @@ const User = mongoose.model('User');
 // const User = require('../models/User');
 
 exports.index = async (req, res) => {
-
+    req.logout();
     res.render('login');
 
-}
+};
 
 exports.register = (req, res) => {
     res.render('register');
@@ -29,20 +29,17 @@ exports.registerAction = (req, res) => {
             return;
         };
 
-
         req.flash('success', "login efetuado com sucesso");
         res.redirect('/login');
     });
 }
 
 exports.loginAction = async (req, res) => {
+
     const auth = await User.authenticate();
     console.log(req.body);
 
-    auth(req.body.name, req.body.password, (err, result) => {
-        console.log('=======')
-        console.log("aa " + result);
-        console.log('====-==')
+    auth(req.body.name, req.body.password, async (err, result) => {
 
         if (result == undefined || result == null) {
             req.flash('error', "Problemas no login! [;-;] ");
@@ -50,15 +47,21 @@ exports.loginAction = async (req, res) => {
             return;
 
         }
+        
+        // let userDB = await User.findOne({ _id: user._id });
+
+
+        const payload = (Date.now() + Math.random()).toString();
+        const token   = await bcrypt.hash(payload, 10);
+        console.log('tooooken: ' + token);
+
+        // result.token = token;
+        // result.sessionID = req.sessionID;
+        // result.save();
 
         req.login(result, () => {});
 
-        const payload = (Date.now() + Math.random()).toString();
-        const token   = bcrypt.hash(payload, 10);
-
-        var updateToken = User.updateOne({ _id: result._id }, { token: token });    
-
-        if (result.name == 'recepcao') { 
+        if (result.name == 'recepcao') {
             req.flash('success', 'Login efetuado com sucesso!');
             res.redirect('/');
 
@@ -76,7 +79,7 @@ exports.loginAction = async (req, res) => {
 
         } else if (result.name == 'consultorio1') {
             req.flash('success', 'Login efetuado no Consultorio 1 com sucesso');
-            res.redirect('/consultorio1'); 
+            res.redirect('/consultorio1');
 
         } else if (result.name == 'consultorio2') {
             req.flash('success', 'Login efetuado no Consultorio 2 com sucesso');
@@ -87,12 +90,11 @@ exports.loginAction = async (req, res) => {
             res.redirect('/consultorio3');
 
         }
-
     })
-    };
+};
 
-// const errors = validationResult(req);
-// if (!errors.isEmpty()) {
-//     res.redirect("/login");
-//     return;
-// }
+exports.logout = async (req, res) => {
+    req.logout();
+    req.flash('success', 'Você deslogou! :)');
+    res.redirect('/login');
+} 

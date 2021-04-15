@@ -1,16 +1,34 @@
-module.exports.isLogged = (req, res, next) => {
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+
+const bcrypt = require('bcrypt');
+
+module.exports.isLogged = async (req, res, next) => {
     let user = req.user;
     let route = req.route;
 
+    // Protegento rotas, se o usuário nao estiver logado
     if(!req.isAuthenticated()){
         req.flash('error', 'Você não tem permissão para acessar está página!')
         res.redirect('/login');
         return;
     }
-    console.log('@======@')
-    console.log(req)
-    console.log('@======@')
 
+    // console.log(user)
+    // let userDB = await User.findOne({ _id: user._id });
+    // userDB = userDB._doc;
+    
+    // console.log('/////-=-=')
+    // console.log(req.sessionID);
+    // console.log(user.sessionID);
+
+    // if(!(req.sessionID == user.sessionID)){
+    //     req.flash('error', "Você foi deslogado! :(")
+    //     res.redirect('/login');
+    //     return;
+    // }
+    
+    // Protegendo rotas, para cada usuário
     if(user.name == 'consultorio1' && route.path != '/consultorio1'){
         req.flash('error', 'Você não tem permissão para acessar outra página além do Consutório 1!')
         res.redirect('/login');
@@ -31,15 +49,15 @@ module.exports.isLogged = (req, res, next) => {
         req.flash('error', 'Você não tem permissão para acessar outra página além da Medicação!')
         res.redirect('/login');
         return;
-    } else if (user.name == 'triagem' && route.path != '/triagem') {
-        req.flash('error', 'Você não tem permissão para acessar outra página além da Triagem!')
+    } else if (user.name == 'triagem' && (route.path == '/triagem' || route.path == '/enviarAoMedico')) {
+        req.flash('success', ':)')
         res.redirect('/login');
-        return;
-    } else if ((user.name == 'recepcao' && route.path != '/')) {
+        next();
+    } else if (user.name == 'recepcao' && route.path != '/') {
         req.flash('error', 'Você não tem permissão para acessar outra página além da Recepção!')
         res.redirect('/login');
         return;
     }
- 
+
     next();
-}
+};

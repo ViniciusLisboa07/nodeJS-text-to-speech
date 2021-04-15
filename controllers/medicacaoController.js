@@ -8,7 +8,9 @@ const Call = mongoose.model('Call');
 
 exports.index = async (req, res) => {
 
-    let userName = req.session.user['name'];
+    let user = req.user;
+    let userName = user.name;
+
     const chamadasEletro = await Call.find({ consultorio: 'medicacao' });
 
     let fila = [];

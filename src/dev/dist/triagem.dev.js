@@ -201,7 +201,6 @@ function createLine(data) {
   btnDispensar.className = "btn btn-danger btn-sm";
   btnDispensar.onclick = dismiss();
   TdBtnDispensar.appendChild(btnDispensar);
-  btnEnviarMedico.onclick = setInput(btnEnviarMedico);
   btnEnviarMedico.innerHTML = "Enviar";
   btnEnviarMedico.className = "btn btn-success btn-sm";
   btnEnviarMedico.dataset.toggle = "modal";
@@ -213,6 +212,7 @@ function createLine(data) {
   novaLinha.appendChild(TdBtnDispensar);
   novaLinha.appendChild(TdBtnEnviar);
   novaLinha.appendChild(inputID);
+  btnEnviarMedico.onclick = setInput(btnEnviarMedico);
   return novaLinha;
 } // console.log("yuikjhkh" + btnPostToDoctor);
 

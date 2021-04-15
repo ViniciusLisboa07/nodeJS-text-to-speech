@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     token:String
 
 });
-
+ 
 userSchema.plugin(passportLocalMongoose, { usernameField: 'name' });
 
 const modelName = "User";
