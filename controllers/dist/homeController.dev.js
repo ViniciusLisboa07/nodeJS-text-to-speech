@@ -8,55 +8,16 @@ var Call = mongoose.model('Call');
 var _require = require("../utils/socket"),
     Socket = _require.Socket;
 
-exports.userMidleware = function _callee(req, res, next) {
+exports.index = function _callee(req, res) {
+  var user, userName, chamadasEletro, fila;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          // if (!req.query.token && !req.body.token && !req.session.token) {
-          //     req.flash("error", "Efetue o LogIn 1!");
-          //     res.redirect('/login');
-          //     return;
-          // }
-          // let token = '';
-          // if (req.query.token) {
-          //     token = req.query.token;
-          // } else if (req.body.token) {
-          //     token = req.body.token;
-          // } else if (req.session.token) {
-          //     token = req.session.token;
-          // }
-          // if (token == "") {
-          //     req.flash("error", "Efetue o LogIn 2!");
-          //     res.redirect('/login');
-          //     return;
-          // }
-          // const user = await User.findOne({ token: token });
-          // if (!user) {
-          //     req.flash("error", "Efetue o LogIn 3!");
-          //     res.redirect('/login')
-          //     return;
-          // }
-          next();
-
-        case 1:
-        case "end":
-          return _context.stop();
-      }
-    }
-  });
-};
-
-exports.index = function _callee2(req, res) {
-  var user, userName, chamadasEletro, fila;
-  return regeneratorRuntime.async(function _callee2$(_context2) {
-    while (1) {
-      switch (_context2.prev = _context2.next) {
-        case 0:
           console.log(req.session);
           user = req.user;
           userName = user.name;
-          _context2.next = 5;
+          _context.next = 5;
           return regeneratorRuntime.awrap(Call.find({
             "consultorio": {
               "$regex": "_Recepcao"
@@ -64,7 +25,7 @@ exports.index = function _callee2(req, res) {
           }));
 
         case 5:
-          chamadasEletro = _context2.sent;
+          chamadasEletro = _context.sent;
           fila = [];
 
           for (i in chamadasEletro) {
@@ -87,23 +48,23 @@ exports.index = function _callee2(req, res) {
 
         case 10:
         case "end":
-          return _context2.stop();
+          return _context.stop();
       }
     }
   });
 };
 
-exports.homeAction = function _callee3(req, res) {
+exports.homeAction = function _callee2(req, res) {
   var nomePaciente, consultorio, repetir, prioridade, alteracao;
-  return regeneratorRuntime.async(function _callee3$(_context3) {
+  return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
-      switch (_context3.prev = _context3.next) {
+      switch (_context2.prev = _context2.next) {
         case 0:
           nomePaciente = req.body.nomePaciente;
           consultorio = req.body.consultorio;
           repetir = req.body.repetir;
           prioridade = req.body.prioridade;
-          _context3.next = 6;
+          _context2.next = 6;
           return regeneratorRuntime.awrap(Call.create({
             nomePaciente: nomePaciente,
             consultorio: consultorio,
@@ -112,7 +73,7 @@ exports.homeAction = function _callee3(req, res) {
           }));
 
         case 6:
-          alteracao = _context3.sent;
+          alteracao = _context2.sent;
 
           if (consultorio == 'eletro') {
             console.log('=================================================');
@@ -142,7 +103,7 @@ exports.homeAction = function _callee3(req, res) {
 
         case 8:
         case "end":
-          return _context3.stop();
+          return _context2.stop();
       }
     }
   });
