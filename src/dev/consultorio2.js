@@ -25,12 +25,11 @@ function aplicandoEstilo(tabelaBody) {
         btns[i].onclick = (x) => {
             let id =  btns[i].parentNode.parentNode.children[3].value;
             
-
             btns[i].parentNode.parentNode.remove();
 
-            $.post("/consultorio1", { id: id }, function() {
-                location.reload()
-            }
+            $.post("/consultorio2", { id: id }, function() {
+                location.reload();
+            });
         }
 
     };

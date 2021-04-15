@@ -27,8 +27,10 @@ function aplicandoEstilo(tabelaBody) {
       var id = btns[i].parentNode.parentNode.children[3].value;
       btns[i].parentNode.parentNode.remove();
 
-      _jquery["default"].post("/consultorio1", {
+      _jquery["default"].post("/consultorio2", {
         id: id
+      }, function () {
+        location.reload();
       });
     };
   };

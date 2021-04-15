@@ -48,21 +48,22 @@ exports.userMidleware = function _callee(req, res, next) {
 };
 
 exports.index = function _callee2(req, res) {
-  var userName, chamadasEletro, fila;
+  var user, userName, chamadasEletro, fila;
   return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          console.log(req.body, req.session, req.query);
-          userName = req.session.user['name'];
-          _context2.next = 4;
+          console.log(req.session);
+          user = req.user;
+          userName = user.name;
+          _context2.next = 5;
           return regeneratorRuntime.awrap(Call.find({
             "consultorio": {
               "$regex": "_Recepcao"
             }
           }));
 
-        case 4:
+        case 5:
           chamadasEletro = _context2.sent;
           fila = [];
 
@@ -84,7 +85,7 @@ exports.index = function _callee2(req, res) {
             fila: fila
           });
 
-        case 9:
+        case 10:
         case "end":
           return _context2.stop();
       }

@@ -28,8 +28,8 @@ exports.index = async (req, res) => {
 exports.consultorio2Action = async (req, res) => {
     let id = req.body.id;
     
-    const alteracao = await Call.findOne({ _id: id });
     const chamada = await Call.updateOne({ _id: id }, { consultorio: 'consultorio2_Recepcao' });
+    const alteracao = await Call.findOne({ _id: id });
 
     Socket.emit('call', alteracao);
     console.log('consultorio2Action');

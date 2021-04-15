@@ -49,28 +49,28 @@ exports.index = function _callee(req, res) {
 };
 
 exports.consultorio2Action = function _callee2(req, res) {
-  var id, alteracao, chamada;
+  var id, chamada, alteracao;
   return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           id = req.body.id;
           _context2.next = 3;
-          return regeneratorRuntime.awrap(Call.findOne({
-            _id: id
-          }));
-
-        case 3:
-          alteracao = _context2.sent;
-          _context2.next = 6;
           return regeneratorRuntime.awrap(Call.updateOne({
             _id: id
           }, {
             consultorio: 'consultorio2_Recepcao'
           }));
 
-        case 6:
+        case 3:
           chamada = _context2.sent;
+          _context2.next = 6;
+          return regeneratorRuntime.awrap(Call.findOne({
+            _id: id
+          }));
+
+        case 6:
+          alteracao = _context2.sent;
           Socket.emit('call', alteracao);
           console.log('consultorio2Action');
           res.redirect('/consultorio2');

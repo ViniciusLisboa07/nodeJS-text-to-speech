@@ -22,8 +22,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser(process.env.SECRECT));
 app.use(session({
 
-    resave : false,
-    saveUninitialized : false,
+    resave : true,
+    saveUninitialized : true,
     secret : process.env.SECRECT
 
 }));

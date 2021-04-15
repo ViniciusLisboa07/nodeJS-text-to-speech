@@ -37,8 +37,10 @@ exports.userMidleware = async (req, res, next) => {
 };
 
 exports.index = async (req, res) => {
-    console.log(req.body, req.session, req.query)
-    let userName = req.session.user['name'];
+    console.log(req.session);
+
+    let user = req.user;
+    let userName = user.name;
     const chamadasEletro = await Call.find( { "consultorio": { "$regex": "_Recepcao"} });
 
     let fila = [];
