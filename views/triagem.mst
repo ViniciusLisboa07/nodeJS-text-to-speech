@@ -28,6 +28,7 @@
 
 <body>
     <div class="container-fluid">
+    <div><a href="/logout" class="text-danger">SAIR</a>/div>
         <table class="table table-striped table-hover table-md" id="tblPacientesTriagem">
             <div class="card-header bg-light">
                 <div class="text-dark">Chamar pacientes</div>
