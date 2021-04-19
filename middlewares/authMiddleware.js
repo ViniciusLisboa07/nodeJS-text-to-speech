@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 module.exports.isLogged = async (req, res, next) => {
     let user = req.user;
     let route = req.route;
-
+    
     // Protegento rotas, se o usuário nao estiver logado
     if(!req.isAuthenticated()){
         req.flash('error', 'Você não tem permissão para acessar está página!')

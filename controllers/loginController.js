@@ -8,12 +8,8 @@ var session = require('express-session');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
-// const User = require('../models/User');
-
 exports.index = async (req, res) => {
-    req.logout();
     res.render('login');
-
 };
 
 exports.register = (req, res) => {
@@ -37,29 +33,40 @@ exports.registerAction = (req, res) => {
 exports.loginAction = async (req, res) => {
 
     const auth = await User.authenticate();
-    console.log(req.body);
 
     auth(req.body.name, req.body.password, async (err, result) => {
-
         if (result == undefined || result == null) {
             req.flash('error', "Problemas no login! [;-;] ");
             res.redirect("/login");
+            console.log(err)
             return;
-
         }
-        
-        // let userDB = await User.findOne({ _id: user._id });
 
+        let userDB = await User.findOne({
+            name: req.body.name
+        });
 
-        const payload = (Date.now() + Math.random()).toString();
-        const token   = await bcrypt.hash(payload, 10);
-        console.log('tooooken: ' + token);
+        if (userDB.sessionID != req.sessionID) {
+            if (userDB.sessionID == "") {
 
-        // result.token = token;
-        // result.sessionID = req.sessionID;
-        // result.save();
+                const payload = (Date.now() + Math.random()).toString();
+                const token = await bcrypt.hash(payload, 10);
+                console.log('tooooken: ' + token);
+                await User.updateOne({
+                    name: req.body.name
+                }, {
+                    token: token,
+                    sessionID: req.sessionID
+                });
 
-        req.login(result, () => {});
+                req.login(result, () => {});
+            } else {
+                req.flash('error', "Outro usuario esta logado!");
+                res.redirect("/login");
+                return;
+            }
+                
+        };
 
         if (result.name == 'recepcao') {
             req.flash('success', 'Login efetuado com sucesso!');
@@ -90,11 +97,16 @@ exports.loginAction = async (req, res) => {
             res.redirect('/consultorio3');
 
         }
-    })
+    });
 };
 
 exports.logout = async (req, res) => {
+    await User.updateOne({
+        _id: req.user._id
+    }, {
+        sessionID: ''
+    });
     req.logout();
-    req.flash('success', 'Você deslogou! :)');
+    req.session.destroy();
     res.redirect('/login');
-} 
+}

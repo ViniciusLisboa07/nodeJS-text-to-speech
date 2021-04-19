@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: ''
     },
+    sessionID:String,
     token:String
 
 });

@@ -15,7 +15,6 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const app = express();
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -35,7 +34,6 @@ app.use((req, res, next) => {
     res.locals.flashes = req.flash();
     next();
 });
-
 
 app.use(passport.initialize());
 app.use(passport.session());

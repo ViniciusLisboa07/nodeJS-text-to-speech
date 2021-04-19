@@ -13,10 +13,12 @@ module.exports.isLogged = function _callee(req, res, next) {
       switch (_context.prev = _context.next) {
         case 0:
           user = req.user;
-          route = req.route; // Protegento rotas, se o usuário nao estiver logado
+          route = req.route;
+          console.log('-----');
+          console.log(req.user); // Protegento rotas, se o usuário nao estiver logado
 
           if (req.isAuthenticated()) {
-            _context.next = 6;
+            _context.next = 8;
             break;
           }
 
@@ -24,9 +26,9 @@ module.exports.isLogged = function _callee(req, res, next) {
           res.redirect('/login');
           return _context.abrupt("return");
 
-        case 6:
+        case 8:
           if (!(user.name == 'consultorio1' && route.path != '/consultorio1')) {
-            _context.next = 12;
+            _context.next = 14;
             break;
           }
 
@@ -34,9 +36,9 @@ module.exports.isLogged = function _callee(req, res, next) {
           res.redirect('/login');
           return _context.abrupt("return");
 
-        case 12:
+        case 14:
           if (!(user.name == 'consultorio2' && route.path != '/consultorio2')) {
-            _context.next = 18;
+            _context.next = 20;
             break;
           }
 
@@ -44,9 +46,9 @@ module.exports.isLogged = function _callee(req, res, next) {
           res.redirect('/login');
           return _context.abrupt("return");
 
-        case 18:
+        case 20:
           if (!(user.name == 'consultorio3' && route.path != '/consultorio3')) {
-            _context.next = 24;
+            _context.next = 26;
             break;
           }
 
@@ -54,9 +56,9 @@ module.exports.isLogged = function _callee(req, res, next) {
           res.redirect('/login');
           return _context.abrupt("return");
 
-        case 24:
+        case 26:
           if (!(user.name == 'eletro' && route.path != '/eletro')) {
-            _context.next = 30;
+            _context.next = 32;
             break;
           }
 
@@ -64,9 +66,9 @@ module.exports.isLogged = function _callee(req, res, next) {
           res.redirect('/login');
           return _context.abrupt("return");
 
-        case 30:
+        case 32:
           if (!(user.name == 'medicacao' && route.path != '/medicacao')) {
-            _context.next = 36;
+            _context.next = 38;
             break;
           }
 
@@ -74,21 +76,21 @@ module.exports.isLogged = function _callee(req, res, next) {
           res.redirect('/login');
           return _context.abrupt("return");
 
-        case 36:
+        case 38:
           if (!(user.name == 'triagem' && (route.path == '/triagem' || route.path == '/enviarAoMedico'))) {
-            _context.next = 42;
+            _context.next = 44;
             break;
           }
 
           req.flash('success', ':)');
           res.redirect('/login');
           next();
-          _context.next = 46;
+          _context.next = 48;
           break;
 
-        case 42:
+        case 44:
           if (!(user.name == 'recepcao' && route.path != '/')) {
-            _context.next = 46;
+            _context.next = 48;
             break;
           }
 
@@ -96,10 +98,10 @@ module.exports.isLogged = function _callee(req, res, next) {
           res.redirect('/login');
           return _context.abrupt("return");
 
-        case 46:
+        case 48:
           next();
 
-        case 47:
+        case 49:
         case "end":
           return _context.stop();
       }

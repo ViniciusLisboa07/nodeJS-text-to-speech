@@ -16,6 +16,7 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: ''
   },
+  sessionID: String,
   token: String
 });
 userSchema.plugin(passportLocalMongoose, {
