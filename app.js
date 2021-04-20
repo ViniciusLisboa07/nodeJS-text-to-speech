@@ -27,9 +27,7 @@ app.use(session({
     saveUninitialized : true,
     secret : process.env.SECRECT,
     store: MongoStore.create({ 
-        mongoUrl: 'mongodb://localhost:27017/tts',
-        autoRemove: 'interval',
-        autoRemoveInterval: 10 // In minutes. Default
+        mongoUrl: 'mongodb://localhost:27017/tts'
     })
 
 }));

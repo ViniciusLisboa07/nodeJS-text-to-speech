@@ -3,10 +3,10 @@ mongoose.Promise = global.Promise;
 const passportLocalMongoose = require('passport-local-mongoose')
 
 const sessionSchema = new mongoose.Schema({
-    _id:String,
+    _id:false,
     session:String
 });
- 
+    
 sessionSchema.plugin(passportLocalMongoose, { usernameField: 'name' });
 
 const modelName = "Session";

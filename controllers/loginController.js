@@ -9,7 +9,8 @@ const mongoose = require('mongoose');
 const User     = mongoose.model('User');
 const Session  = mongoose.model('Session');
 
-exports.index  = async (req, res) => {
+exports.index  = (req, res) => {
+    
     res.render('login');
 };
 
@@ -42,27 +43,27 @@ exports.loginAction = async (req, res) => {
             console.log(err)
             return;
         };
+ 
+        let userDB = await User.findOne({ name: req.body .name });
+        console.log('Session ID atual: ' + req.session.id);
+        console.log('Session ID atual: ' + req.session.id);
 
-        let userDB = await User.findOne({
-            name: req.body.name
-        });
-
-        if(req.sessionID != userDB.sessionID) {
-            if (userDB.sessionID != ""){
-                var filter = {'session':{'$regex': '.*"user":"'+ userDB.name +'".*'}}
-                await Session.deleteOne(filter, () => {
-                    var msg = 'Alguém entrou com este usuário!'
+        if (userDB.sessionID != ""){
+                if(req.sessionID != userDB.sessionID) {
+                    await Session.remove({ 'session.user': userDB.name })
+                    let msg = "Outro usuario conectou a sua conta!";
+                    console.log(msg);
                     Socket.emitTo('logOut', msg, userDB.sessionID);
-                });
             }
         }
-        
+
         const payload = (Date.now() + Math.random()).toString();
         const token = await bcrypt.hash(payload, 10);
         console.log('tooooken: ' + token);
         await User.updateOne({ name: req.body.name }, { token: token, sessionID: req.sessionID });
 
         req.login(result, () => {});
+
 
         if (result.name == 'recepcao') {
             req.flash('success', 'Login efetuado com sucesso!');
@@ -97,13 +98,8 @@ exports.loginAction = async (req, res) => {
 };
 
 exports.logout = async (req, res) => {
-    // await User.updateOne({
-    //     _id: req.user.id
-    // }, {
-    //     sessionID: ''
-    // });
+    await User.updateOne({ name: req.user.name }, { sessionID: '' });
+
     req.logout();
-    req.session.destroy();
     res.redirect('/login');
 };
-

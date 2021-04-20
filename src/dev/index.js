@@ -158,7 +158,6 @@ btnChamar.onclick = (x) => {
 };
 
 socket.on('logOut', (data) => {
-
-    window.location = '/logout';
-   
-})
+    alert('outro usuario entrou em sua conta!');
+    // window.location = '/logout';
+}) 
