@@ -8,6 +8,7 @@ const io = require('socket.io');
 
 const cookieParser = require('cookie-parser')
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const flash = require('express-flash')
 
 const passport = require('passport');
@@ -19,11 +20,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(cookieParser(process.env.SECRECT));
+
 app.use(session({
 
     resave : true,
     saveUninitialized : true,
-    secret : process.env.SECRECT
+    secret : process.env.SECRECT,
+    store: MongoStore.create({ 
+        mongoUrl: 'mongodb://localhost:27017/tts',
+        autoRemove: 'interval',
+        autoRemoveInterval: 10 // In minutes. Default
+    })
 
 }));
 

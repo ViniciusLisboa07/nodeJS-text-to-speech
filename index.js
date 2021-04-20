@@ -9,6 +9,7 @@ mongoose.connection.on('error', (error) => {
 
 require('./models/Call');
 require('./models/User');
+require('./models/Session');
 
 
 require('dotenv').config({ path: 'variables.env' });

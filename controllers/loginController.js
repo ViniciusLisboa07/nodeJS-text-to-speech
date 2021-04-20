@@ -3,12 +3,13 @@ const {
     matchedData
 } = require('express-validator');
 const bcrypt = require('bcrypt');
-var session = require('express-session');
+const { Socket } = require("../utils/socket");
 
 const mongoose = require('mongoose');
-const User = mongoose.model('User');
+const User     = mongoose.model('User');
+const Session  = mongoose.model('Session');
 
-exports.index = async (req, res) => {
+exports.index  = async (req, res) => {
     res.render('login');
 };
 
@@ -40,33 +41,28 @@ exports.loginAction = async (req, res) => {
             res.redirect("/login");
             console.log(err)
             return;
-        }
+        };
 
         let userDB = await User.findOne({
             name: req.body.name
         });
 
-        if (userDB.sessionID != req.sessionID) {
-            if (userDB.sessionID == "") {
-
-                const payload = (Date.now() + Math.random()).toString();
-                const token = await bcrypt.hash(payload, 10);
-                console.log('tooooken: ' + token);
-                await User.updateOne({
-                    name: req.body.name
-                }, {
-                    token: token,
-                    sessionID: req.sessionID
+        if(req.sessionID != userDB.sessionID) {
+            if (userDB.sessionID != ""){
+                var filter = {'session':{'$regex': '.*"user":"'+ userDB.name +'".*'}}
+                await Session.deleteOne(filter, () => {
+                    var msg = 'Alguém entrou com este usuário!'
+                    Socket.emitTo('logOut', msg, userDB.sessionID);
                 });
-
-                req.login(result, () => {});
-            } else {
-                req.flash('error', "Outro usuario esta logado!");
-                res.redirect("/login");
-                return;
             }
-                
-        };
+        }
+        
+        const payload = (Date.now() + Math.random()).toString();
+        const token = await bcrypt.hash(payload, 10);
+        console.log('tooooken: ' + token);
+        await User.updateOne({ name: req.body.name }, { token: token, sessionID: req.sessionID });
+
+        req.login(result, () => {});
 
         if (result.name == 'recepcao') {
             req.flash('success', 'Login efetuado com sucesso!');
@@ -101,12 +97,13 @@ exports.loginAction = async (req, res) => {
 };
 
 exports.logout = async (req, res) => {
-    await User.updateOne({
-        _id: req.user._id
-    }, {
-        sessionID: ''
-    });
+    // await User.updateOne({
+    //     _id: req.user.id
+    // }, {
+    //     sessionID: ''
+    // });
     req.logout();
     req.session.destroy();
     res.redirect('/login');
-}
+};
+

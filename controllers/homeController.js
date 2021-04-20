@@ -6,7 +6,7 @@ const Call = mongoose.model('Call');
 const { Socket } = require("../utils/socket");
 
 exports.index = async (req, res) => {
-    console.log(req.session);
+    console.log(req.session.id);
 
     let user = req.user;
     let userName = user.name;

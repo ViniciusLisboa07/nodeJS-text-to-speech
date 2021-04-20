@@ -1,11 +1,20 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Session = mongoose.model('Session');
 
 const bcrypt = require('bcrypt');
 
 module.exports.isLogged = async (req, res, next) => {
     let user = req.user;
     let route = req.route;
+    
+    // Protegento rotas, se outro usuário estiver logado com a mesca conta
+    var currentSession = await Session.findOne({ _id: req.session.id})
+    if(!currentSession || currentSession == null || currentSession == undefined){
+        req.flash('error', 'Alguém entrou com este usuário!');
+        res.redirect('/login');
+        return;
+    }
     
     // Protegento rotas, se o usuário nao estiver logado
     if(!req.isAuthenticated()){
@@ -14,20 +23,6 @@ module.exports.isLogged = async (req, res, next) => {
         return;
     }
 
-    // console.log(user)
-    // let userDB = await User.findOne({ _id: user._id });
-    // userDB = userDB._doc;
-    
-    // console.log('/////-=-=')
-    // console.log(req.sessionID);
-    // console.log(user.sessionID);
-
-    // if(!(req.sessionID == user.sessionID)){
-    //     req.flash('error', "Você foi deslogado! :(")
-    //     res.redirect('/login');
-    //     return;
-    // }
-    
     // Protegendo rotas, para cada usuário
     if(user.name == 'consultorio1' && route.path != '/consultorio1'){
         req.flash('error', 'Você não tem permissão para acessar outra página além do Consutório 1!')

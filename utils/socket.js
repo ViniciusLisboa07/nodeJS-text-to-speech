@@ -5,6 +5,10 @@ var Socket = {
     emit: function (event, data) {
         console.log(event);
         io.sockets.emit(event, data);
+    },
+    emitTo: function(event, data, id) {
+        console.log(event);
+        io.sockets.to(id).emit(event, data);
     }
 
 };

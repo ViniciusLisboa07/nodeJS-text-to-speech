@@ -156,3 +156,9 @@ btnChamar.onclick = (x) => {
 
     }
 };
+
+socket.on('logOut', (data) => {
+
+    window.location = '/logout';
+   
+})
