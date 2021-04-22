@@ -256,4 +256,9 @@ btnPostToDoctor.onclick = function () {
     
     window.location.href = '/triagem';
 
-}
+};
+
+socket.on('triagemLogOut', (data) => {
+   
+    window.location = '/logout';
+});

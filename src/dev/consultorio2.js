@@ -117,3 +117,8 @@ socket.on("consultorio2", (data) => {
     aplicandoEstilo($('#tblPacientesConsultorio2 > tbody'));
 
 });
+
+socket.on('consultorio2LogOut', (data) => {
+   
+    window.location = '/logout';
+});

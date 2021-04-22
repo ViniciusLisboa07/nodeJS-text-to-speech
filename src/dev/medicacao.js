@@ -123,3 +123,8 @@ socket.on("medicacao_call", (data) => {
     aplicandoEstilo($('#tblPacientesMedicacao > tbody'));
 
 });
+
+socket.on('medicacaoLogOut', (data) => {
+   
+    window.location = '/logout';
+});

@@ -122,3 +122,8 @@ socket.on("eletroCall", (data) => {
     aplicandoEstilo($('#tblPacientesEletro > tbody'));
 
 });
+
+socket.on('eletroLogOut', (data) => {
+   
+    window.location = '/logout';
+});

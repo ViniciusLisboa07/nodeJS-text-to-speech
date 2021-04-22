@@ -17,7 +17,7 @@ var Socket = {
         }else if(user.name == 'consultorio3') {
             io.sockets.emit('consultorio3LogOut', data);
 
-        }else if(user.name == 'eletre') {
+        }else if(user.name == 'eletro') {
             io.sockets.emit('eletroLogOut', data);
 
         }else if(user.name == 'medicacao') {

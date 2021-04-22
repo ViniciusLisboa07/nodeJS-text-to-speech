@@ -119,3 +119,8 @@ socket.on("consultorio1", (data) => {
 
 
 });
+
+socket.on('consultorio1', (data) => {
+   
+    window.location = '/logout';
+});
