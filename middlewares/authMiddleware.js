@@ -9,7 +9,7 @@ module.exports.isLogged = async (req, res, next) => {
     let route = req.route;
     
     // Protegento rotas, se outro usuário estiver logado com a mesca conta
-    var currentSession = null;
+    // var currentSession = null;
     // currentSession = await Session.findById(req.session.id).exec();
     // if(!currentSession || currentSession == null || currentSession == undefined){
     //     req.flash('error', 'Alguém entrou com este usuário!');

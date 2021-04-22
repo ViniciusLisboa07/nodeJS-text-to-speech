@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-const passportLocalMongoose = require('passport-local-mongoose')
+// const passportLocalMongoose = require('passport-local-mongoose')
 
 const sessionSchema = new mongoose.Schema({
-    _id:false,
+    // _id:false,
     session:String
 });
     
-sessionSchema.plugin(passportLocalMongoose, { usernameField: 'name' });
+// sessionSchema.plugin(passportLocalMongoose, { usernameField: 'name' });
 
 const modelName = "Session";
 

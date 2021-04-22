@@ -11,7 +11,8 @@ exports.index = async (req, res) => {
     let user = req.user;
     let userName = user.name;
 
-  
+    console.log("-=-=-=-=-=-=-=");
+    console.log(Socket.clients());
 
     const chamadasEletro = await Call.find( { "consultorio": { "$regex": "_Recepcao"} });
 
@@ -42,6 +43,7 @@ exports.homeAction = async (req, res) => {
 
     let alteracao = await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, repetir: repetir, prioridade: prioridade })
 
+    
     if(consultorio == 'eletro') {
         console.log('=================================================');
 
