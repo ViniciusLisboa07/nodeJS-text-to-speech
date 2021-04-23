@@ -29,14 +29,13 @@ function setInput(x) {
 }
 
 function aplicandoEstilo(tabelaBody) {
-    var btns = document.getElementsByClassName("chamar");
-
+    
     for (let i = 0; i < tabelaBody[0].children.length; i++) {
-
+        
         if (tabelaBody[0].children[i].children[1].outerText == '1') {
             tabelaBody[0].children[i].children[1].innerHTML = "Normal";
             tabelaBody[0].children[i].children[1].className = 'bg-info';
-
+            
         } else if (tabelaBody[0].children[i].children[1].outerText == '2') {
             tabelaBody[0].children[i].children[1].innerHTML = "Alta";
             tabelaBody[0].children[i].children[1].className = 'bg-warning';
@@ -47,6 +46,7 @@ function aplicandoEstilo(tabelaBody) {
         }
 
         if (btns != null && btns != undefined && btns.length > 0) {
+            var btns = document.getElementsByClassName("chamar");
             console.log(i);
             btns[i].onclick = (x) => {
                 let id = btns[i].parentNode.parentNode.children[3].value;
@@ -260,5 +260,21 @@ btnPostToDoctor.onclick = function () {
 
 socket.on('triagemLogOut', (data) => {
    
-    window.location = '/logout';
+    let msg = "Alguém fez log in na Triagem!"
+    console.log(msg);
+    
+    var form = document.createElement('form');
+    form.setAttribute('method', 'get');
+    form.setAttribute('action', 'logout');
+
+    var input = document.createElement("input");
+    input.setAttribute('type', 'hidden');
+    input.setAttribute('name', 'msg');
+    input.value = msg;
+
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+    form.submit();
+
 });

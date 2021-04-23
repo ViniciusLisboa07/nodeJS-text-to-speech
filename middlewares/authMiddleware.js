@@ -45,10 +45,10 @@ module.exports.isLogged = async (req, res, next) => {
         req.flash('error', 'Você não tem permissão para acessar outra página além da Medicação!')
         res.redirect('/login');
         return;
-    } else if (user.name == 'triagem' && (route.path == '/triagem' || route.path == '/enviarAoMedico')) {
-        req.flash('success', ':)')
+    } else if (user.name == 'triagem' && route.path != '/triagem') {
+        req.flash('error', 'Você não tem permissão para acessar outra página além da Medicação!')
         res.redirect('/login');
-        next();
+        return;
     } else if (user.name == 'recepcao' && route.path != '/') {
         req.flash('error', 'Você não tem permissão para acessar outra página além da Recepção!')
         res.redirect('/login');

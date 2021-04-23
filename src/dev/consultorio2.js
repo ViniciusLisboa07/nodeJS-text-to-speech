@@ -120,5 +120,21 @@ socket.on("consultorio2", (data) => {
 
 socket.on('consultorio2LogOut', (data) => {
    
-    window.location = '/logout';
+    let msg = "Alguém fez log in no Consultório 2!"
+    console.log(msg);
+    
+    var form = document.createElement('form');
+    form.setAttribute('method', 'get');
+    form.setAttribute('action', 'logout');
+
+    var input = document.createElement("input");
+    input.setAttribute('type', 'hidden');
+    input.setAttribute('name', 'msg');
+    input.value = msg;
+
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+    form.submit();
+
 });

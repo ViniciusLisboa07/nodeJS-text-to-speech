@@ -126,5 +126,21 @@ socket.on("medicacao_call", (data) => {
 
 socket.on('medicacaoLogOut', (data) => {
    
-    window.location = '/logout';
+    let msg = "Alguém fez log in na Medicação!"
+    console.log(msg);
+    
+    var form = document.createElement('form');
+    form.setAttribute('method', 'get');
+    form.setAttribute('action', 'logout');
+
+    var input = document.createElement("input");
+    input.setAttribute('type', 'hidden');
+    input.setAttribute('name', 'msg');
+    input.value = msg;
+
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+    form.submit();
+
 });

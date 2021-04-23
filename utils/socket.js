@@ -56,6 +56,12 @@ var Socket = {
 
 io.on("connection", function (socket) {
     console.log("A user connected");
+    socket.on('doubleUserLogOut', (req, res, msg) => {
+        // req.flash('error', msg);
+        req.logout();
+        res.redirect('/login');
+    });
+
 });
 
 exports.Socket = Socket;

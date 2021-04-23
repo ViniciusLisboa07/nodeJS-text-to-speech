@@ -47,10 +47,10 @@ router.get('/triagem', authMiddleware.isLogged, triagemController.index);
 router.post('/triagem', triagemController.triagemAction);
 
     // Rota para deletar chamada da triagem
-router.post('/del', authMiddleware.isLogged, triagemController.delAction);
+router.post('/del', triagemController.delAction);
 
     // rota para enviar paciente para o consultorio
-router.post('/enviarAoMedico', authMiddleware.isLogged, triagemController.enviarPaciente)
+router.post('/enviarAoMedico', triagemController.enviarPaciente);
 
 // Rotas consultorio
 router.get('/consultorio1', authMiddleware.isLogged, consultorio1Controller.index);

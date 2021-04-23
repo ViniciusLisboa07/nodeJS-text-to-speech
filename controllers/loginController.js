@@ -107,5 +107,7 @@ exports.logout = async (req, res) => {
     await User.updateOne({ name: req.user.name }, { sessionID: '' });
 
     req.logout();
+    console.log(req.query)
+    req.flash('error', req.query.msg);
     res.redirect('/login');
 };
