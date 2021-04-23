@@ -9,7 +9,7 @@ exports.index = async (req, res) => {
     console.log(req.session.id);
 
     let user = req.user;
-    let userName = user.name;
+    let userName = user.nick;
 
     console.log("-=-=-=-=-=-=-=");
     console.log(Socket.clients());

@@ -9,7 +9,7 @@ const Call = mongoose.model('Call');
 exports.index = async (req, res) => {
 
     let user = req.user;
-    let userName = user.name;
+    let userName = user.nick;
 
     const chamadasEletro = await Call.find({ consultorio: 'medicacao' });
 
@@ -27,7 +27,7 @@ exports.index = async (req, res) => {
     }
     fila.sort((a, b) => a.prioridade > b.prioridade ? -1 : 1);
 
-    res.render('medicacao', { userName: userName, fila: fila });
+    res.render('medicacao', { username: userName, fila: fila });
 
 }
 

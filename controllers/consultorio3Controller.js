@@ -7,6 +7,7 @@ exports.index = async (req, res) => {
     const chamadasEletro = await Call.find({ consultorio: 'consultorio3' });
 
     let fila = [];
+    let userName = req.user.nick;
 
     for (i in chamadasEletro) {
 
@@ -19,10 +20,10 @@ exports.index = async (req, res) => {
         });
 
     }
-
+ 
     fila.sort((a, b) => a.prioridade > b.prioridade ? -1 : 1);
 
-    res.render('consultorio3', { fila: fila });
+    res.render('consultorio3', { username: userName, fila: fila });
 };
 
 exports.consultorio3Action = async (req, res) => {

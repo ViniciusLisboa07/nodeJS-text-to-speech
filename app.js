@@ -5,7 +5,7 @@ const mustache = require('mustache-express');
 const helpers = require('./helpers');
 const dotenv = require('dotenv').config()
 const io = require('socket.io');
-
+ 
 const cookieParser = require('cookie-parser')
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -23,22 +23,22 @@ app.use(cookieParser(process.env.SECRECT));
 
 app.use(session({
 
-    resave : true,
+    resave : true, 
     saveUninitialized : true,
     secret : process.env.SECRECT,
     store: MongoStore.create({ 
         mongoUrl: 'mongodb://localhost:27017/tts'
     })
 
-}));
-
+})); 
+ 
 app.use(flash());
 
 app.use((req, res, next) => {
     res.locals.h = helpers;
     res.locals.flashes = req.flash();
     next();
-});
+}); 
 
 app.use(passport.initialize());
 app.use(passport.session());

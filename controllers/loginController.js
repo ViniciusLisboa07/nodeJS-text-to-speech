@@ -34,9 +34,9 @@ exports.registerAction = (req, res) => {
         res.redirect('/login');
     });
 }
-
+ 
 exports.loginAction = async (req, res) => {
-
+ 
     const auth = await User.authenticate();
 
     auth(req.body.name, req.body.password, async (err, result) => {
@@ -61,13 +61,13 @@ exports.loginAction = async (req, res) => {
                 console.log(userDB.sessionID);
                 Socket.emitTo('logOut', msg, userDB);
             }
-        };
+        }; 
  
         const payload = (Date.now() + Math.random()).toString();
         const token = await bcrypt.hash(payload, 10);
         console.log('tooooken: ' + token);
         await User.updateOne({ name: req.body.name }, { token: token, sessionID: req.sessionID });
-
+ 
         req.login(result, () => {});
 
         if (result.name == 'recepcao') {
