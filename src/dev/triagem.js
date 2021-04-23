@@ -258,7 +258,7 @@ btnPostToDoctor.onclick = function () {
         id: id.value
     });
 
-    window.location.href = '/triagem';
+    window.location.reload();
 
 };
 
