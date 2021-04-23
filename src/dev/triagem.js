@@ -29,13 +29,13 @@ function setInput(x) {
 }
 
 function aplicandoEstilo(tabelaBody) {
-    
+
     for (let i = 0; i < tabelaBody[0].children.length; i++) {
-        
+
         if (tabelaBody[0].children[i].children[1].outerText == '1') {
             tabelaBody[0].children[i].children[1].innerHTML = "Normal";
             tabelaBody[0].children[i].children[1].className = 'bg-info';
-            
+
         } else if (tabelaBody[0].children[i].children[1].outerText == '2') {
             tabelaBody[0].children[i].children[1].innerHTML = "Alta";
             tabelaBody[0].children[i].children[1].className = 'bg-warning';
@@ -48,21 +48,25 @@ function aplicandoEstilo(tabelaBody) {
         if (btns != null && btns != undefined && btns.length > 0) {
             var btns = document.getElementsByClassName("chamar");
             console.log(i);
-            btns[i].onclick = (x) => {
-                let id = btns[i].parentNode.parentNode.children[3].value;
-                console.log(id);
-
-                btns[i].parentNode.parentNode.remove();
-                $.post("/triagem", { id: id }, function() {
-                    location.reload();
-                });
-            }
+            btns[i].onclick = btnChamar(btns[i]);
         }
 
     };
 }
-
+ 
 aplicandoEstilo($('#tblPacientesTriagem > tbody'));
+    
+function btnChamar(x) {
+    let id = x.parentNode.parentNode.children[3].value;
+    console.log(id);
+
+    x.parentNode.parentNode.remove();
+    $.post("/triagem", {
+        id: id
+    }, function () {
+        window.location.reload();
+    });
+}
 
 socket.on("triagem_call", (data) => {
     // console.log(data)
@@ -222,20 +226,20 @@ function createLine(data) {
     btnEnviarMedico.className = "btn btn-success btn-sm";
     btnEnviarMedico.dataset.toggle = "modal";
     btnEnviarMedico.dataset.target = "#enviarModal";
-    
+
     TdBtnEnviar.appendChild(btnEnviarMedico);
 
-    
+
     novaLinha.className = "linha";
-    
+
     novaLinha.appendChild(novoNome);
     novaLinha.appendChild(novaPrioridade);
     novaLinha.appendChild(TdBtnDispensar);
     novaLinha.appendChild(TdBtnEnviar);
     novaLinha.appendChild(inputID);
-    
+
     btnEnviarMedico.onclick = setInput(btnEnviarMedico);
-    
+
     return novaLinha;
 }
 
@@ -253,16 +257,16 @@ btnPostToDoctor.onclick = function () {
         prioridade: prioridade.value,
         id: id.value
     });
-    
+
     window.location.href = '/triagem';
 
 };
 
 socket.on('triagemLogOut', (data) => {
-   
+
     let msg = "Alguém fez log in na Triagem!"
     console.log(msg);
-    
+
     var form = document.createElement('form');
     form.setAttribute('method', 'get');
     form.setAttribute('action', 'logout');

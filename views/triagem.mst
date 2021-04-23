@@ -45,7 +45,7 @@
                     <tr class="linha">
                         <td> {{ nomePaciente }} </td>
                         <td> {{ prioridade }} </td>
-                        <td><button class="btn btn-secondary btn-sm chamar">Chamar</button></td>
+                        <td><button class="btn btn-secondary btn-sm chamar" onclick="btnChamar(this)">Chamar</button></td>
                         <input type="hidden" value="{{id}}">
                     </td>
                 {{/fila}}
@@ -140,6 +140,18 @@
             if(listOfInput.length > 1) {
                 listOfInput[0].remove();
             }
+        }
+
+        function btnChamar(x) {
+            let id = x.parentNode.parentNode.children[3].value;
+            console.log(id);
+
+            x.parentNode.parentNode.remove();
+            $.post("/triagem", {
+                id: id
+            }, function () {
+                window.location.reload();
+            });
         }
 
     </script>
