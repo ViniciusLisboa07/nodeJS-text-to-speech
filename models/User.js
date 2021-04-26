@@ -21,12 +21,4 @@ userSchema.plugin(passportLocalMongoose, { usernameField: 'name' });
 
 const modelName = "User";
 
-if(mongoose.connection && mongoose.connection.models[modelName]){
-    console.log('us er s');
-    module.exports = mongoose.connection.models[modelName];
-
-} else {
-    console.log('us ers')
-    module.exports = mongoose.model('User', userSchema, 'users');
- 
-}
+module.exports = mongoose.model('User', userSchema);

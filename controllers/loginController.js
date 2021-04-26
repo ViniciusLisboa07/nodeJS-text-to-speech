@@ -20,9 +20,11 @@ exports.index = (req, res) => {
 exports.register = (req, res) => {
     res.render('register');
 };
-
-exports.registerAction = (req, res) => {
-    User.register(new User(req.body), req.body.password, (err) => {
+ 
+exports.registerAction =  (req, res) => {
+    let newUser = new User(req.body)
+    console.log(req.body);
+    User.register(newUser, req.body.password, (err) => {
         if (err) {
             console.log("Erro ao regisrtar: " + err);
             req.flash('error', "erro ao registrar");

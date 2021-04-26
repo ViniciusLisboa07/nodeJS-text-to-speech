@@ -7,11 +7,12 @@ exports.index = async (req, res) => {
     const chamadasTriagem = await Call.find({ consultorio: 'triagem' });
     const chamadasTelaTriagem = await Call.find({ consultorio: 'tela_triagem' });
 
-    let fila = [];
+    let fila = [];  
     let filaPacientesProntos = [];
+    let username = req.user.nick;
 
-    for (i in chamadasTriagem) {
- 
+    for (i in chamadasTriagem) { 
+
         fila.push({
             nomePaciente: chamadasTriagem[i]._doc['nomePaciente'],
             consultorio: chamadasTriagem[i]._doc['consultorio'],
@@ -22,6 +23,7 @@ exports.index = async (req, res) => {
     };
    
     fila.sort((a, b) => a.prioridade > b.prioridade ? -1 : 1);
+
     
     for (i in chamadasTelaTriagem) {
  
@@ -34,7 +36,7 @@ exports.index = async (req, res) => {
    
     filaPacientesProntos.sort((a, b) => a.prioridade > b.prioridade ? -1 : 1);
 
-    res.render('triagem', { fila: fila, filaPacientesProntos: filaPacientesProntos });
+    res.render('triagem', { userName: username, fila: fila, filaPacientesProntos: filaPacientesProntos });
 };  
 
 exports.triagemAction = async (req, res) => {

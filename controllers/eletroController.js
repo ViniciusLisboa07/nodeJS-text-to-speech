@@ -7,6 +7,7 @@ exports.index = async (req, res) => {
     const chamadasEletro = await Call.find({ consultorio: 'eletro' });
 
     let fila = [];
+    let username = req.user.nick;
 
     for (i in chamadasEletro) {
 
@@ -20,22 +21,11 @@ exports.index = async (req, res) => {
 
     }
 
-    // Call.watch( { $match: { "operationType": "update", fulldocument: 'updateLookup' } } )
-    // .on('change', async (change) => {
-    //     console.log(change);
-    //     console.log(change.documentKey['_id']);
-    //     let alteracao = await Call.findOne({ _id: change.documentKey['_id'] });
-        
-    
-    //     Socket.emit('call', alteracao);
-
-    // });
-
     fila.sort((a, b) => a.prioridade > b.prioridade ? -1 : 1);
 
-    res.render('eletro', { fila: fila });
+    res.render('eletro', { userName: username, fila: fila });
 };
-
+ 
 exports.eletroAction = async (req, res) => {
     let id = req.body.id;
     

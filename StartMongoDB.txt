@@ -1,6 +1,6 @@
 mongod --port 27017 --replSet rs0 --dbpath="C:\data\db0"
 
-
+?replicaSet=rs0
 
 
 var change = await User.updateMany({ }, [ {$set : { "password": '12345'} } ]); // adicionar campo em uma collection

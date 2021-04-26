@@ -1,18 +1,16 @@
 const mongoose = require('mongoose');
 const { ReplSet } = require('mongodb-topology-manager');
 
-mongoose.connect('mongodb://127.0.0.1:27017/tts?replicaSet=rs0', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://127.0.0.1:27017/tts', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = global.Promise;
 mongoose.connection.on('error', (error) => {
     console.log('Error: .-.' + error.message);
 });
 
-
 require('./models/Call');
 require('./models/User');
 require('./models/Session');
-
-
+ 
 require('dotenv').config({ path: 'variables.env' });
 
 const app = require('./app');

@@ -9,29 +9,35 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
-{{#flashes}}
-
-    {{#success}}
-    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
-    {{/success}}
-    {{#error}}
-    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
-    {{/error}}
-    {{#info}}
-    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
-    {{/info}}
-    {{#querySuccess}}
-    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
-    {{/querySuccess}}
-
-{{/flashes}}
-
 <body>
+
+<div class="navbar navbar-light bg-light justify-content-between">
+        <div>
+            {{#flashes}}
+                {{#success}}
+                    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
+                {{/success}}
+                {{#error}}
+                    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
+                {{/error}}
+                {{#info}}
+                    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
+                {{/info}}
+                {{#querySuccess}}
+                    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
+                {{/querySuccess}}
+            {{/flashes}}
+        </div>
+    
+        <div class="card my-2 my-lg-0">
+            <a>{{ username }}</a>
+            <a class="btn btn-outline-danger" href="/logout">SAIR</a>
+        </div>
+    </div>
     <div class="container-fluid">
-    <div class="card-header bg-light"><a href="/logout" class="text-danger">SAIR</a></div>
-        <table class="table table-striped table-hover table-md" id="tblPacientesTriagem">
-            <div class="card-header bg-light">
-                <div class="text-dark">Chamar pacientes</div>
+        <table class="table table-striped table-hover table-md rounded" id="tblPacientesTriagem">
+            <div class="card-header bg-primary">
+                <div class="text-light">Chamar pacientes</div>
             </div>
             <thead>
                 <tr>
@@ -52,9 +58,9 @@
             </tbody>
         </table>
 
-        <table class="table table-striped table-hover table-md" id="tblPacientesTelaTriagem">
-            <div class="card-header bg-light">
-                <div class="text-dark">Dispensar pacientes</div>
+        <table class="table table-striped table-hover table-md rounded" id="tblPacientesTelaTriagem">
+            <div class="card-header bg-primary">
+                <div class="text-light">Dispensar pacientes</div>
             </div>
             <thead>
                 <tr>

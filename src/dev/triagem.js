@@ -57,10 +57,12 @@ function aplicandoEstilo(tabelaBody) {
 aplicandoEstilo($('#tblPacientesTriagem > tbody'));
     
 function btnChamar(x) {
-    let id = x.parentNode.parentNode.children[3].value;
+    let id = x.id;
     console.log(id);
+    
+    console.log($(`#${id}`));
+    $(`#${id}`).parentNode.parentNode.remove();
 
-    x.parentNode.parentNode.remove();
     $.post("/triagem", {
         id: id
     }, function () {
@@ -87,8 +89,13 @@ socket.on("triagem_call", (data) => {
 
     newBtn.innerHTML = "Chamar";
     newBtn.className = "btn btn-secondary btn-sm chamar";
-    novoTD.appendChild(newBtn);
+    newBtn.id = data['_id'];
 
+    newBtn.onclick = () => {
+        $(this).closest('tr').remove();
+    };
+    
+    novoTD.appendChild(newBtn);
     novaLinha.appendChild(novoNome);
     novaLinha.appendChild(novaPrioridade);
     novaLinha.appendChild(novoTD);
@@ -241,7 +248,7 @@ function createLine(data) {
     btnEnviarMedico.onclick = setInput(btnEnviarMedico);
 
     return novaLinha;
-}
+};
 
 // console.log("yuikjhkh" + btnPostToDoctor);
 btnPostToDoctor.onclick = function () {

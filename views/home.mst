@@ -9,28 +9,30 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
-{{#flashes}}
-
-    {{#success}}
-        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
-    {{/success}}
-    {{#error}}
-        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
-    {{/error}}
-{{/flashes}}
-
 <body>
+    <div class="navbar navbar-light bg-light justify-content-between">
+        <div>
+            {{#flashes}}
+                {{#success}}
+                    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
+                {{/success}}
+                {{#error}}
+                    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
+                {{/error}}
+                {{#info}}
+                    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
+                {{/info}}
+            {{/flashes}}
+        </div>
+    
+        <div class="card my-2 my-lg-0">
+            <a>{{ username }}</a>
+            <a class="btn btn-outline-danger" href="/logout">SAIR</a>
+        </div>
+    </div>
+
     <div class="d-flex align-items-center justify-content-center" id="corpo">
-        
         <div class="card w-50 m-5">
-            <div class="card-header bg-light d-flex">
-                <div class="text-dark">
-                    <p>{{ userName }}</p>
-                </div>
-                <div class="justify-content-end">
-                    <a href="/logout" class="text-danger">SAIR</a>
-                </div>
-            </div>
             <div class="card-header bg-primary">
                 <div class="text-light">Chamar paciente</div>
             </div>
