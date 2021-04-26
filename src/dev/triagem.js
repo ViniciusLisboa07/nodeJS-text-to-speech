@@ -90,11 +90,18 @@ socket.on("triagem_call", (data) => {
     newBtn.innerHTML = "Chamar";
     newBtn.className = "btn btn-secondary btn-sm chamar";
     newBtn.id = data['_id'];
-
     newBtn.onclick = () => {
-        $(this).closest('tr').remove();
-    };
-    
+        let id = newBtn.id;
+
+        novaLinha.remove();
+
+        $.post("/triagem", {
+            id: id
+        }, function () {
+            window.location.reload();
+        });
+    }
+
     novoTD.appendChild(newBtn);
     novaLinha.appendChild(novoNome);
     novaLinha.appendChild(novaPrioridade);
@@ -147,6 +154,12 @@ socket.on("triagem_call", (data) => {
     }
     aplicandoEstilo($('#tblPacientesTriagem > tbody'));
 });
+
+$('#tblPacientesTriagem').on('change', () => {
+    
+    
+
+})
 
 socket.on('triagemTela_call', (data) => {
 
