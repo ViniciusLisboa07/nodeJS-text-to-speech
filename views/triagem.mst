@@ -11,24 +11,19 @@
 
 <body>
 
-<div class="navbar navbar-light bg-light justify-content-between">
+    <div class="navbar navbar-light bg-light justify-content-between">
         <div>
-            {{#flashes}}
-                {{#success}}
-                    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
-                {{/success}}
-                {{#error}}
-                    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
-                {{/error}}
-                {{#info}}
-                    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
-                {{/info}}
-                {{#querySuccess}}
-                    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
-                {{/querySuccess}}
-            {{/flashes}}
+            {{#flashes}} {{#success}}
+            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
+            {{/success}} {{#error}}
+            <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
+            {{/error}} {{#info}}
+            <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
+            {{/info}} {{#querySuccess}}
+            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
+            {{/querySuccess}} {{/flashes}}
         </div>
-    
+
         <div class="card my-2 my-lg-0">
             <a>{{ username }}</a>
             <a class="btn btn-outline-danger" href="/logout">SAIR</a>
@@ -48,13 +43,13 @@
             </thead>
             <tbody>
                 {{#fila}}
-                    <tr class="linha">
-                        <td> {{ nomePaciente }} </td>
-                        <td> {{ prioridade }} </td>
-                        <td><button class="btn btn-secondary btn-sm chamar" onclick="btnChamar(this)">Chamar</button></td>
-                        <input type="hidden" value="{{id}}">
+                <tr class="linha">
+                    <td> {{ nomePaciente }} </td>
+                    <td> {{ prioridade }} </td>
+                    <td><button class="btn btn-secondary btn-sm chamar" onclick="btnChamar(this)">Chamar</button></td>
+                    <input type="hidden" value="{{id}}">
                     </td>
-                {{/fila}}
+                    {{/fila}}
             </tbody>
         </table>
 
@@ -72,50 +67,70 @@
             </thead>
             <tbody>
                 {{#filaPacientesProntos}}
-                    <tr class="linha2">
-                        <td> {{ nomePaciente }} </td>
-                        <td> {{ prioridade }} </td>
-                        <input type="hidden" value="{{id}}" id="idInputPacientes">
-                        </td>
-                        <td><button class="btn btn-danger btn-sm" onClick="dismiss(this)" >Dispensar</button></td>
-                        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#enviarModal" onClick="setInput(this)" >Enviar</button></td>
+                <tr class="linha2">
+                    <td> {{ nomePaciente }} </td>
+                    <td> {{ prioridade }} </td>
+                    <input type="hidden" value="{{id}}" id="idInputPacientes">
                     </td>
-                {{/filaPacientesProntos}}
+                    <td><button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDispensar" onClick="setInput(this)">Dispensar</button></td>
+                    <td><button class="btn btn-success btn-sm" id="btnEnviarModal" data-toggle="modal" data-target="#enviarModal" onClick="setInput(this)">Enviar</button></td>
+                    </td>
+                    {{/filaPacientesProntos}}
             </tbody>
         </table>
 
         <div class="modal fade" id="enviarModal" tabindex="-1" role="dialog" aria-labelledby="enviarModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Enviar para o médico</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Enviar para o médico</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
-                </div>
-                <div class="modal-body" id="body-modal">
-                    
-                    <label for="selectConsultorio">Consultorio</label>
-                    <select name="selectConsultorio" id="selectConsultorio" class="form-control">
+                    </div>
+                    <div class="modal-body" id="body-modal">
+
+                        <label for="selectConsultorio">Consultorio</label>
+                        <select name="selectConsultorio" id="selectConsultorio" class="form-control">
                         <option value="consultorio1">Consultorio 1</option>
                         <option value="consultorio2">Consultorio 2</option>
                         <option value="consultorio3">Consultorio 3</option>
                     </select>
-                    <br>
-                    <label for="selectPrioridade">Prioridade</label>
-                    <select name="selectPrioridade" id="selectPrioridade" class="form-control">
+                        <br>
+                        <label for="selectPrioridade">Prioridade</label>
+                        <select name="selectPrioridade" id="selectPrioridade" class="form-control">
                         <option value="1">Normal</option>
                         <option value="2">Alta</option>
                         <option value="3">Muito Alta</option>
                     </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" id="btnEnviarMedico">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-sm" role="dialog" id="modalDispensar" aria-labelledby="dispensarModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Você realmente deseja dispensar o paciente?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="body-modal-dismiss">
+                    <p>Isso encerrará a consulta...</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                  <button type="button" class="btn btn-primary" id="btnEnviarMedico">Enviar</button>
+                    <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-danger" onClick="dismiss(this)">Dispensar</button>
                 </div>
-              </div>
             </div>
-          </div>
+        </div>
     </div>
 
     </div>
@@ -126,24 +141,27 @@
     <script src="./node_modules/socket.io/client-dist/socket.io.js"></script>
     <script src="./src/dist/js/triagem.js"></script>
     <script>
-        
         function setInput(x) {
             // melhorar isso depois
-            var bodyModal = document.getElementById('body-modal');
-            console.log(x);
             var idInput = x.parentNode.parentNode.children[2].value;
             var newInput = document.createElement('input');
             newInput.type = 'hidden';
             newInput.value = idInput;
-            newInput.className = 'hiddenInputId';
 
-            var listOfInput = document.getElementsByClassName('hiddenInputId');
-            // idInput.id = "idCallInput";
-            
+            if (x.id == 'btnEnviarModal') {
+                var bodyModal = document.getElementById('body-modal');
+                newInput.className = 'hiddenInputIdEnviar';
+                var listOfInput = document.getElementsByClassName('hiddenInputIdEnviar');
+            } else {
+                var bodyModal = document.getElementById('body-modal-dismiss');
+                newInput.className = 'hiddenInputIdDismiss';
+                var listOfInput = document.getElementsByClassName('hiddenInputIdDismiss');
+            }
+
             console.log(newInput);
             bodyModal.appendChild(newInput);
             console.log(listOfInput);
-            if(listOfInput.length > 1) {
+            if (listOfInput.length > 1) {
                 listOfInput[0].remove();
             }
         }
@@ -155,11 +173,23 @@
             x.parentNode.parentNode.remove();
             $.post("/triagem", {
                 id: id
-            }, function () {
-                window.location.reload();
             });
         }
 
+        function dismiss(x) {
+            let id = x.parentNode.parentNode.children[1].children[1].value;
+            console.log(id);
+
+            x.parentNode.parentNode.parentNode.parentNode.remove();
+            $.post("/del", {
+                id: id
+            }, function() {
+                window.location.reload();
+            });
+
+            console.log('dismisss');
+        }
     </script>
 </body>
+
 </html>

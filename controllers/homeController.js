@@ -5,7 +5,7 @@ const Call = mongoose.model('Call');
 
 const { Socket } = require("../utils/socket");
 
-exports.index = async (req, res) => {
+exports.index = async(req, res) => {
     console.log(req.session.id);
 
     let user = req.user;
@@ -14,7 +14,7 @@ exports.index = async (req, res) => {
     console.log("-=-=-=-=-=-=-=");
     console.log(Socket.clients());
 
-    const chamadasEletro = await Call.find( { "consultorio": { "$regex": "_Recepcao"} });
+    const chamadasEletro = await Call.find({ "consultorio": { "$regex": "_Recepcao" } });
 
     let fila = [];
     for (i in chamadasEletro) {
@@ -31,10 +31,10 @@ exports.index = async (req, res) => {
     fila.sort((a, b) => a.prioridade > b.prioridade ? -1 : 1);
 
     res.render('home', { userName: userName, fila: fila });
-    
+
 };
 
-exports.homeAction = async (req, res) => {
+exports.homeAction = async(req, res) => {
 
     let nomePaciente = req.body.nomePaciente;
     let consultorio = req.body.consultorio;
@@ -43,24 +43,24 @@ exports.homeAction = async (req, res) => {
 
     let alteracao = await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, repetir: repetir, prioridade: prioridade })
 
-    
-    if(consultorio == 'eletro') {
+
+    if (consultorio == 'eletro') {
         console.log('=================================================');
 
         Socket.emit('eletroCall', alteracao);
         res.redirect('/');
     } else if (consultorio == 'medicacao') {
-    
+
         console.log("medicacaao 123123");
         Socket.emit('medicacao_call', alteracao);
         res.redirect('/');
     } else if (consultorio == 'triagem') {
-        
+
         console.log('triagemmm');
         Socket.emit('triagem_call', alteracao);
         res.redirect('/');
     } else if (consultorio == 'consultorio1') {
-        
+
         console.log('consultorio1');
         Socket.emit('consultorio1_call', alteracao);
         res.redirect('/');

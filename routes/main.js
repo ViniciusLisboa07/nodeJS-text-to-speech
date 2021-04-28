@@ -17,22 +17,22 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const signInValidator = require('../validators/SignInValidator');
 
 const router = express.Router();
-router.use("/vendors",express.static(__dirname + "/vendors"));
-router.use("/src/dist/js",express.static(__dirname + "/src/dist/js"));
-  
+router.use("/vendors", express.static(__dirname + "/vendors"));
+router.use("/src/dist/js", express.static(__dirname + "/src/dist/js"));
+
 // Rotas login
 router.get('/login', loginController.index);
-router.post('/login', signInValidator.signIn,  loginController.loginAction);
+router.post('/login', signInValidator.signIn, loginController.loginAction);
 router.get('/register', loginController.register);
 router.post('/register', loginController.registerAction);
 router.get('/logout', loginController.logout)
-// Rotas recepcao
+    // Rotas recepcao
 router.get('/', authMiddleware.isLogged, homeController.index);
 router.post('/', authMiddleware.isLogged, homeController.homeAction);
 
 // Rotas tela
 router.get('/screen', screenController.index);
-router.post('/screen', screenController.screenAction); 
+router.post('/screen', screenController.screenAction);
 
 // Rotas eletro
 router.get('/eletro', authMiddleware.isLogged, eletroController.index);
@@ -46,10 +46,11 @@ router.post('/medicacao', medicacaoController.medicacaoAction);
 router.get('/triagem', authMiddleware.isLogged, triagemController.index);
 router.post('/triagem', triagemController.triagemAction);
 
-    // Rota para deletar chamada da triagem
+
+// Rota para deletar chamada da triagem
 router.post('/del', triagemController.delAction);
 
-    // rota para enviar paciente para o consultorio
+// rota para enviar paciente para o consultorio
 router.post('/enviarAoMedico', triagemController.enviarPaciente);
 
 // Rotas consultorio
@@ -62,4 +63,4 @@ router.post('/consultorio2', consultorio2Controller.consultorio2Action);
 router.get('/consultorio3', authMiddleware.isLogged, consultorio3Controller.index);
 router.post('/consultorio3', consultorio3Controller.consultorio3Action);
 
-module.exports = router; 
+module.exports = router;

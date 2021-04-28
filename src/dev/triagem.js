@@ -7,10 +7,17 @@ var btnPostToDoctor = document.getElementById('btnEnviarMedico');
 
 var tableRow = Array.from(rowFila);
 
-function setInput(x) {
-    // melhorar isso depois
-    var bodyModal = document.getElementById('body-modal');
-    var idInput = x.parentNode.parentNode.children[2].value;
+function setInput(x, btn) {
+    // melhorar isso depois.
+    console.log('$$$');
+    if (btn.id == 'btnEnviarModal') {
+        var bodyModal = document.getElementById('body-modal');
+    } else {
+        var bodyModal = document.getElementById('body-modal-dismiss');
+    }
+
+    var idInput = x;
+
     var newInput = document.createElement('input');
     newInput.type = 'hidden';
     newInput.value = idInput;
@@ -53,19 +60,19 @@ function aplicandoEstilo(tabelaBody) {
 
     };
 }
- 
+
 aplicandoEstilo($('#tblPacientesTriagem > tbody'));
-    
+
 function btnChamar(x) {
     let id = x.id;
     console.log(id);
-    
+
     console.log($(`#${id}`));
     $(`#${id}`).parentNode.parentNode.remove();
 
     $.post("/triagem", {
         id: id
-    }, function () {
+    }, function() {
         window.location.reload();
     });
 }
@@ -97,7 +104,7 @@ socket.on("triagem_call", (data) => {
 
         $.post("/triagem", {
             id: id
-        }, function () {
+        }, function() {
             window.location.reload();
         });
     }
@@ -151,15 +158,11 @@ socket.on("triagem_call", (data) => {
             $('#tblPacientesTriagem > tbody').prepend(novaLinha);
             // console.log('nenhum muito alta');
         }
-    }
+    };
+
     aplicandoEstilo($('#tblPacientesTriagem > tbody'));
 });
 
-$('#tblPacientesTriagem').on('change', () => {
-    
-    
-
-})
 
 socket.on('triagemTela_call', (data) => {
 
@@ -213,8 +216,16 @@ socket.on('triagemTela_call', (data) => {
 
 aplicandoEstilo($('#tblPacientesTelaTriagem > tbody'));
 
-function dismiss() {
+function dismiss(id, novaLinha) {
+
+    novaLinha.remove();
+
+    $.post("/del", {
+        id: id
+    });
+
     console.log('dismisss');
+
 }
 
 function createLine(data) {
@@ -236,9 +247,32 @@ function createLine(data) {
 
     novoNome.innerHTML = data['nomePaciente'];
 
+    btnDispensar.addEventListener('click', () => {
+        var bodyModal = document.getElementById('body-modal-dismiss');
+
+        var idInput = data['_id'];
+
+        var newInput = document.createElement('input');
+        newInput.type = 'hidden';
+        newInput.value = idInput;
+        newInput.className = 'hiddenInputIdDismiss';
+
+        var listOfInput = document.getElementsByClassName('hiddenInputIdDismiss');
+
+        console.log(newInput);
+        bodyModal.appendChild(newInput);
+        console.log(listOfInput);
+        if (listOfInput.length > 1) {
+            listOfInput[0].remove();
+        };
+
+    }, false);
+
     btnDispensar.innerHTML = "Dispensar";
     btnDispensar.className = "btn btn-danger btn-sm";
-    btnDispensar.onclick = dismiss();
+    btnDispensar.dataset.toggle = "modal";
+    btnDispensar.dataset.target = "#modalDispensar";
+    btnDispensar.id = 'btnDispensar';
 
     TdBtnDispensar.appendChild(btnDispensar);
 
@@ -246,9 +280,29 @@ function createLine(data) {
     btnEnviarMedico.className = "btn btn-success btn-sm";
     btnEnviarMedico.dataset.toggle = "modal";
     btnEnviarMedico.dataset.target = "#enviarModal";
+    btnEnviarMedico.id = 'btnEnviarModal';
+    btnEnviarMedico.addEventListener('click', () => {
+        var bodyModal = document.getElementById('body-modal');
+
+        var idInput = data['_id'];
+
+        var newInput = document.createElement('input');
+        newInput.type = 'hidden';
+        newInput.value = idInput;
+        newInput.className = 'hiddenInputIdEnviar';
+
+        var listOfInput = document.getElementsByClassName('hiddenInputIdEnviar');
+
+        console.log(newInput);
+        bodyModal.appendChild(newInput);
+        console.log(listOfInput);
+        if (listOfInput.length > 1) {
+            listOfInput[0].remove();
+        };
+
+    }, false);
 
     TdBtnEnviar.appendChild(btnEnviarMedico);
-
 
     novaLinha.className = "linha";
 
@@ -258,19 +312,17 @@ function createLine(data) {
     novaLinha.appendChild(TdBtnEnviar);
     novaLinha.appendChild(inputID);
 
-    btnEnviarMedico.onclick = setInput(btnEnviarMedico);
-
     return novaLinha;
 };
 
-// console.log("yuikjhkh" + btnPostToDoctor);
-btnPostToDoctor.onclick = function () {
+btnPostToDoctor.onclick = function() {
     console.log('btn enviar medico');
 
     var consultorio = document.getElementById('selectConsultorio');
     var prioridade = document.getElementById('selectPrioridade');
     var bodyModal = document.getElementById('body-modal');
     var id = bodyModal.children[5];
+    console.log(id);
 
     $.post("/enviarAoMedico", {
         consultorio: consultorio.value,
@@ -279,7 +331,6 @@ btnPostToDoctor.onclick = function () {
     });
 
     window.location.reload();
-
 };
 
 socket.on('triagemLogOut', (data) => {
