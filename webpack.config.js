@@ -1,4 +1,4 @@
-const path =  require('path');
+const path = require('path');
 
 module.exports = {
     entry: {
@@ -12,8 +12,8 @@ module.exports = {
         consultorio3: './src/dev/consultorio3.js'
     },
     output: {
-        filename:'[name].js',
-        path:path.resolve(__dirname, 'src/dist/js')        
+        filename: '[name].js',
+        path: path.resolve(__dirname, 'src/dist/js')
     },
     mode: 'development',
     resolve: {
@@ -21,11 +21,11 @@ module.exports = {
             "child_process": false
         }
     },
-    target:"web",
-    node: { 
-        global     : false,
-        __filename : false,
-        __dirname  : false,
+    target: "web",
+    node: {
+        global: false,
+        __filename: false,
+        __dirname: false,
         // fs: "empty", // if unable to resolve "fs"
     },
     externals: {
@@ -33,5 +33,5 @@ module.exports = {
         fs: "require('fs')",
         os: "require('os')",
         path: "require('path')"
-    },    
+    },
 }

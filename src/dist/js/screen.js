@@ -15,7 +15,7 @@
   \***************************/
 /***/ (() => {
 
-eval("var pacienteTela = document.getElementById('pacienteTela');\r\nvar consultorioTela = document.getElementById('consultorioTela');\r\n\r\n\r\nwindow.onload = () => {\r\n    var audio = document.getElementById('audioChamada');\r\n    console.log(audio);\r\n    audio.play();\r\n};\r\n\r\n\n\n//# sourceURL=webpack://node-tts/./src/dev/screen.js?");
+eval("var pacienteTela = document.getElementById('pacienteTela');\r\nvar consultorioTela = document.getElementById('consultorioTela');\r\n\r\nwindow.onload = () => {\r\n\r\n    var audio = document.getElementById('audioChamada');\r\n    if (audio.children[0].src) {\r\n        console.log(audio.children[0].src)\r\n        audio.play();\r\n    }\r\n\r\n};\n\n//# sourceURL=webpack://node-tts/./src/dev/screen.js?");
 
 /***/ })
 

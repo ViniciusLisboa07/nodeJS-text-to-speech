@@ -12,19 +12,15 @@
 <body>
     <div class="navbar navbar-light bg-light justify-content-between">
         <div>
-            {{#flashes}}
-                {{#success}}
-                    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
-                {{/success}}
-                {{#error}}
-                    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
-                {{/error}}
-                {{#info}}
-                    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
-                {{/info}}
-            {{/flashes}}
+            {{#flashes}} {{#success}}
+            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
+            {{/success}} {{#error}}
+            <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
+            {{/error}} {{#info}}
+            <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
+            {{/info}} {{/flashes}}
         </div>
-    
+
         <div class="card my-2 my-lg-0">
             <a>{{ username }}</a>
             <a class="btn btn-outline-danger" href="/logout">SAIR</a>
@@ -38,58 +34,58 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                <form method="post" action="/" >
-                    <label for="nomePaciente">Paciente</label>
-                    <input inputmode="none" type="text" id="nomePaciente" name="nomePaciente" class="form-control" required="true">
-                    <label class="mt-2" for="consultorio">Consultório</label>
-                    <select name="consultorio" id="consultorio" class="form-control">
+                    <form method="post" action="/">
+                        <label for="nomePaciente">Paciente</label>
+                        <input inputmode="none" type="text" id="nomePaciente" name="nomePaciente" class="form-control" required="true">
+                        <label class="mt-2" for="consultorio">Consultório</label>
+                        <select name="consultorio" id="consultorio" class="form-control">
                         <option value="medicacao">Medicação</option>
                         <option value="eletro">Eletro</option>
                         <option value="triagem">Triagem</option>
                     </select>
-                    <label class="mt-2" for="repetir">Repetir</label>
-                    <select name="repetir" id="repetir" class="form-control">
+                        <label class="mt-2" for="repetir">Repetir</label>
+                        <select name="repetir" id="repetir" class="form-control">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                     </select>
-                    <label class="mt-2" for=" prioridade">Prioridade</label>
-                    <select name="prioridade" id="prioridade" class="form-control">
+                        <label class="mt-2" for=" prioridade">Prioridade</label>
+                        <select name="prioridade" id="prioridade" class="form-control">
                         <option value="1">Normal</option>
                         <option value="2">Alta</option>
                         <option value="3">Muito Alta</option>
                     </select>
-                   <button type="submit" class="mt-4 btn btn-primary btn-lg" id="btnFalar">Enviar</button>
-                </form>
+                        <button type="submit" class="mt-4 btn btn-primary btn-lg" id="btnFalar">Enviar</button>
+                    </form>
                 </div>
             </div>
             <div class="card-footer">
             </div>
         </div>
         <div>
-                <table class="table table-striped table-hover table-md w-50" id="tblFilaRecepcao">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nome Paciente</th>
-                            <th scope="col">Prioridade</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#fila}}
-                            <tr class="linha">
-                                <td> {{ nomePaciente }} </td>
-                                <td> {{ prioridade }} </td>
-                                <input type="hidden" value="{{id}}">
-                            </tr>
-                        {{/fila}}
-                    </tbody>
-                </table>
-                <button class="btn btn-secondary btn-md" id="btnChamar"> Chamar Próximo </button>
+            <table class="table table-striped table-hover table-md w-50" id="tblFilaRecepcao">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome Paciente</th>
+                        <th scope="col">Prioridade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#fila}}
+                    <tr class="linha">
+                        <td> {{ nomePaciente }} </td>
+                        <td> {{ prioridade }} </td>
+                        <input type="hidden" value="{{id}}">
+                    </tr>
+                    {{/fila}}
+                </tbody>
+            </table>
+            <button class="btn btn-secondary btn-md" id="btnChamar"> Chamar Próximo </button>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/speech-synthesis-recorder@1.2.1/SpeechSynthesisRecorder.js"></script>
-    <script src="./node_modules/socket.io/client-dist/socket.io.js"></script>
+    <script src="./node_modules/socket.io-client/dist/socket.io.js"></script>
     <script src="./src/dist/js/home.js"></script>
 </body>
 

@@ -1,14 +1,15 @@
 import $ from 'jquery';
+import { io } from 'socket.io-client';
 
 var socket = io();
- 
+
 var rowFila = document.getElementsByClassName("linha");
 var btns = document.getElementsByTagName("button");
 var tblPacientesConsultorio2 = document.getElementById('tblPacientesConsultorio2');
 var tableRow = Array.from(rowFila);
 
 function aplicandoEstilo(tabelaBody) {
-    for(let i = 0; i < rowFila.length; i++) {
+    for (let i = 0; i < rowFila.length; i++) {
         if (tabelaBody[0].children[i].children[1].outerText == '1') {
             tabelaBody[0].children[i].children[1].innerHTML = "Normal";
             tabelaBody[0].children[i].children[1].className = 'bg-info';
@@ -23,8 +24,8 @@ function aplicandoEstilo(tabelaBody) {
         }
 
         btns[i].onclick = (x) => {
-            let id =  btns[i].parentNode.parentNode.children[3].value;
-            
+            let id = btns[i].parentNode.parentNode.children[3].value;
+
             btns[i].parentNode.parentNode.remove();
 
             $.post("/consultorio2", { id: id }, function() {
@@ -39,7 +40,7 @@ aplicandoEstilo($('#tblPacientesConsultorio2 > tbody'));
 
 console.log(socket);
 
-socket.on("consultorio2", (data) => {   
+socket.on("consultorio2", (data) => {
     console.log(data)
 
     var novaLinha = document.createElement('tr');
@@ -81,7 +82,7 @@ socket.on("consultorio2", (data) => {
             console.log(i);
             $('#tblPacientesConsultorio2 > tbody > tr').eq(i - 1).after(novaLinha); // Adicionando após
 
-        // Se houver alguma linha com prioridade Muito Alta 
+            // Se houver alguma linha com prioridade Muito Alta 
         } else if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
 
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Muito Alta"));
@@ -90,7 +91,7 @@ socket.on("consultorio2", (data) => {
             $('#tblPacientesConsultorio2 > tbody > tr').eq(i - 1).after(novaLinha);
             console.log('muito alta');
 
-        // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
+            // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
         } else {
             console.log('nada. WARNING')
             $('#tblPacientesConsultorio2 > tbody').prepend(novaLinha);
@@ -98,18 +99,18 @@ socket.on("consultorio2", (data) => {
 
     } else {
 
-        if(tableRow.find(a => a.children[1].outerText == "Muito Alta")){
+        if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
 
             var i = tableRow.indexOf(tableRow.slice().reverse().find(a => a.children[1].outerText == "Muito Alta"));
 
-            $('#tblPacientesConsultorio2 > tbody > tr').eq(i).after(novaLinha);// Adicionando após
+            $('#tblPacientesConsultorio2 > tbody > tr').eq(i).after(novaLinha); // Adicionando após
             console.log('algum muito alta');
-            
+
         } else {
 
             $('#tblPacientesConsultorio2 > tbody').prepend(novaLinha);
             console.log('nenhum muito alta');
-        
+
         }
 
     }
@@ -119,10 +120,10 @@ socket.on("consultorio2", (data) => {
 });
 
 socket.on('consultorio2LogOut', (data) => {
-   
+
     let msg = "Alguém fez log in no Consultório 2!"
     console.log(msg);
-    
+
     var form = document.createElement('form');
     form.setAttribute('method', 'get');
     form.setAttribute('action', 'logout');

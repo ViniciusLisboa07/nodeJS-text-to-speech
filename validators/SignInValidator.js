@@ -4,7 +4,7 @@ module.exports = {
     signIn: checkSchema({
         name: {
             notEmpty: true,
-            trim:true,
+            trim: true,
             errorMessage: 'Teste'
         }
     })

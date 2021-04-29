@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { io } from 'socket.io-client';
 
 var socket = io();
 var tblFilaRecepcao = document.getElementById('tblFilaRecepcao');
@@ -98,7 +99,7 @@ socket.on('call', (data) => {
 
             var i = tableRow.indexOf(tableRow.slice().reverse().find(a => a.children[1].outerText == "Muito Alta"));
 
-            $('#tblFilaRecepcao > tbody > tr').eq(i).after(novaLinha);// Adicionando após
+            $('#tblFilaRecepcao > tbody > tr').eq(i).after(novaLinha); // Adicionando após
             console.log('algum muito alta');
 
         } else {
@@ -107,10 +108,10 @@ socket.on('call', (data) => {
             console.log('nenhum muito alta');
 
         }
- 
+
     }
     aplicandoEstilo();
- 
+
 });
 
 console.log($('#tblFilaRecepcao > tbody')[0].children)
@@ -119,8 +120,8 @@ var form = null;
 btnChamar.onclick = (x) => {
     rowFila = document.getElementsByClassName("linha");
     tableRow = Array.from(rowFila);
-    
-    console.log($('#tblFilaRecepcao')[0].children[1].children[0].children[2]);  
+
+    console.log($('#tblFilaRecepcao')[0].children[1].children[0].children[2]);
     if (tableRow.length > 0) {
 
         console.log($('#tblFilaRecepcao')[0].children[1]);
@@ -161,7 +162,7 @@ console.log(socket)
 socket.on('recepcaoLogOut', (data) => {
     let msg = "Alguém fez log in na conta da recepção!"
     console.log(msg);
-    
+
     var form = document.createElement('form');
     form.setAttribute('method', 'get');
     form.setAttribute('action', 'logout');

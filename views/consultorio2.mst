@@ -12,19 +12,15 @@
 <body>
     <div class="navbar navbar-light bg-light justify-content-between">
         <div>
-            {{#flashes}}
-                {{#success}}
-                    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
-                {{/success}}
-                {{#error}}
-                    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
-                {{/error}}
-                {{#info}}
-                    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
-                {{/info}}
-            {{/flashes}}
+            {{#flashes}} {{#success}}
+            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
+            {{/success}} {{#error}}
+            <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
+            {{/error}} {{#info}}
+            <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
+            {{/info}} {{/flashes}}
         </div>
-    
+
         <div class="card my-2 my-lg-0">
             <a>{{ username }}</a>
             <a class="btn btn-outline-danger" href="/logout">SAIR</a>
@@ -41,12 +37,12 @@
             </thead>
             <tbody>
                 {{#fila}}
-                    <tr class="linha">
-                        <td> {{ nomePaciente }} </td>
-                        <td> {{ prioridade }} </td>
-                        <td><button class="btn btn-secondary btn-sm">Chamar</button></td>
-                        <input type="hidden" value="{{id}}">
-                    </tr>
+                <tr class="linha">
+                    <td> {{ nomePaciente }} </td>
+                    <td> {{ prioridade }} </td>
+                    <td><button class="btn btn-secondary btn-sm">Chamar</button></td>
+                    <input type="hidden" value="{{id}}">
+                </tr>
                 {{/fila}}
             </tbody>
         </table>
@@ -56,9 +52,8 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript"
-        src="https://unpkg.com/speech-synthesis-recorder@1.2.1/SpeechSynthesisRecorder.js"></script>
-    <script src="./node_modules/socket.io/client-dist/socket.io.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/speech-synthesis-recorder@1.2.1/SpeechSynthesisRecorder.js"></script>
+    <script src="./node_modules/socket.io-client/dist/socket.io.js"></script>
     <script src="./src/dist/js/consultorio2.js"></script>
 </body>
 

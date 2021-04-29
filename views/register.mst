@@ -9,18 +9,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
-{{#flashes}}
-
-    {{#success}}
-        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
-    {{/success}}
-    {{#error}}
-        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
-    {{/error}}
-    {{#info}}
-        <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
-    {{/info}}
-{{/flashes}}
+{{#flashes}} {{#success}}
+<div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
+{{/success}} {{#error}}
+<div class="card text-white bg-danger mb-3" style="max-width: 18rem;">{{.}}</div>
+{{/error}} {{#info}}
+<div class="card text-white bg-warning mb-3" style="max-width: 18rem;">{{.}}</div>
+{{/info}} {{/flashes}}
 
 <body>
     <div class="container">
@@ -33,12 +28,13 @@
             <input type="password" name="password" value="12345" class="form-control">
             <input type="hidden" name="sessionID" value="" class="form-control">
             <input type="hidden" name="token" value="" class="form-control">
-        <button type="submit" class="mt-4 btn btn-primary btn-lg">Entrar</button>
+            <button type="submit" class="mt-4 btn btn-primary btn-lg">Entrar</button>
         </form>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/speech-synthesis-recorder@1.2.1/SpeechSynthesisRecorder.js"></script>
+
 </body>
 
 </html>

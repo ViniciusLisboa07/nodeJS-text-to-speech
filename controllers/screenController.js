@@ -16,6 +16,7 @@ exports.screenAction = async(req, res) => {
     var id = req.body.id;
 
     var call = await Call.findOne({ _id: id });
+    console.log(call)
     var endIndex = call._doc['consultorio'].indexOf('_');
     var consultorio = call._doc['consultorio'].slice(0, endIndex);
 
@@ -44,8 +45,6 @@ exports.screenAction = async(req, res) => {
 
     });
 
-
-
     myPromise.then((msg) => {
 
         setTimeout(
@@ -64,7 +63,6 @@ exports.screenAction = async(req, res) => {
         console.log('tela-triagemqweqwe');
 
     } else {
-
         await Call.deleteOne({ _id: id });
     }
 
