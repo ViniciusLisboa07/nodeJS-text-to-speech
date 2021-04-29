@@ -31,19 +31,14 @@ function aplicandoEstilo(tabelaBody) {
 
             btns[i].parentNode.parentNode.remove();
 
-            $.post("/medicacao", { id: id }, function(){
+            $.post("/medicacao", { id: id }, function() {
                 location.reload();
             });
-
-
-
         }
-
     };
 }
 
 aplicandoEstilo($('#tblPacientesMedicacao > tbody'));
-
 
 socket.on("medicacao_call", (data) => {
     console.log(data)
@@ -125,10 +120,10 @@ socket.on("medicacao_call", (data) => {
 });
 
 socket.on('medicacaoLogOut', (data) => {
-   
+
     let msg = "Alguém fez log in na Medicação!"
     console.log(msg);
-    
+
     var form = document.createElement('form');
     form.setAttribute('method', 'get');
     form.setAttribute('action', 'logout');

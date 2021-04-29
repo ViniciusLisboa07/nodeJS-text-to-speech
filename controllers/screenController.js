@@ -32,7 +32,7 @@ exports.screenAction = async(req, res) => {
 
         var audioFile = exec('balcon.exe -n "IVONA 2 Ricardo" -f textos/helloworld.txt -w src/audios/' + nomeAudio + '.wav', (err) => {
             if (err) {
-                console.log("Erro ao executar o espeak: " + err);
+                console.log("Erro ao executar o balcon: " + err);
             }
         });
 

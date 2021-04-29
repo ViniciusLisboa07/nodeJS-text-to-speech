@@ -9,7 +9,7 @@ var tableRow = Array.from(rowFila);
 function aplicandoEstilo(tabelaBody) {
     var btns = document.getElementsByTagName("button");
 
-    for(let i = 0; i < tabelaBody[0].children.length; i++) {
+    for (let i = 0; i < tabelaBody[0].children.length; i++) {
 
         if (tabelaBody[0].children[i].children[1].outerText == '1') {
             console.log('normal');
@@ -28,8 +28,8 @@ function aplicandoEstilo(tabelaBody) {
         }
 
         btns[i].onclick = (x) => {
-            let id =  btns[i].parentNode.parentNode.children[3].value;
-            
+            let id = btns[i].parentNode.parentNode.children[3].value;
+
             btns[i].parentNode.parentNode.remove();
 
             $.post("/eletro", { id: id }, function() {
@@ -40,13 +40,11 @@ function aplicandoEstilo(tabelaBody) {
     };
 }
 
-
-
 aplicandoEstilo($('#tblPacientesEletro > tbody'));
 
 console.log(socket);
 
-socket.on("eletroCall", (data) => {   
+socket.on("eletroCall", (data) => {
     console.log(data)
 
     var novaLinha = document.createElement('tr');
@@ -86,7 +84,7 @@ socket.on("eletroCall", (data) => {
             console.log(i);
             $('#tblPacientesEletro > tbody > tr').eq(i - 1).after(novaLinha); // Adicionando após
 
-        // Se houver alguma linha com prioridade Muito Alta 
+            // Se houver alguma linha com prioridade Muito Alta 
         } else if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
 
             var i = tableRow.slice().reverse().indexOf(tableRow.find(a => a.children[1].outerText == "Muito Alta"));
@@ -95,7 +93,7 @@ socket.on("eletroCall", (data) => {
             $('#tblPacientesEletro > tbody > tr').eq(i - 1).after(novaLinha);
             console.log('muito alta');
 
-        // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
+            // Se nao houver nenhuma linha com prioridade "Alta" nem "Muito Alta"
         } else {
             console.log('nada. WARNING')
             $('#tblPacientesEletro > tbody').prepend(novaLinha);
@@ -103,18 +101,18 @@ socket.on("eletroCall", (data) => {
 
     } else {
 
-        if(tableRow.find(a => a.children[1].outerText == "Muito Alta")){
+        if (tableRow.find(a => a.children[1].outerText == "Muito Alta")) {
 
             var i = tableRow.indexOf(tableRow.slice().reverse().find(a => a.children[1].outerText == "Muito Alta"));
 
-            $('#tblPacientesEletro > tbody > tr').eq(i).after(novaLinha);// Adicionando após
+            $('#tblPacientesEletro > tbody > tr').eq(i).after(novaLinha); // Adicionando após
             console.log('algum muito alta');
-            
+
         } else {
 
             $('#tblPacientesEletro > tbody').prepend(novaLinha);
             console.log('nenhum muito alta');
-        
+
         }
 
     }
@@ -124,10 +122,10 @@ socket.on("eletroCall", (data) => {
 });
 
 socket.on('eletroLogOut', (data) => {
-   
+
     let msg = "Alguém fez log in na Eletro!"
     console.log(msg);
-    
+
     var form = document.createElement('form');
     form.setAttribute('method', 'get');
     form.setAttribute('action', 'logout');
