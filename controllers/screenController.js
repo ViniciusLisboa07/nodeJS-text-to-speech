@@ -7,10 +7,10 @@ const { Socket } = require("../utils/socket");
 exports.index = (req, res) => {
 
     res.render('screen');
-    
+
 };
 
-exports.screenAction = async (req, res) => {
+exports.screenAction = async(req, res) => {
 
     console.log(req.body)
     var id = req.body.id;
@@ -19,9 +19,9 @@ exports.screenAction = async (req, res) => {
     var endIndex = call._doc['consultorio'].indexOf('_');
     var consultorio = call._doc['consultorio'].slice(0, endIndex);
 
-    var str = "Atenção: " + call._doc['nomePaciente'] + " se dirija ao " + consultorio;
+    var str = "Por favor: " + call._doc['nomePaciente'] + " se dirija ao " + consultorio;
 
-    fs.writeFile('textos/helloworld.txt', str, function (err) {
+    fs.writeFile('textos/helloworld.txt', str, function(err) {
         if (err) return console.log(err);
     });
 
@@ -30,7 +30,7 @@ exports.screenAction = async (req, res) => {
 
     const myPromise = new Promise((resolve, reject) => {
 
-        var audioFile = exec('espeak -vpt-br -f textos/helloworld.txt --stdout > src/audios/' + nomeAudio + '.wav', (err) => {
+        var audioFile = exec('balcon.exe -n "IVONA 2 Ricardo" -f textos/helloworld.txt -w src/audios/' + nomeAudio + '.wav', (err) => {
             if (err) {
                 console.log("Erro ao executar o espeak: " + err);
             }
@@ -56,13 +56,13 @@ exports.screenAction = async (req, res) => {
         console.log("Success:" + msg);
     });
 
-    if(consultorio == 'triagem'){
+    if (consultorio == 'triagem') {
         let updateTriagemTela = await Call.find({ _id: id }).updateOne({ consultorio: 'tela_triagem' });
         let alteracao = await Call.findOne({ _id: id });
-        
+
         Socket.emit('triagemTela_call', alteracao);
         console.log('tela-triagemqweqwe');
-        
+
     } else {
 
         await Call.deleteOne({ _id: id });
