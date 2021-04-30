@@ -15,7 +15,7 @@ module.exports = {
         filename: '[name].js',
         path: path.resolve(__dirname, 'src/dist/js')
     },
-    mode: 'development',
+    mode: 'production',
     resolve: {
         fallback: {
             "child_process": false
