@@ -31,7 +31,7 @@ exports.screenAction = async(req, res) => {
 
     const myPromise = new Promise((resolve, reject) => {
 
-        var audioFile = exec('balcon.exe -n "IVONA 2 Ricardo" -f textos/helloworld.txt -w src/audios/' + nomeAudio + '.wav', (err) => {
+        var audioFile = exec('balcon.exe -n "IVONA 2 Ricardo" -f textos/helloworld.txt -w audios/' + nomeAudio + '.wav', (err) => {
             if (err) {
                 console.log("Erro ao executar o balcon: " + err);
             }

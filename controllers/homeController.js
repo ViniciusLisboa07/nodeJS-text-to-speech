@@ -29,9 +29,7 @@ exports.index = async(req, res) => {
     }
     fila.sort((a, b) => a.prioridade > b.prioridade ? -1 : 1);
 
-    var teste = '1620909929065';
-
-    res.render('home', { userName: userName, fila: fila, teste: teste });
+    res.render('home', { userName: userName, fila: fila });
 
 };
 

@@ -78,9 +78,6 @@
             <button class="btn btn-secondary btn-md" id="btnChamar"> Chamar Próximo </button>
         </div>
     </div>
-    <audio id="audioChamada" controls>
-            <source src="audios/{{ teste }}.wav" type="audio/mpeg">
-    </audio>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/speech-synthesis-recorder@1.2.1/SpeechSynthesisRecorder.js"></script>
