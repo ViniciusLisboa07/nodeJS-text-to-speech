@@ -22,7 +22,6 @@ exports.index = async(req, res) => {
         fila.push({
             nomePaciente: chamadasEletro[i]._doc['nomePaciente'],
             consultorio: chamadasEletro[i]._doc['consultorio'],
-            repetir: chamadasEletro[i]._doc['repetir'],
             prioridade: chamadasEletro[i]._doc['prioridade'],
             id: chamadasEletro[i]._doc['_id']
         })
@@ -30,7 +29,9 @@ exports.index = async(req, res) => {
     }
     fila.sort((a, b) => a.prioridade > b.prioridade ? -1 : 1);
 
-    res.render('home', { userName: userName, fila: fila });
+    var teste = '1620909929065';
+
+    res.render('home', { userName: userName, fila: fila, teste: teste });
 
 };
 
@@ -38,10 +39,9 @@ exports.homeAction = async(req, res) => {
 
     let nomePaciente = req.body.nomePaciente;
     let consultorio = req.body.consultorio;
-    let repetir = req.body.repetir;
     let prioridade = req.body.prioridade;
 
-    let alteracao = await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, repetir: repetir, prioridade: prioridade })
+    let alteracao = await Call.create({ nomePaciente: nomePaciente, consultorio: consultorio, prioridade: prioridade })
 
 
     if (consultorio == 'eletro') {

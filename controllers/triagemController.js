@@ -16,7 +16,6 @@ exports.index = async(req, res) => {
         fila.push({
             nomePaciente: chamadasTriagem[i]._doc['nomePaciente'],
             consultorio: chamadasTriagem[i]._doc['consultorio'],
-            repetir: chamadasTriagem[i]._doc['repetir'],
             prioridade: chamadasTriagem[i]._doc['prioridade'],
             id: chamadasTriagem[i]._doc['_id']
         });

@@ -55,6 +55,7 @@ app.use('/', router);
 app.engine('mst', mustache());
 
 app.use("/src", express.static(__dirname + '/src'));
+app.use("/audios", express.static(__dirname + '/audios'));
 app.use("/node_modules", express.static(__dirname + '/node_modules'));
 app.use("/utils", express.static(__dirname + '/utils'));
 

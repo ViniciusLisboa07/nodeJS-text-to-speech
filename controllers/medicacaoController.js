@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Call = mongoose.model('Call');
 
-exports.index = async (req, res) => {
+exports.index = async(req, res) => {
 
     let user = req.user;
     let userName = user.nick;
@@ -20,7 +20,6 @@ exports.index = async (req, res) => {
         fila.push({
             nomePaciente: chamadasEletro[i]._doc['nomePaciente'],
             consultorio: chamadasEletro[i]._doc['consultorio'],
-            repetir: chamadasEletro[i]._doc['repetir'],
             prioridade: chamadasEletro[i]._doc['prioridade'],
             id: chamadasEletro[i]._doc['_id']
         });
@@ -33,15 +32,15 @@ exports.index = async (req, res) => {
 
 
 
-exports.medicacaoAction = async (req, res) => {
+exports.medicacaoAction = async(req, res) => {
 
     let id = req.body.id;
-    
+
     const alteracao = await Call.findOne({ _id: id });
     const chamada = await Call.find({ _id: id }).updateOne({ consultorio: 'medicacao_Recepcao' });
 
     Socket.emit('call', alteracao);
     console.log('medicacaoAction');
-    res.redirect('/medicacao');    
+    res.redirect('/medicacao');
 
 }
