@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
     <div class="row" style="height: 100vh">
         <div class="col align-self-center">
             <div class="card w-50 mx-auto">
@@ -28,7 +27,7 @@
 
     {{ #nomeAudio }}
     <audio id="audioChamada" controls>
-            <source src="audios/{{ nomeAudio }}.wav" type="audio/mpeg">
+        <source src="audios/{{ nomeAudio }}.wav" type="audio/mpeg">
     </audio> {{ /nomeAudio }}
 
     <script src="/src/dist/js/screen.js"></script>

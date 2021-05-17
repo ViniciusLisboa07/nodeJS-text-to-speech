@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
     <div class="navbar navbar-light bg-light justify-content-between">
         <div>
             {{#flashes}} {{#success}}
@@ -23,7 +22,6 @@
             <div class="card text-white bg-success mb-3" style="max-width: 18rem;">{{.}}</div>
             {{/querySuccess}} {{/flashes}}
         </div>
-
         <div class="card my-2 my-lg-0">
             <a>{{ username }}</a>
             <a class="btn btn-outline-danger" href="/logout">SAIR</a>
